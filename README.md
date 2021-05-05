@@ -1,0 +1,1 @@
+# maven-web-project-template
