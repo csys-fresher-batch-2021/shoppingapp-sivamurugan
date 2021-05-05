@@ -6,13 +6,13 @@
 	<artifactId>app</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>YourProjectName</name>
-	<url>https://github.com/csys-fresher-batch-2021/yourreponame</url>
+	<name>shoppingapp-sivamurugan</name>
+	<url>https://github.com/csys-fresher-batch-2021/shoppingapp-sivamurugan</url>
 
 	<properties>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
-		<sonar.projectKey>csys-fresher-batch-2021_your_project_name</sonar.projectKey>
+		<sonar.projectKey>csys-fresher-batch-2021_shoppingapp-sivamurugan</sonar.projectKey>
 		<sonar.organization>csys-fresher-batch-2021</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
