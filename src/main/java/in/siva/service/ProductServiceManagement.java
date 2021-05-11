@@ -3,6 +3,7 @@ package in.siva.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.siva.exception.ProductInvalidException;
 import in.siva.model.ProductDetail;
 import in.siva.validator.ProductValidator;
 
@@ -46,11 +47,11 @@ public class ProductServiceManagement {
 					productDetails.add(product);
 				}
 				else {
-					throw new RuntimeException("Product Already Exists");
+					throw new ProductInvalidException("Product Already Exists");
 				}
 				
 			} else {
-				throw new RuntimeException("Invalid Product Details");
+				throw new ProductInvalidException("Invalid Product Details");
 			}
 		}
 		

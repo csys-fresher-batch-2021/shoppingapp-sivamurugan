@@ -1,3 +1,4 @@
+<%@page import="in.siva.exception.ProductInvalidException"%>
 <%@page import="in.siva.model.ProductDetail"%>
 <%@page import="in.siva.service.ProductServiceManagement"%>
 <%@page import="java.util.Date"%>
@@ -36,7 +37,7 @@ ProductDetail product1 = new ProductDetail(productName, productPrice, productQua
 	}
 
 // Exception message if product details didn't met requirements
-	catch(RuntimeException e) {
+	catch(ProductInvalidException e) {
 		String errorMessage = e.getMessage();
 		response.sendRedirect("addproducts.jsp?errorMessage=" + errorMessage);
 		//out.println(errorMessage);

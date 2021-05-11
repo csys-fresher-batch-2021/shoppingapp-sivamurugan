@@ -26,7 +26,7 @@
 	%>
 	<form action = "addProducts-action.jsp" method = "post">
 		<h3>Add Products</h3>
-		<table summary = "product details">
+		<table>
 		<tr>
 		<th scope = "col">
 		</th>

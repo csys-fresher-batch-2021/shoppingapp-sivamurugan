@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import in.siva.exception.ProductInvalidException;
 import in.siva.model.ProductDetail;
 
 public class AddProductTest {
@@ -22,7 +23,7 @@ public class AddProductTest {
 			ProductServiceManagement.addProduct(product1);
 			
 		}
-		catch(RuntimeException e) {
+		catch(ProductInvalidException e) {
 			fail();
 		}
 
@@ -42,7 +43,7 @@ public class AddProductTest {
 			ProductServiceManagement.addProduct(product2);
 			
 		}
-		catch(RuntimeException e) {
+		catch(ProductInvalidException e) {
 			fail();
 		}
 
@@ -63,7 +64,7 @@ public class AddProductTest {
 			ProductServiceManagement.addProduct(product3);
 			fail();
 		}
-		catch(RuntimeException e) {
+		catch(ProductInvalidException e) {
 			assertEquals("Invalid Product Details", e.getMessage());
 		}
 
@@ -84,7 +85,7 @@ public class AddProductTest {
 			ProductServiceManagement.addProduct(product4);
 			fail();
 		}
-		catch(RuntimeException e) {
+		catch(ProductInvalidException e) {
 			assertEquals("Invalid Product Details", e.getMessage());
 		}
 
@@ -102,7 +103,7 @@ public class AddProductTest {
 			ProductServiceManagement.addProduct(product5);
 			fail();
 		}
-		catch(RuntimeException e) {
+		catch(ProductInvalidException e) {
 			assertEquals("Product Already Exists", e.getMessage());
 		}
 
