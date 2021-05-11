@@ -5,6 +5,9 @@ import java.util.regex.Pattern;
 
 
 public class ProductValidator {
+	private ProductValidator() {
+		// Default constructor
+	}
 	/**
 	 * This method is used to check the entered product has alphabets characters only
 	 * If yes it returns - true, else - False;
@@ -12,7 +15,7 @@ public class ProductValidator {
 	 * @return
 	 */
 	public static boolean isStringValid(String productName) {
-		String regx = "[a-zA-Z]+\\.?";
+		String regx = "[a-z]+\\.?";
 		Pattern pattern = Pattern.compile(regx, Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(productName);
 		return matcher.find();

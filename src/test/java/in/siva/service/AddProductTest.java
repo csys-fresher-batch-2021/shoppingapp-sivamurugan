@@ -15,6 +15,7 @@ public class AddProductTest {
 	public void validProductTest1() {
 
 		// Creating object for product 1 
+		 
 		ProductDetail product1 = new ProductDetail("Tomato", 24, 500, "Vegetables");
 		
 		try {

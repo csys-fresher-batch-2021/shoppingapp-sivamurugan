@@ -29,10 +29,8 @@
 		<table summary = "product details">
 		<tr>
 		<th scope = "col">
-		Type
 		</th>
 		<th scope = "col">
-		Value
 		</th>
 		</tr>
 		
