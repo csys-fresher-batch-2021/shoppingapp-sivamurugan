@@ -18,19 +18,7 @@ public class ProductValidator {
 		return matcher.find();
 	}
 	
-	/**
-	 * this method is used to check whether the entered price is positive float or not
-	 *  If Positive - true, Negative - false 
-	 * @param productPrice
-	 * @return
-	 */
-	public static boolean isPriceValid(float productPrice) {
-		boolean valid = true;
-		if(productPrice < 0) {
-			valid = false;
-		}
-		return valid;
-	}
+
 	
 	/**
 	 * This method is used to check whether the entered quantity type is positive or not
@@ -38,9 +26,9 @@ public class ProductValidator {
 	 * @param productQuantity
 	 * @return
 	 */
-	public static boolean isProductQuantityValid(int productQuantity) {
+	public static boolean isNumberValid(int number) {
 		boolean valid = true;
-		if(productQuantity < 0) {
+		if(number < 0) {
 			valid = false;
 		}
 		return valid;
