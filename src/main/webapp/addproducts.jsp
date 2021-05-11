@@ -2,7 +2,8 @@
 <%@page import="in.siva.model.ProductDetail"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.time.LocalDate"%>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>MyApp</title>
 </head>
@@ -25,7 +26,15 @@
 	%>
 	<form action = "addProducts-action.jsp" method = "post">
 		<h3>Add Products</h3>
-		<table>
+		<table summary = "product details">
+		<tr>
+		<th scope = "col">
+		Type
+		</th>
+		<th scope = "col">
+		Value
+		</th>
+		</tr>
 		
 			<tr>
 				<td>
