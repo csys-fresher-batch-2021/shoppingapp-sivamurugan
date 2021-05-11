@@ -9,7 +9,7 @@ import in.siva.validator.ProductValidator;
 
 public class ProductServiceManagement {
 		// Global ArrayList Declaration to store product details
-		private static List<ProductDetail> productDetails = new ArrayList<ProductDetail>();
+		private static List<ProductDetail> productDetails = new ArrayList<>();
 
 		/**
 		 * This method is used to check whether the product is repeated or not
