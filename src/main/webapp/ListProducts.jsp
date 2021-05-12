@@ -13,19 +13,19 @@
 		<figcaption>List Of Products</figcaption>
 		<table class = "table table-bordered">
 		<tr>
-			<th>
+			<th scope = "col">
 				S.No
 			</th>
-			<th>
+			<th scope = "col">
 				Category
 			</th>
-			<th>
+			<th scope = "col">
 				Name
 			</th>
-			<th>
+			<th scope = "col">
 				Price (Rs)
 			</th>
-			<th>
+			<th scope = "col">
 				Quantity (Kg)
 			</th>
 		</tr>
@@ -59,7 +59,6 @@
 				
 		</table>
 		</figure>
-		<a class = "btn btn-secondary" href = "addproducts.jsp">Add Product</a>
 
 	</main>
 </body>
