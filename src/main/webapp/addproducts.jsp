@@ -37,7 +37,7 @@
 					Product Name 
 				</td>
 				<td>
-					<input type = "text" name = "productName" placeholder = "Produt Name"  required autofocus>
+					<input type = "text" name = "productName" placeholder = "Product Name"  required autofocus>
 				</td>
 			</tr>
 			<tr>
@@ -45,7 +45,7 @@
 					Price 
 				</td>
 				<td>
-					<input type = "number" name = "productPrice" min = 1 max = 200 placeholder = "Produt price in Rs" required>
+					<input type = "number" name = "productPrice" min = 1 max = 200 placeholder = "Product price in Rs" required>
 				</td>
 			</tr>
 			<tr>
@@ -53,7 +53,7 @@
 					Quantity 
 				</td>
 				<td>
-					<input type = "number" name = "productQuantity" placeholder = "Produt quantity in Kg" min = 1 max = 500 required>
+					<input type = "number" name = "productQuantity" placeholder = "Product quantity in Kg" min = 1 max = 500 required>
 				</td>
 			</tr>
 			<tr>
