@@ -59,6 +59,10 @@ public class AddProductServlet extends HttpServlet {
 				//out.println(errorMessage);
 				
 			}
+			catch(NumberFormatException e) {
+				String errorMessage = "Invalid Quantity or Price";
+				response.sendRedirect("addproducts.jsp?errorMessage=" + errorMessage);
+			}
 			
 	}
 
