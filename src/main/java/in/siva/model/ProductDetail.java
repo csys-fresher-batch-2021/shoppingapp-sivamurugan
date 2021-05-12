@@ -3,20 +3,20 @@ package in.siva.model;
 public class ProductDetail {
 
 	// Declaring types of details for a product
-	private String productName;
-	private int productPrice;
-	private int productQuantity;
-	private String productCategory;
+	private String name;
+	private int price;
+	private int quantity;
+	private String category;
 	
 	private ProductDetail() {
 		
 	}
 	// Get values of product details using constructor
-	public ProductDetail(String productName, int productPrice, int productQuantity, String productCategory){
-		this.productName = productName;
-		this.productPrice = productPrice;
-		this.productQuantity = productQuantity;
-		this.productCategory = productCategory;
+	public ProductDetail(String name, int price, int quantity, String category){
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
+		this.category = category;
 	}
 	
 	/**
@@ -24,7 +24,7 @@ public class ProductDetail {
 	 * @return
 	 */
 	public String getProductName() {
-		return productName;
+		return name;
 	}
 	
 	/**
@@ -32,7 +32,7 @@ public class ProductDetail {
 	 * @return
 	 */
 	public int getProductPrice() {
-		return productPrice;
+		return price;
 	}
 	
 	/**
@@ -40,7 +40,7 @@ public class ProductDetail {
 	 * @return
 	 */
 	public int getProductQuantity() {
-		return productQuantity;
+		return quantity;
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class ProductDetail {
 	 * @return
 	 */
 	public String getProductcategory() {
-		return productCategory;
+		return category;
 	}
 	
 	
@@ -58,8 +58,8 @@ public class ProductDetail {
 	 */
 	@Override
 	public String toString() {
-		return "ProductDetail [productName=" + productName + ", productPrice=" + productPrice + ", productQuantity="
-				+ productQuantity + ", productCatagory=" + productCategory + "]";
+		return "ProductDetail [productName=" + name + ", productPrice=" + price + ", productQuantity="
+				+ quantity + ", productCatagory=" + category + "]";
 	}
 
 	

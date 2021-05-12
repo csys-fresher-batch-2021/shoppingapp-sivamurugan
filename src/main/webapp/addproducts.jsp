@@ -1,9 +1,9 @@
-<%@page import="in.siva.service.ProductServiceManagement"%>
+<%@page import="in.siva.service.ProductService"%>
 <%@page import="in.siva.model.ProductDetail"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>MyApp</title>
+<title>Add Product</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -61,7 +61,7 @@
 					Category 
 				</td>
 				<td>
-					<select name = "category">
+					<select name = "category" required>
 					<option value = "vegetables">Vegetables</option>
 					<option value = "fruits"> Fruits </option>
 					</select>
@@ -69,7 +69,7 @@
 			</tr>
 		</table><br>
 		
-		<button type = "submit" class = "btn btn-info">Add Products</button>
+		<button type = "submit" class = "btn btn-info">Submit</button>
 
 	</form>
 	</main>

@@ -20,7 +20,7 @@ public class AddProductTest {
 		ProductDetail product1 = new ProductDetail("Tomato", 24, 500, "Vegetables");
 		
 		try {
-			ProductServiceManagement.addProduct(product1);
+			ProductService.addProduct(product1);
 			
 		}
 		catch(ProductInvalidException e) {
@@ -40,7 +40,7 @@ public class AddProductTest {
 		ProductDetail product2 = new ProductDetail("Potato", 24, 500, "Vegetables");
 		
 		try {
-			ProductServiceManagement.addProduct(product2);
+			ProductService.addProduct(product2);
 			
 		}
 		catch(ProductInvalidException e) {
@@ -61,7 +61,7 @@ public class AddProductTest {
 		ProductDetail product3 = new ProductDetail(" ", 24, 500, "Vegetables");
 		
 		try {
-			ProductServiceManagement.addProduct(product3);
+			ProductService.addProduct(product3);
 			fail();
 		}
 		catch(ProductInvalidException e) {
@@ -82,7 +82,7 @@ public class AddProductTest {
 		ProductDetail product4 = new ProductDetail("potato", -4, 430, "vegetables");
 
 		try {
-			ProductServiceManagement.addProduct(product4);
+			ProductService.addProduct(product4);
 			fail();
 		}
 		catch(ProductInvalidException e) {
@@ -100,7 +100,7 @@ public class AddProductTest {
 		ProductDetail product5 = new ProductDetail("potato", 76, 430, "vegetables");
 
 		try {
-			ProductServiceManagement.addProduct(product5);
+			ProductService.addProduct(product5);
 			fail();
 		}
 		catch(ProductInvalidException e) {

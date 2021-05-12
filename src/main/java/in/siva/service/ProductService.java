@@ -8,10 +8,15 @@ import in.siva.model.ProductDetail;
 import in.siva.validator.ProductValidator;
 
 
-public class ProductServiceManagement {
+public class ProductService {
 		// Global ArrayList Declaration to store product details
-		private static List<ProductDetail> productDetails = new ArrayList<>();
+		private final static List<ProductDetail> productDetails = new ArrayList<>();
 
+		
+		private ProductService() {
+			// Default constructor
+		}
+		
 		/**
 		 * This method is used to check whether the product is repeated or not
 		 * @param productName
