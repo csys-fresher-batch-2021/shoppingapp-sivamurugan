@@ -22,7 +22,7 @@
 		out.println("<font color='red'>" + errorMessage + "</font>");
 	}
 	%>
-	<form action = "AddProductsServlet" method = "post">
+	<form action = "AddProductServlet" method = "post">
 		<h3>Add Products</h3>
 		<table>
 		<tr>

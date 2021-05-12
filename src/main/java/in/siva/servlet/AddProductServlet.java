@@ -14,7 +14,7 @@ import in.siva.service.ProductService;
 /**
  * Servlet implementation class AddProductsServlet
  */
-@WebServlet("/AddProductsServlet")
+@WebServlet("/AddProductServlet")
 public class AddProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
