@@ -1,7 +1,5 @@
 <%@page import="in.siva.service.ProductServiceManagement"%>
 <%@page import="in.siva.model.ProductDetail"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.time.LocalDate"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +22,7 @@
 		out.println("<font color='red'>" + errorMessage + "</font>");
 	}
 	%>
-	<form action = "addProducts-action.jsp" method = "post">
+	<form action = "AddProductsServlet" method = "post">
 		<h3>Add Products</h3>
 		<table>
 		<tr>
