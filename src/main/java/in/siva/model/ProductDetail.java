@@ -8,7 +8,9 @@ public class ProductDetail {
 	private int productQuantity;
 	private String productCategory;
 	
-	
+	private ProductDetail() {
+		
+	}
 	// Get values of product details using constructor
 	public ProductDetail(String productName, int productPrice, int productQuantity, String productCategory){
 		this.productName = productName;
