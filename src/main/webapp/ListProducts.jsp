@@ -40,7 +40,7 @@
 				<%= i %>
 			</td>
 			<td>
-				<%= product.getProductcategory() %>
+				<%=product.getProductCategory()%>
 			</td>
 			<td>
 				<%=product.getProductName() %>
