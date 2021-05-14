@@ -2,6 +2,13 @@
 <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 
+
+<%
+String loggedInUsername = (String)session.getAttribute("LOGGED_IN_USER");
+String role = (String) session.getAttribute("ROLE");
+%>
+
+
 <header>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <a class="navbar-brand" href="#">MyApp</a>
@@ -14,9 +21,16 @@
       <li class="nav-item active">
         <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
       </li>
+      <% if (loggedInUsername != null && role != null && role.equalsIgnoreCase("ADMIN")){ %>
       <li class="nav-item">
         <a class="nav-link" href="addproducts.jsp">Add Products</a>
       </li>
+      <%} %>
+      <% if (loggedInUsername != null && role != null){ %>
+      <li class="nav-item">
+        <a class="nav-link" href="ListProducts.jsp">View Products</a>
+      </li>
+      <%} %>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
         <div class="dropdown-menu" aria-labelledby="dropdownId">
@@ -27,13 +41,39 @@
     </ul>
      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item active">
+      <% if (loggedInUsername == null){ %>
         <a class="nav-link" href="#">Login</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="registration.jsp">Register</a>
       </li>
-      </ul>
-   
+      <%} else { %>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Welcome <%=loggedInUsername %></a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Logout</a>
+        <%} %>
+      </li>
+      </ul> 
   </div>
 </nav>
 </header>
+
+
+
+
+<!-- Java Codes common to all pages -->
+
+<%
+	// Scriplets (Java Code)
+	String infoMessage = request.getParameter("infoMessage");
+	if(infoMessage != null){
+		out.println("<font color='green'>" + infoMessage + "</font>");
+	}
+	
+	String errorMessage = request.getParameter("errorMessage");
+	if(errorMessage != null){
+		out.println("<font color='red'>" + errorMessage + "</font>");
+	}
+%>
