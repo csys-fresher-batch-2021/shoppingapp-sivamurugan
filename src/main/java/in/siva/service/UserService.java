@@ -2,9 +2,12 @@ package in.siva.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import in.siva.exception.InvalidLoginException;
 import in.siva.exception.UserInvalidException;
 import in.siva.exception.UserRepeatedException;
 import in.siva.model.UserDetail;
+import in.siva.validator.UserLoginValidator;
 import in.siva.validator.UserValidator;
 
 public class UserService {
@@ -31,6 +34,27 @@ public class UserService {
 		} else {
 			throw new UserInvalidException("Invalid User Details");
 		}
+	}
+	
+	/**
+	 * This method is used to validate the user with admin and normal user role
+	 * If user didn't met normal login and admin login it will throw Invalid login details exception
+	 * @param username
+	 * @param password
+	 * @param role
+	 * @return
+	 */
+	public static String loginValidation(String username, String password, String role) {
+		String infoMessage = null;
+		if(UserLoginValidator.userValidator(username, password, role)) {
+			infoMessage = "User Login Successful";
+		} else if(UserLoginValidator.adminValidator(username, password, role)) {
+			infoMessage = "Admin Login Successful";
+		} else {
+			throw new InvalidLoginException("Invalid Login Credentials! Try Again");
+		}
+		
+		return infoMessage;
 	}
 
 	/** 
