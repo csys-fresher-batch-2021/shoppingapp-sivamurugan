@@ -2,6 +2,8 @@ package in.siva.validator;
 
 import java.util.List;
 
+import org.jasypt.util.password.StrongPasswordEncryptor;
+
 import in.siva.constants.Constants;
 import in.siva.model.UserDetail;
 import in.siva.service.UserService;
@@ -54,13 +56,34 @@ public class UserLoginValidator {
 		// Declaration
 		boolean valid = false;
 
+		String encryptedPassword = encryptPassword(password);
+		
 		// Business Logic
-		if (role.equals(Constants.ADMIN)) {
-			if (username.equalsIgnoreCase("Admin") && password.equals("Admin123@")) {
-				valid = true;
-			}
+		if (role.equals(Constants.ADMIN) && username.equalsIgnoreCase("Admin") && checkPassword(password, encryptedPassword)) {
+			valid = true;
 		}
 		return valid;
 
+	}
+	
+	/**
+	 * This method is used to encrypt password for admin
+	 * @param inputPassword
+	 * @return
+	 */
+	public static String encryptPassword(String inputPassword) {
+	    StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
+	    return encryptor.encryptPassword(inputPassword);
+	}
+	
+	/** 
+	 * This method is used validate whether the password and encrypted password matches or not
+	 * @param inputPassword
+	 * @param encryptedStoredPassword
+	 * @return
+	 */
+	public static boolean checkPassword(String inputPassword, String encryptedStoredPassword) {
+	    StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
+	    return encryptor.checkPassword(inputPassword, encryptedStoredPassword);
 	}
 }
