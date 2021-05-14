@@ -43,7 +43,7 @@ public class UserLoginValidator {
 
 	/**
 	 * This method is used to validate admin login If username equal to "Admin"
-	 * (Ignoring case sensitive) & password equal to "Admin123@" returns true Else it
+	 * (Ignoring case sensitive) & password equalto "Admin123@" returns true Else it
 	 * returns false
 	 * 
 	 * @param username

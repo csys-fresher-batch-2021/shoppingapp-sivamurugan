@@ -47,7 +47,7 @@ public class ProductDetail {
 	 * This method is used to get product category
 	 * @return
 	 */
-	public String getProductcategory() {
+	public String getProductCategory() {
 		return category;
 	}
 	

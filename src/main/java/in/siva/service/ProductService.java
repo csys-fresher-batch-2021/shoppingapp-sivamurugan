@@ -47,7 +47,7 @@ public class ProductService {
 			if (ProductValidator.isStringValid(product.getProductName())
 					&& ProductValidator.isNumberValid(product.getProductPrice())
 					&& ProductValidator.isNumberValid(product.getProductQuantity())
-					&& ProductValidator.isStringValid(product.getProductcategory())) {
+					&& ProductValidator.isStringValid(product.getProductCategory())) {
 				if(isProductNotRepeated(product.getProductName())) {
 					productDetails.add(product);
 				}
