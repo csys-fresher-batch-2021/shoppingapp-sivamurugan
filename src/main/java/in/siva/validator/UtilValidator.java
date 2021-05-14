@@ -4,8 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class ProductValidator {
-	private ProductValidator() {
+public class UtilValidator {
+	private UtilValidator() {
 		// Default constructor
 	}
 	/**
@@ -33,6 +33,101 @@ public class ProductValidator {
 		boolean valid = true;
 		if(number < 0) {
 			valid = false;
+		}
+		return valid;
+	}
+	
+	/**
+	 * This method is used to check whether the created password is valid or not It
+	 * will return true if the new password contains atleast one number, lowercase,
+	 * uppercase, special character Otherwise it will return false
+	 * 
+	 * @param password
+	 * @return true or false
+	 */
+	public static boolean isPasswordValid(String password) {
+		String check = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
+		if (password == null) {
+			return false;
+		}
+		Pattern passwordPattern = Pattern.compile(check);
+		Matcher passwordMatcher = passwordPattern.matcher(password);
+		return passwordMatcher.matches();
+	}
+	
+	
+	/**
+	 * this method takes old email and new email It changes Old email into new email
+	 * and it will return new email
+	 * 
+	 * @param email
+	 * @return true or false
+	 * 
+	 */
+	public static boolean isEmailValid(String email) {
+		String check = "\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b";
+
+		// Business Logic
+		if (email == null) {
+			return false;
+		}
+		Pattern patternForEmail = Pattern.compile(check);
+		Matcher matcherForEmail = patternForEmail.matcher(email);
+		return matcherForEmail.matches();
+	}
+	
+	/**
+	 * This method will check whether entered panNo is valid or not
+	 * Pan No must contain first 5 digits as Upper case alphabets
+	 * 0-9 decimals next 4 digits
+	 * upper case alphabet as final digit
+	 * @param panNo
+	 * @return
+	 */
+	public static boolean isPanValid(String panNo) {
+		// Pattern
+		String regx = "[A-Z]{5}[0-9]{4}[A-Z]{1}";
+		
+		// Business Logic
+		if (panNo == null) {
+			return false;
+		}
+		Pattern pattern = Pattern.compile(regx);
+		Matcher matcher = pattern.matcher(panNo);
+		return matcher.matches();
+	}
+	
+	/**
+	 * This method will check whether the entered user-name is valid or not
+	 * User name must contain a Upper-case lower-case and a number 
+	 * @param username
+	 * @return
+	 */
+	public static boolean isUsernameValid(String username) {
+		
+		// Pattern
+		String regx = "^[a-zA-Z0-9]+$";
+		
+		// Business Logic
+		if (username == null) {
+			return false;
+		}
+		Pattern usernamePattern = Pattern.compile(regx);
+		Matcher usernameMatcher = usernamePattern.matcher(username);
+		return usernameMatcher.matches();
+	}
+	
+	/**
+	 * This method is used to check whether the entered mobile number is 10 digit number
+	 * It will return true if length of mobile number is 10 else returns false
+	 * @param mobileNumber
+	 * @return
+	 */
+	public static boolean isMobileValid(long mobileNumber) {
+		boolean valid = false;
+		String mobileStr = Long.toString(mobileNumber);
+		if(mobileStr.length()==10) {
+			valid = true;
 		}
 		return valid;
 	}

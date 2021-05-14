@@ -5,7 +5,7 @@ import java.util.List;
 
 import in.siva.exception.ProductInvalidException;
 import in.siva.model.ProductDetail;
-import in.siva.validator.ProductValidator;
+import in.siva.validator.UtilValidator;
 
 
 public class ProductService {
@@ -44,10 +44,10 @@ public class ProductService {
 		public static void addProduct(ProductDetail product) {
 			
 			// Business Logic
-			if (ProductValidator.isStringValid(product.getProductName())
-					&& ProductValidator.isNumberValid(product.getProductPrice())
-					&& ProductValidator.isNumberValid(product.getProductQuantity())
-					&& ProductValidator.isStringValid(product.getProductcategory())) {
+			if (UtilValidator.isStringValid(product.getProductName())
+					&& UtilValidator.isNumberValid(product.getProductPrice())
+					&& UtilValidator.isNumberValid(product.getProductQuantity())
+					&& UtilValidator.isStringValid(product.getProductCategory())) {
 				if(isProductNotRepeated(product.getProductName())) {
 					productDetails.add(product);
 				}

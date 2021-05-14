@@ -37,3 +37,21 @@
   </div>
 </nav>
 </header>
+
+
+
+
+<!-- Java Codes common to all pages -->
+
+<%
+	// Scriplets (Java Code)
+	String infoMessage = request.getParameter("infoMessage");
+	if(infoMessage != null){
+		out.println("<font color='green'>" + infoMessage + "</font>");
+	}
+	
+	String errorMessage = request.getParameter("errorMessage");
+	if(errorMessage != null){
+		out.println("<font color='red'>" + errorMessage + "</font>");
+	}
+%>

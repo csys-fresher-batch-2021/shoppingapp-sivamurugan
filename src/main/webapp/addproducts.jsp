@@ -8,20 +8,6 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-	
-	
-	<%
-	// Scriplets (Java Code)
-	String infoMessage = request.getParameter("infoMessage");
-	if(infoMessage != null){
-		out.println("<font color='green'>" + infoMessage + "</font>");
-	}
-	
-	String errorMessage = request.getParameter("errorMessage");
-	if(errorMessage != null){
-		out.println("<font color='red'>" + errorMessage + "</font>");
-	}
-	%>
 	<form action = "AddProductServlet" method = "post">
 		<h3>Add Products</h3>
 		<table>
