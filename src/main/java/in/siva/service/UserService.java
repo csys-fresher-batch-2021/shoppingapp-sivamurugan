@@ -14,7 +14,7 @@ public class UserService {
 	}
 
 	// Global ArrayList declaration to store user details
-	private final static List<UserDetail> userDetails = new ArrayList<>();
+	private static final List<UserDetail> userDetails = new ArrayList<>();
 
 	/**
 	 * This method is used to add user to the ArrayList
@@ -40,4 +40,6 @@ public class UserService {
 	public static List<UserDetail> getUserDetails() {
 		return userDetails;
 	}
+	
+	
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import in.siva.constants.Constants;
 import in.siva.exception.UserInvalidException;
 import in.siva.exception.UserRepeatedException;
 import in.siva.model.UserDetail;
@@ -24,12 +25,13 @@ public class UserRegistrationServlet extends HttpServlet {
      */
     public UserRegistrationServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+    @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
@@ -50,7 +52,7 @@ public class UserRegistrationServlet extends HttpServlet {
 			UserDetail user = new UserDetail(name, age, gender, mobileNumber, email, username, password, role);
 			UserService.addUser(user);
 			
-			System.out.println(user);
+			//System.out.println(user);   (Used to check whether user details stored are not)
 			
 			// Redirect to login page after registration
 			response.sendRedirect("loginPage.jsp");
@@ -59,21 +61,21 @@ public class UserRegistrationServlet extends HttpServlet {
 			
 			// Invalid product message if details entered were wrong
 			String errorMessage = e.getMessage();
-			response.sendRedirect("newUserRegistration.jsp?errorMessage=" + errorMessage);
+			response.sendRedirect(Constants.newUserErrorMessage + errorMessage);
 		}
 		
 		catch(UserRepeatedException e) {
 			
-			// User repeated message if mobile number, username or email repeated
+			// User repeated message if mobile number, user name or email repeated
 			String errorMessage = e.getMessage();
-			response.sendRedirect("newUserRegistration.jsp?errorMessage=" + errorMessage);
+			response.sendRedirect(Constants.newUserErrorMessage + errorMessage);
 		}
 		
 		catch(NumberFormatException e) {
 			
 			// Number format exception for mobile number if mobile number is entered wrong
 			String errorMessage = "Invalid mobile number";
-			response.sendRedirect("newUserRegistration.jsp?errorMessage=" + errorMessage);
+			response.sendRedirect(Constants.newUserErrorMessage + errorMessage);
 		}
 	}
 

@@ -6,6 +6,12 @@ import in.siva.service.UserService;
 
 public class UserValidator {
 
+	
+	private UserValidator() {
+		// Default constructor
+	}
+	
+	
 	public static boolean isUserValid(UserDetail user) {
 		// Declaration
 		boolean valid = false;
