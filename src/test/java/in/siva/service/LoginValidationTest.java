@@ -13,7 +13,7 @@ public class LoginValidationTest {
 	 * Static used to add one valid user
 	 */
 	static {
-		UserDetail user = new UserDetail("Siva", 21, Constants.MALE, 6369855563l, "siva@gmail.com", "siva123",
+		UserDetail user = new UserDetail("Siva", 21, Constants.MALE, 8355676589l, "siva12343523@gmail.com", "hihihi",
 				"Sivasys123@", Constants.USER);
 		UserService.addUser(user);
 	}
@@ -24,7 +24,7 @@ public class LoginValidationTest {
 	@Test
 	public void validUserLoginTest() {
 		try {
-			String infoMessage = UserService.loginValidation("siva123", "Sivasys123@", Constants.USER);
+			String infoMessage = UserService.loginValidation("hihihi", "Sivasys123@", Constants.USER);
 			assertEquals("User Login Successful", infoMessage);
 		} catch (InvalidLoginException e) {
 			fail();
@@ -49,7 +49,7 @@ public class LoginValidationTest {
 	@Test
 	public void invalidPasswordLoginTest() {
 		try {
-			String infoMessage = UserService.loginValidation("siva123", "Sivasys12@", Constants.USER);
+			String infoMessage = UserService.loginValidation("hihihi", "Sivasys12@", Constants.USER);
 		} catch (InvalidLoginException e) {
 			assertEquals("Invalid Login Credentials! Try Again", e.getMessage());
 		}
