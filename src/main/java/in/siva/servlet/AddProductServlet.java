@@ -44,7 +44,7 @@ public class AddProductServlet extends HttpServlet {
 					
 				
 				ProductService.addProduct(product1);
-				System.out.println(product1.getProductCategory());
+				//System.out.println(product1.getProductCategory());
 				String infoMessage = "Product Added Successfully";
 				response.sendRedirect("addproducts.jsp?infoMessage=" + infoMessage);
 				//out.println(infoMessage);

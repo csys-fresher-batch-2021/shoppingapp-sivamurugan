@@ -38,7 +38,7 @@
 				<option value = "User"> User </option>
 				<option value = "Admin" disabled> Admin </option>
 			</select><br/>
-			<button type = "submit">Submit</button>
+			<button type = "submit" class= "btn btn-info">Submit</button>
 		</form>
 	</main>
 </body>
