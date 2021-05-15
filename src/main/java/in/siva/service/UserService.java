@@ -45,46 +45,20 @@ public class UserService {
 		}
 	}
 	
-<<<<<<< HEAD
-	
 	/**
 	 * This method is used to verify login with role
 	 * If role is admin it will validate login with admin login details
 	 * If role is user it will validate login with user login details 
-=======
-	/**
-	 * This method is used to validate the user with admin and normal user role
-	 * If user didn't met normal login and admin login it will throw Invalid login details exception
->>>>>>> 5e0491d445a6d22ad4315f3db51cb6d6486afab1
 	 * @param username
 	 * @param password
 	 * @param role
 	 * @return
-<<<<<<< HEAD
-=======
 	 */
+
 	public static String loginValidation(String username, String password, String role) {
 		String infoMessage = null;
 		if(UserLoginValidator.userValidator(username, password, role)) {
 			infoMessage = "User Login Successful";
-		} else if(UserLoginValidator.adminValidator(username, password, role)) {
-			infoMessage = "Admin Login Successful";
-		} else {
-			throw new InvalidLoginException("Invalid Login Credentials! Try Again");
-		}
-		
-		return infoMessage;
-	}
-
-	/** 
-	 * This method is used to get user details
-	 * @return userDetails
->>>>>>> 5e0491d445a6d22ad4315f3db51cb6d6486afab1
-	 */
-	public static String loginValidation(String username, String password, String role) {
-		String infoMessage = null;
-		if(UserLoginValidator.userValidator(username, password, role)) {
-			infoMessage = "User Login Sucessful";
 		} else if(UserLoginValidator.adminValidator(username, password, role)) {
 			infoMessage = "Admin Login Successful";
 		} else {

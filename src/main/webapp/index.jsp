@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>MyApp</title>
+<title>Shop App</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
