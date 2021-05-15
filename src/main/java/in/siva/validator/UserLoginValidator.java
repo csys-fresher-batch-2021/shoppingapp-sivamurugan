@@ -2,6 +2,11 @@ package in.siva.validator;
 
 import java.util.List;
 
+<<<<<<< HEAD
+=======
+import org.jasypt.util.password.StrongPasswordEncryptor;
+
+>>>>>>> 5e0491d445a6d22ad4315f3db51cb6d6486afab1
 import in.siva.constants.Constants;
 import in.siva.model.UserDetail;
 import in.siva.service.UserService;
@@ -54,13 +59,45 @@ public class UserLoginValidator {
 		// Declaration
 		boolean valid = false;
 
+<<<<<<< HEAD
 		// Business Logic
 		if (role.equals(Constants.ADMIN)) {
 			if (username.equalsIgnoreCase("Admin") && password.equals("Admin123@")) {
 				valid = true;
 			}
+=======
+		String encryptedPassword = encryptPassword(password);
+		
+		// Business Logic
+		if (role.equals(Constants.ADMIN) && username.equalsIgnoreCase("Admin") && checkPassword(password, encryptedPassword)) {
+			valid = true;
+>>>>>>> 5e0491d445a6d22ad4315f3db51cb6d6486afab1
 		}
 		return valid;
 
 	}
+<<<<<<< HEAD
+=======
+	
+	/**
+	 * This method is used to encrypt password for admin
+	 * @param inputPassword
+	 * @return
+	 */
+	public static String encryptPassword(String inputPassword) {
+	    StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
+	    return encryptor.encryptPassword(inputPassword);
+	}
+	
+	/** 
+	 * This method is used validate whether the password and encrypted password matches or not
+	 * @param inputPassword
+	 * @param encryptedStoredPassword
+	 * @return
+	 */
+	public static boolean checkPassword(String inputPassword, String encryptedStoredPassword) {
+	    StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
+	    return encryptor.checkPassword(inputPassword, encryptedStoredPassword);
+	}
+>>>>>>> 5e0491d445a6d22ad4315f3db51cb6d6486afab1
 }

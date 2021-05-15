@@ -28,6 +28,10 @@ public class LoginValidationServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+<<<<<<< HEAD
+=======
+    @Override
+>>>>>>> 5e0491d445a6d22ad4315f3db51cb6d6486afab1
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
