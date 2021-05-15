@@ -68,6 +68,30 @@ public class ProductService {
 			return productDetails;
 		}
 		
+		/**
+		 * This method is used to remove product details by product name
+		 * If product name already available in productDetails matched is set as true
+		 * If matched equals true then that index is removed
+		 * @param productName
+		 */
+		public static void removeProduct(String productName) {
+			int index = 0;
+			boolean matched = false;
+			for (ProductDetail product : productDetails) {
+				if(product.getProductName().equalsIgnoreCase(productName)) {
+					matched = true;
+					break;
+				}
+				index ++;
+			}
+			
+			if(matched) {
+				productDetails.remove(index);
+			} else {
+				throw new ProductInvalidException("Invalid Product Name");
+			}
+		}
+		
 		
 
 }
