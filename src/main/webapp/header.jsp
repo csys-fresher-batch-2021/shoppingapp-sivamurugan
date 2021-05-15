@@ -7,7 +7,6 @@
 String loggedInUsername = (String)session.getAttribute("LOGGED_IN_USER");
 String role = (String) session.getAttribute("ROLE");
 %>
-
 <header>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <a class="navbar-brand" href="#">MyApp</a>
@@ -25,9 +24,11 @@ String role = (String) session.getAttribute("ROLE");
         <a class="nav-link" href="addproducts.jsp">Add Products</a>
       </li>
       <%} %>
+      <% if (loggedInUsername != null && role != null){ %>
       <li class="nav-item">
         <a class="nav-link" href="ListProducts.jsp">View Products</a>
       </li>
+      <%} %>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
         <div class="dropdown-menu" aria-labelledby="dropdownId">
@@ -49,11 +50,10 @@ String role = (String) session.getAttribute("ROLE");
         <a class="nav-link" href="#">Welcome <%=loggedInUsername %></a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link" href="LogoutServlet">Logout</a>
       </li>
       <%} %>
       </ul>
-   
   </div>
 </nav>
 </header>

@@ -1,9 +1,7 @@
 package in.siva.validator;
 
 import java.util.List;
-
 import org.jasypt.util.password.StrongPasswordEncryptor;
-
 import in.siva.constants.Constants;
 import in.siva.model.UserDetail;
 import in.siva.service.UserService;
@@ -55,7 +53,6 @@ public class UserLoginValidator {
 	public static boolean adminValidator(String username, String password, String role) {
 		// Declaration
 		boolean valid = false;
-
 		String encryptedPassword = encryptPassword(password);
 		
 		// Business Logic

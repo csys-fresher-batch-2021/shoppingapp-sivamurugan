@@ -18,7 +18,16 @@ public class UserService {
 
 	// Global ArrayList declaration to store user details
 	private static final List<UserDetail> userDetails = new ArrayList<>();
-
+	
+	/** 
+	 * This method is used to get user details
+	 * @return userDetails
+	 */
+	public static List<UserDetail> getUserDetails() {
+		return userDetails;
+	}
+	
+	
 	/**
 	 * This method is used to add user to the ArrayList
 	 * @param user
@@ -37,13 +46,15 @@ public class UserService {
 	}
 	
 	/**
-	 * This method is used to validate the user with admin and normal user role
-	 * If user didn't met normal login and admin login it will throw Invalid login details exception
+	 * This method is used to verify login with role
+	 * If role is admin it will validate login with admin login details
+	 * If role is user it will validate login with user login details 
 	 * @param username
 	 * @param password
 	 * @param role
 	 * @return
 	 */
+
 	public static String loginValidation(String username, String password, String role) {
 		String infoMessage = null;
 		if(UserLoginValidator.userValidator(username, password, role)) {
@@ -56,14 +67,5 @@ public class UserService {
 		
 		return infoMessage;
 	}
-
-	/** 
-	 * This method is used to get user details
-	 * @return userDetails
-	 */
-	public static List<UserDetail> getUserDetails() {
-		return userDetails;
-	}
-	
 	
 }
