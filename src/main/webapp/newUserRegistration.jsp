@@ -9,7 +9,7 @@
 		<h3>New User Registration</h3>
 		<form action = "UserRegistrationServlet" method = "post">
 			<label for = "name"> Name: </label> 
-			<input type = "text" name = "name" pattern = "[A-Za-z]{4,20}" placeholder = "Enter Name" autofocus required><br />
+			<input type = "text" name = "name" pattern = "[a-zA-Z\s]+" placeholder = "Enter Name" autofocus required><br />
 
 			<label for = "age"> Age : </label>
 			<input type = "number" name = "age" min=1 max=90 placeholder = "Enter Age" required><br />
