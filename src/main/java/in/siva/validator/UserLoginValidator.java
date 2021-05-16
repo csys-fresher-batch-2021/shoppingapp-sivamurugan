@@ -53,7 +53,8 @@ public class UserLoginValidator {
 	public static boolean adminValidator(String username, String password, String role) {
 		// Declaration
 		boolean valid = false;
-		String encryptedPassword = encryptPassword(password);
+		String defaultPassword = "Admin123@";
+		String encryptedPassword = encryptPassword(defaultPassword);
 		
 		// Business Logic
 		if (role.equals(Constants.ADMIN) && username.equalsIgnoreCase("Admin") && checkPassword(password, encryptedPassword)) {
