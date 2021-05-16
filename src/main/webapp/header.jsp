@@ -26,10 +26,16 @@ String role = (String) session.getAttribute("ROLE");
       <li class="nav-item">
         <a class="nav-link" href="removeProduct.jsp">Remove Product</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="removeAccount.jsp">Remove User</a>
+      </li>
       <%} %>
       <% if (loggedInUsername != null && role != null){ %>
       <li class="nav-item">
         <a class="nav-link" href="ListProducts.jsp">View Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="editProfile.jsp">Edit Profile</a>
       </li>
       <%} %>
       <li class="nav-item dropdown">
