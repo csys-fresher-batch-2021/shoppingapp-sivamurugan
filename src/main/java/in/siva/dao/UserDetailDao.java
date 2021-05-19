@@ -212,4 +212,32 @@ public class UserDetailDao {
 			ConnectionUtil.close(pst, con);
 		}
 	}
+	
+	public static void updateEmail(String newEmail, String username) throws DBException {
+		Connection con = null;
+		PreparedStatement pst = null;
+		try {
+			// To establish connection
+			con = ConnectionUtil.getConnection();
+
+			// SQl commands
+			String sql = "UPDATE userdetails SET email = ? WHERE username = ?";
+			// To Execute
+			pst = con.prepareStatement(sql);
+
+			pst.setString(1, newEmail);
+			pst.setString(2, username);
+
+			pst.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			throw new DBException("Sorry! Unable to update Email address");
+		}
+
+		finally {
+			// Release the connection
+			ConnectionUtil.close(pst, con);
+		}
+	}
 }
