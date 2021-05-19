@@ -3,17 +3,21 @@ package in.siva.validator;
 import java.util.List;
 import in.siva.dao.UserDetailDao;
 import in.siva.exception.DBException;
+import in.siva.exception.UserInvalidException;
+import in.siva.exception.UserRepeatedException;
 import in.siva.model.UserDetail;
+
 public class UserValidator {
 
-	
 	private UserValidator() {
 		// Default constructor
 	}
-	
+
 	/**
-	 * This method is used to validate whether the details entered by user is valid or not
-	 * It will validate all details and if all details are valid it will return true else it will return false
+	 * This method is used to validate whether the details entered by user is valid
+	 * or not It will validate all details and if all details are valid it will
+	 * return true else it will return false
+	 * 
 	 * @param user
 	 * @return
 	 */
@@ -31,21 +35,23 @@ public class UserValidator {
 	}
 
 	/**
-	 * This method is used to check whether the sensitive details entered by user is already registered by a user or not
-	 * If not used by it will return true
-	 * Else it will return false
+	 * This method is used to check whether the sensitive details entered by user is
+	 * already registered by a user or not If not used by it will return true Else
+	 * it will return false
+	 * 
 	 * @param user
 	 * @return
-	 * @throws DBException 
+	 * @throws DBException
 	 */
-	public static boolean isUserNotRepeated(UserDetail user) throws DBException{
+	public static boolean isUserNotRepeated(UserDetail user) throws DBException {
 		// Declaration
 		boolean valid = true;
 		// To get user details
 		List<UserDetail> userDetails = UserDetailDao.getUserDetails();
 		// Business Logic
 		for (UserDetail userDetail : userDetails) {
-			if (user.getEmail().equalsIgnoreCase(userDetail.getEmail()) || userDetail.getMobileNumber() == user.getMobileNumber()
+			if (user.getEmail().equalsIgnoreCase(userDetail.getEmail())
+					|| userDetail.getMobileNumber() == user.getMobileNumber()
 					|| user.getUsername().equals(userDetail.getUsername())) {
 				valid = false;
 				break;
@@ -55,41 +61,93 @@ public class UserValidator {
 		return valid;
 
 	}
-	
+
 	/**
-	 * This method is used  to check whether the username is present in database or not
-	 * If present - true
-	 * if not present - false
+	 * This method is used to check whether the username is present in database or
+	 * not If present - true if not present - false
+	 * 
 	 * @param username
 	 * @return
-	 * @throws DBException 
+	 * @throws DBException
 	 */
 	public static boolean isUsernamePresent(String username) throws DBException {
 		boolean exists = false;
 		List<UserDetail> userDetails = UserDetailDao.getUserDetails();
 		for (UserDetail user : userDetails) {
-			if(user.getUsername().equals(username)) {
+			if (user.getUsername().equals(username)) {
 				exists = true;
 				break;
 			}
 		}
 		return exists;
 	}
+
 	/**
-	 * This method is used to check whether the entered username & new name is valid or not
-	 * Returns true if valid else returns false
+	 * This method is used to check whether the entered mobile number is already
+	 * present in db or not
+	 * 
+	 * @param mobileNumber
+	 * @return
+	 * @throws DBException
+	 */
+	public static boolean isMobileNotRepeated(long mobileNumber) throws DBException {
+		boolean isNotRepeated = true;
+		List<UserDetail> userDetails = UserDetailDao.getUserDetails();
+		for (UserDetail user : userDetails) {
+			if (user.getMobileNumber() == mobileNumber) {
+				isNotRepeated = false;
+				break;
+			}
+		}
+
+		return isNotRepeated;
+	}
+
+	/**
+	 * This method is used to check whether the entered username & new name is valid
+	 * or not Returns true if valid else returns false
+	 * 
 	 * @param newName
 	 * @param username
 	 * @return
-	 * @throws DBException 
+	 * @throws DBException
 	 */
-	public static boolean isUpdateNameValid(String newName, String username) throws DBException{
+	public static boolean isUpdateNameValid(String newName, String username) throws DBException {
 		boolean valid = false;
-		if(UtilValidator.isStringValid(newName) && isUsernamePresent(username)) {
+		if (UtilValidator.isStringValid(newName) && isUsernamePresent(username)) {
 			valid = true;
 		}
-		
+
+		return valid;
+	}
+
+	/**
+	 * This method is used to check whether entered mobile number is valid or not
+	 * Returns true if mobile number & username is present in db Else it returns
+	 * false
+	 * 
+	 * @param newNumber
+	 * @param username
+	 * @return
+	 * @throws DBException
+	 */
+	public static boolean isUpdateMobileValid(long newNumber, String username) throws DBException {
+		boolean valid = false;
+		if (UtilValidator.isMobileValid(newNumber)) {
+			if (isMobileNotRepeated(newNumber)) {
+				if (isUsernamePresent(username)) {
+					valid = true;
+				} else {
+					throw new UserInvalidException("User not found");
+				}
+			} else {
+				throw new UserRepeatedException("Mobile Number is already used by a user");
+			}
+
+		} else {
+			throw new UserInvalidException("Please enter valid mobile number");
+		}
+
 		return valid;
 	}
 }
-
