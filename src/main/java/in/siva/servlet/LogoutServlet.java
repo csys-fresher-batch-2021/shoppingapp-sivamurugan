@@ -1,7 +1,6 @@
 package in.siva.servlet;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,11 +22,18 @@ public class LogoutServlet extends HttpServlet {
         
     }
 
+    /**
+     * This method is used to remove session details of user after logout
+     */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		response.sendRedirect("loginPage.jsp");
+		try {
+			response.sendRedirect("loginPage.jsp");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -1,10 +1,9 @@
 package in.siva.validator;
 
 import java.util.List;
-import org.jasypt.util.password.StrongPasswordEncryptor;
-import in.siva.constants.Constants;
+import in.siva.dao.UserDetailDao;
+import in.siva.exception.DBException;
 import in.siva.model.UserDetail;
-import in.siva.service.UserService;
 
 public class UserLoginValidator {
 
@@ -20,68 +19,23 @@ public class UserLoginValidator {
 	 * @param username
 	 * @param password
 	 * @return
+	 * @throws DBException 
 	 */
-	public static boolean userValidator(String username, String password, String role) {
+	public static boolean userValidator(String username, String password, String role) throws DBException {
 
 		// Declaration
 		boolean valid = false;
 
 		// To get user details
-		List<UserDetail> userDetils = UserService.getUserDetails();
+		List<UserDetail> userDetils = UserDetailDao.getUserDetails();
 
 		// Business Logic
-		if (role.equals(Constants.USER)) {
 			for (UserDetail user : userDetils) {
-				if (user.getUsername().equalsIgnoreCase(username) && user.getPassword().equals(password)) {
+				if (user.getUsername().equals(username) && user.getPassword().equals(password) && user.getRole().equals(role)) {
 					valid = true;
 					break;
 				}
 			}
-		}
 		return valid;
-	}
-
-	/**
-	 * This method is used to validate admin login If username equal to "Admin"
-	 * (Ignoring case sensitive) & password equalto "Admin123@" returns true Else it
-	 * returns false
-	 * 
-	 * @param username
-	 * @param password
-	 * @return
-	 */
-	public static boolean adminValidator(String username, String password, String role) {
-		// Declaration
-		boolean valid = false;
-		String defaultPassword = "Admin123@";
-		String encryptedPassword = encryptPassword(defaultPassword);
-		
-		// Business Logic
-		if (role.equals(Constants.ADMIN) && username.equalsIgnoreCase("Admin") && checkPassword(password, encryptedPassword)) {
-			valid = true;
-		}
-		return valid;
-
-	}
-	
-	/**
-	 * This method is used to encrypt password for admin
-	 * @param inputPassword
-	 * @return
-	 */
-	public static String encryptPassword(String inputPassword) {
-	    StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
-	    return encryptor.encryptPassword(inputPassword);
-	}
-	
-	/** 
-	 * This method is used validate whether the password and encrypted password matches or not
-	 * @param inputPassword
-	 * @param encryptedStoredPassword
-	 * @return
-	 */
-	public static boolean checkPassword(String inputPassword, String encryptedStoredPassword) {
-	    StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
-	    return encryptor.checkPassword(inputPassword, encryptedStoredPassword);
 	}
 }

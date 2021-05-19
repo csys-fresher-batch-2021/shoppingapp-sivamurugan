@@ -1,8 +1,8 @@
 package in.siva.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.sql.SQLException;
+import in.siva.dao.UserDetailDao;
+import in.siva.exception.DBException;
 import in.siva.exception.InvalidLoginException;
 import in.siva.exception.UserInvalidException;
 import in.siva.exception.UserRepeatedException;
@@ -15,28 +15,21 @@ public class UserService {
 	private UserService() {
 		// Default constructor
 	}
-
-	// Global ArrayList declaration to store user details
-	private static final List<UserDetail> userDetails = new ArrayList<>();
-	
-	/** 
-	 * This method is used to get user details
-	 * @return userDetails
-	 */
-	public static List<UserDetail> getUserDetails() {
-		return userDetails;
-	}
 	
 	
 	/**
 	 * This method is used to add user to the ArrayList
 	 * @param user
+	 * @throws DBException 
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public static void addUser(UserDetail user) {
+	public static void addUser(UserDetail user) throws DBException{
 		// Business Logic
 		if (UserValidator.isUserValid(user)) {
 			if (UserValidator.isUserNotRepeated(user)) {
-				userDetails.add(user);
+				UserDetail validUser = changeEmailToLowerCase(user);
+				UserDetailDao.addUser(validUser);
 			} else {
 				throw new UserRepeatedException("Sorry! Some details you entered were already registered by a user");
 			}
@@ -53,14 +46,13 @@ public class UserService {
 	 * @param password
 	 * @param role
 	 * @return
+	 * @throws DBException 
 	 */
 
-	public static String loginValidation(String username, String password, String role) {
+	public static String loginValidation(String username, String password, String role) throws DBException {
 		String infoMessage = null;
 		if(UserLoginValidator.userValidator(username, password, role)) {
-			infoMessage = "User Login Successful";
-		} else if(UserLoginValidator.adminValidator(username, password, role)) {
-			infoMessage = "Admin Login Successful";
+			infoMessage = "Login Successful";
 		} else {
 			throw new InvalidLoginException("Invalid Login Credentials! Try Again");
 		}
@@ -72,21 +64,42 @@ public class UserService {
 	 * This method is used to remove user by using his/ her user-name
 	 * If user-name matches then matched = true and that index userDetails is removed
 	 * @param username
+	 * @throws DBException 
 	 */
-	public static void removeAccount(String username) {
-		int index = 0;
-		boolean matched = false;
-		for (UserDetail user : userDetails) {
-			if(user.getUsername().equalsIgnoreCase(username)) {
-				matched = true;
-				break;
-			}
-			
-			index++;
-		}
+	public static void removeAccount(String username) throws DBException{
 		
-		if(matched) {
-			userDetails.remove(index);
+		if(UserValidator.isUsernamePresent(username)) {
+			UserDetailDao.removeUser(username);
+		} else {
+			throw new UserInvalidException("User not found");
+		}
+	}
+	
+	/**
+	 * This method is used to convert the email entered by user into lowercase
+	 * @param user
+	 * @return
+	 */
+	public static UserDetail changeEmailToLowerCase(UserDetail user) {
+		
+		String email = user.getEmail();
+		email = email.toLowerCase();
+		user.setEmail(email);
+		return user;
+	}
+	
+	
+	/**
+	 * This method is used to update name 
+	 * It will check whether the username is present in db or not
+	 * If username present then name is updated in db
+	 * @param newName
+	 * @param username
+	 * @throws DBException 
+	 */
+	public static void updateName(String newName, String username) throws DBException {
+		if(UserValidator.isUpdateNameValid(newName, username)) {
+			UserDetailDao.updateName(newName, username);
 		} else {
 			throw new UserInvalidException("User not found");
 		}

@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 
 public class UtilValidator {
+	
 	private UtilValidator() {
 		// Default constructor
 	}
@@ -47,9 +48,6 @@ public class UtilValidator {
 	 */
 	public static boolean isPasswordValid(String password) {
 		String check = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
-		if (password == null) {
-			return false;
-		}
 		Pattern passwordPattern = Pattern.compile(check);
 		Matcher passwordMatcher = passwordPattern.matcher(password);
 		return passwordMatcher.matches();
@@ -68,34 +66,12 @@ public class UtilValidator {
 		String check = "\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b";
 
 		// Business Logic
-		if (email == null) {
-			return false;
-		}
 		Pattern patternForEmail = Pattern.compile(check);
 		Matcher matcherForEmail = patternForEmail.matcher(email);
 		return matcherForEmail.matches();
 	}
 	
-	/**
-	 * This method will check whether entered panNo is valid or not
-	 * Pan No must contain first 5 digits as Upper case alphabets
-	 * 0-9 decimals next 4 digits
-	 * upper case alphabet as final digit
-	 * @param panNo
-	 * @return
-	 */
-	public static boolean isPanValid(String panNo) {
-		// Pattern
-		String regx = "[A-Z]{5}[0-9]{4}[A-Z]{1}";
-		
-		// Business Logic
-		if (panNo == null) {
-			return false;
-		}
-		Pattern pattern = Pattern.compile(regx);
-		Matcher matcher = pattern.matcher(panNo);
-		return matcher.matches();
-	}
+	
 	
 	/**
 	 * This method will check whether the entered user-name is valid or not
@@ -109,9 +85,6 @@ public class UtilValidator {
 		String regx = "^[a-zA-Z0-9]+$";
 		
 		// Business Logic
-		if (username == null) {
-			return false;
-		}
 		Pattern usernamePattern = Pattern.compile(regx);
 		Matcher usernameMatcher = usernamePattern.matcher(username);
 		return usernameMatcher.matches();

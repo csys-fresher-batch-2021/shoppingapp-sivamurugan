@@ -16,11 +16,11 @@
 			
 			<label for = "role">Role :</label>
 			<select name = "role">
-			<option value = "User">USER</option>
-			<option value = "Admin">ADMIN</option>
-			</select>
+			<option value = "U">USER</option>
+			<option value = "A">ADMIN</option>
+			</select><br/>
 		
-			<button type="submit" class = "btn btn-primary">Submit</button>
+			<button type="submit" class = "btn btn-success">Submit</button>
 			<button type="reset" class = "btn btn-danger">Clear</button>
 			<a href = "newUserRegistration.jsp" class = "btn btn-info">New User? Register here</a>
 		</form>
