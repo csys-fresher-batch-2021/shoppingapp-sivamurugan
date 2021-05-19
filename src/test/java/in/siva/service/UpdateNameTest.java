@@ -1,11 +1,8 @@
 package in.siva.service;
 
 import static org.junit.Assert.*;
-
-import java.sql.SQLException;
-
 import org.junit.Test;
-
+import in.siva.exception.DBException;
 import in.siva.exception.UserInvalidException;
 
 public class UpdateNameTest {
@@ -19,9 +16,8 @@ public class UpdateNameTest {
 		String username = "Karan";
 		try {
 			UserService.updateName(newName, username);
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (DBException e) {
 			fail();
-			e.printStackTrace();
 		}
 		
 	}
@@ -35,9 +31,8 @@ public class UpdateNameTest {
 		String username = "Hello";
 		try {
 			UserService.updateName(newName, username);
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (DBException e) {
 			fail();
-			e.printStackTrace();
 		} catch(UserInvalidException e) {
 			assertEquals("User not found", e.getMessage());
 		}
