@@ -1,13 +1,10 @@
 package in.siva.service;
 
 import static org.junit.Assert.*;
-
 import java.sql.SQLException;
-import java.util.List;
-
 import org.junit.Test;
 import in.siva.constants.Constants;
-import in.siva.dao.UserDetailDao;
+import in.siva.exception.DBException;
 import in.siva.exception.UserInvalidException;
 import in.siva.exception.UserRepeatedException;
 import in.siva.model.UserDetail;
@@ -21,7 +18,7 @@ public class AddUserTest {
 	 * @throws ClassNotFoundException
 	 */
 	@Test
-	public void validUserTest() throws ClassNotFoundException, SQLException {
+	public void validUserTest() {
 
 		UserDetail user1 = new UserDetail();
 
@@ -38,6 +35,8 @@ public class AddUserTest {
 
 		} catch (UserInvalidException e) {
 			fail();
+		} catch (DBException e) {
+			fail();
 		}
 	}
 
@@ -48,7 +47,7 @@ public class AddUserTest {
 	 * @throws ClassNotFoundException
 	 */
 	@Test
-	public void invalidNameTest() throws ClassNotFoundException, SQLException {
+	public void invalidNameTest() {
 		UserDetail user2 = new UserDetail();
 		user2.setName("11111");
 		user2.setAge(21);
@@ -63,6 +62,8 @@ public class AddUserTest {
 
 		} catch (UserInvalidException e) {
 			assertEquals("Invalid User Details", e.getMessage());
+		} catch (DBException e) {
+			fail();
 		}
 	}
 
@@ -73,7 +74,7 @@ public class AddUserTest {
 	 * @throws ClassNotFoundException
 	 */
 	@Test
-	public void invalidAgeTest() throws ClassNotFoundException, SQLException {
+	public void invalidAgeTest() {
 		UserDetail user3 = new UserDetail();
 		int age = -8;
 		user3.setName("Invalid Age");
@@ -89,6 +90,8 @@ public class AddUserTest {
 
 		} catch (UserInvalidException e) {
 			assertEquals("Invalid User Details", e.getMessage());
+		} catch (DBException e) {
+			fail();
 		}
 	}
 
@@ -99,7 +102,7 @@ public class AddUserTest {
 	 * @throws ClassNotFoundException
 	 */
 	@Test
-	public void invalidNumberSizeTest() throws ClassNotFoundException, SQLException {
+	public void invalidNumberSizeTest() {
 		UserDetail user4 = new UserDetail();
 		user4.setName("InvalidNumber");
 		user4.setAge(21);
@@ -114,6 +117,8 @@ public class AddUserTest {
 
 		} catch (UserInvalidException e) {
 			assertEquals("Invalid User Details", e.getMessage());
+		} catch (DBException e) {
+			fail();
 		}
 	}
 
@@ -124,7 +129,7 @@ public class AddUserTest {
 	 * @throws ClassNotFoundException
 	 */
 	@Test
-	public void invalidEmailNoSpecialCaseTest() throws ClassNotFoundException, SQLException {
+	public void invalidEmailNoSpecialCaseTest() {
 		UserDetail user5 = new UserDetail();
 		user5.setName("InvalidEmail");
 		user5.setAge(21);
@@ -139,6 +144,8 @@ public class AddUserTest {
 
 		} catch (UserInvalidException e) {
 			assertEquals("Invalid User Details", e.getMessage());
+		} catch (DBException e) {
+			fail();
 		}
 	}
 
@@ -149,7 +156,7 @@ public class AddUserTest {
 	 * @throws ClassNotFoundException
 	 */
 	@Test
-	public void invalidUsernameTest() throws ClassNotFoundException, SQLException {
+	public void invalidUsernameTest() {
 		UserDetail user6 = new UserDetail();
 		user6.setName("Invalid Username");
 		user6.setAge(21);
@@ -164,6 +171,8 @@ public class AddUserTest {
 
 		} catch (UserInvalidException e) {
 			assertEquals("Invalid User Details", e.getMessage());
+		} catch (DBException e) {
+			fail();
 		}
 	}
 
@@ -174,7 +183,7 @@ public class AddUserTest {
 	 * @throws ClassNotFoundException
 	 */
 	@Test
-	public void invalidPasswordWithoutNumberTest() throws ClassNotFoundException, SQLException {
+	public void invalidPasswordWithoutNumberTest() {
 		UserDetail user7 = new UserDetail();
 		user7.setName("InvalidPass");
 		user7.setAge(21);
@@ -189,6 +198,8 @@ public class AddUserTest {
 
 		} catch (UserInvalidException e) {
 			assertEquals("Invalid User Details", e.getMessage());
+		} catch (DBException e) {
+			fail();
 		}
 	}
 
@@ -199,7 +210,7 @@ public class AddUserTest {
 	 * @throws ClassNotFoundException
 	 */
 	@Test
-	public void invalidPasswordWithoutSpecialCharacterTest() throws ClassNotFoundException, SQLException {
+	public void invalidPasswordWithoutSpecialCharacterTest() {
 		UserDetail user8 = new UserDetail();
 		user8.setName("withoutSpecial");
 		user8.setAge(21);
@@ -214,6 +225,8 @@ public class AddUserTest {
 
 		} catch (UserInvalidException e) {
 			assertEquals("Invalid User Details", e.getMessage());
+		} catch (DBException e) {
+			fail();
 		}
 	}
 
@@ -224,7 +237,7 @@ public class AddUserTest {
 	 * @throws ClassNotFoundException
 	 */
 	@Test
-	public void invalidPasswordWithoutUpperCaseTest() throws ClassNotFoundException, SQLException {
+	public void invalidPasswordWithoutUpperCaseTest() {
 		UserDetail user9 = new UserDetail();
 		user9.setName("InvalidPass");
 		user9.setAge(21);
@@ -239,6 +252,8 @@ public class AddUserTest {
 
 		} catch (UserInvalidException e) {
 			assertEquals("Invalid User Details", e.getMessage());
+		} catch (DBException e) {
+			fail();
 		}
 	}
 
@@ -266,13 +281,7 @@ public class AddUserTest {
 
 		} catch (UserRepeatedException e) {
 			assertEquals("Sorry! Some details you entered were already registered by a user", e.getMessage());
-		}
-
-		catch (SQLException e) {
-			fail();
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+		} catch (DBException e) {
 			fail();
 		}
 	}
@@ -294,11 +303,7 @@ public class AddUserTest {
 		try {
 			UserService.addUser(user11);
 			fail();
-		} catch (ClassNotFoundException e) {
-			fail();
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (DBException e) {
 			fail();
 		} catch (UserRepeatedException e) {
 			assertEquals("Sorry! Some details you entered were already registered by a user", e.getMessage());
@@ -323,11 +328,7 @@ public class AddUserTest {
 		try {
 			UserService.addUser(user12);
 			fail();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			fail();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (DBException e) {
 			fail();
 		} catch (UserRepeatedException e) {
 			assertEquals("Sorry! Some details you entered were already registered by a user", e.getMessage());

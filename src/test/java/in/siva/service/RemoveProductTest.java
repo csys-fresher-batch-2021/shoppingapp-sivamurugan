@@ -1,47 +1,41 @@
 package in.siva.service;
 
 import static org.junit.Assert.*;
-
-import java.sql.SQLException;
-
 import org.junit.Test;
-
+import in.siva.exception.DBException;
 import in.siva.exception.ProductInvalidException;
 
 public class RemoveProductTest {
-	
+
 	/**
-	 * In this test case valid product name is given so product removed 
+	 * In this test case valid product name is given so product removed
 	 */
 	@Test
 	public void validProductRemoveTest() {
 		try {
 			try {
 				ProductService.removeProduct("Apple");
-			} catch (ClassNotFoundException | SQLException e) {
+			} catch (DBException e) {
 				fail();
-				e.printStackTrace();
 			}
-		} catch(ProductInvalidException e){
+		} catch (ProductInvalidException e) {
 			fail();
 		}
 	}
-	
+
 	/**
-	 * In this test case invalid product name is given so Invalid product name message
+	 * In this test case invalid product name is given so Invalid product name
+	 * message
 	 */
 	@Test
 	public void invalidProductRemoveTest() {
 		try {
-			try {
 				ProductService.removeProduct("Grapes");
-			} catch (ClassNotFoundException | SQLException e) {
-				fail();
-				e.printStackTrace();
-			}
-		} catch(ProductInvalidException e){
+	
+		} catch (ProductInvalidException e) {
 			assertEquals("Invalid Product Name", e.getMessage());
+		} catch (DBException e) {
+			fail();
 		}
 	}
-
 }

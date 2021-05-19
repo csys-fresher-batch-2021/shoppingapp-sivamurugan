@@ -1,11 +1,8 @@
 package in.siva.service;
 
 import static org.junit.Assert.*;
-
-import java.sql.SQLException;
-
 import org.junit.Test;
-
+import in.siva.exception.DBException;
 import in.siva.exception.ProductInvalidException;
 import in.siva.model.ProductDetail;
 
@@ -27,12 +24,8 @@ public class AddProductTest {
 
 		} catch (ProductInvalidException e) {
 			fail();
-		} catch (ClassNotFoundException e) {
+		} catch (DBException e) {
 			fail();
-			e.printStackTrace();
-		} catch (SQLException e) {
-			fail();
-			e.printStackTrace();
 		}
 
 	}
@@ -52,10 +45,7 @@ public class AddProductTest {
 
 		} catch (ProductInvalidException e) {
 			fail();
-		} catch (ClassNotFoundException e) {
-			fail();
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (DBException e) {
 			fail();
 			e.printStackTrace();
 		}
@@ -77,12 +67,8 @@ public class AddProductTest {
 			fail();
 		} catch (ProductInvalidException e) {
 			assertEquals("Invalid Product Details", e.getMessage());
-		} catch (ClassNotFoundException e) {
+		} catch (DBException e) {
 			fail();
-			e.printStackTrace();
-		} catch (SQLException e) {
-			fail();
-			e.printStackTrace();
 		}
 
 	}
@@ -102,10 +88,7 @@ public class AddProductTest {
 			fail();
 		} catch (ProductInvalidException e) {
 			assertEquals("Invalid Product Details", e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail();
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (DBException e) {
 			fail();
 			e.printStackTrace();
 		}
@@ -127,10 +110,7 @@ public class AddProductTest {
 			fail();
 		} catch (ProductInvalidException e) {
 			assertEquals("Product Already Exists", e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail();
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (DBException e) {
 			fail();
 			e.printStackTrace();
 		}

@@ -1,12 +1,9 @@
 package in.siva.service;
 
 import static org.junit.Assert.*;
-
-import java.sql.SQLException;
-
 import org.junit.Test;
-
 import in.siva.constants.Constants;
+import in.siva.exception.DBException;
 import in.siva.exception.UserInvalidException;
 import in.siva.model.UserDetail;
 
@@ -20,10 +17,8 @@ public class RemoveAccountTest {
 				"Sivasys123@", Constants.USER);
 		try {
 			UserService.addUser(user);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (DBException e) {
+			fail();
 		}
 	}
 	
@@ -36,12 +31,8 @@ public class RemoveAccountTest {
 			UserService.removeAccount("rakas");
 		} catch(UserInvalidException e) {
 			assertEquals("User not found", e.getMessage());
-		} catch (ClassNotFoundException e) {
+		} catch (DBException e) {
 			fail();
-			e.printStackTrace();
-		} catch (SQLException e) {
-			fail();
-			e.printStackTrace();
 		}
 	}
 	
@@ -54,12 +45,8 @@ public class RemoveAccountTest {
 			UserService.removeAccount("bala");
 		} catch(UserInvalidException e) {
 			fail();
-		} catch (ClassNotFoundException e) {
+		} catch (DBException e) {
 			fail();
-			e.printStackTrace();
-		} catch (SQLException e) {
-			fail();
-			e.printStackTrace();
 		}
 	}
 
