@@ -21,12 +21,12 @@ public class ConnectionUtil {
 		String driverClass = "org.postgresql.Driver";
 		String url = "jdbc:postgresql://localhost/ShopApp";
 		String username = "postgres";
-		String passWd = "Sivamurugan";
+		String password = "Sivamurugan";
 		
 		// To Load the jdbc driver in memory
 		Class.forName(driverClass);
 		// To Get the connection
-		return DriverManager.getConnection(url, username, passWd);
+		return DriverManager.getConnection(url, username, password);
 	}
 	
 	/**
