@@ -102,6 +102,27 @@ public class UserValidator {
 
 		return isNotRepeated;
 	}
+	
+	/**
+	 * This method is used to check whether the email by user is already used by another user or not
+	 * If used it will return false
+	 * Else it will return true
+	 * @param email
+	 * @return
+	 * @throws DBException 
+	 */
+	public static boolean isEmailNotRepeated(String email) throws DBException {
+		boolean isNotRepeated = true;
+		List<UserDetail> userDetails = UserDetailDao.getUserDetails();
+		for(UserDetail user : userDetails) {
+			if(user.getEmail().equals(email)) {
+				isNotRepeated = false;
+				break;
+			}
+		}
+		
+		return isNotRepeated;
+	}
 
 	/**
 	 * This method is used to check whether the entered username & new name is valid
@@ -148,6 +169,33 @@ public class UserValidator {
 			throw new UserInvalidException("Please enter valid mobile number");
 		}
 
+		return valid;
+	}
+	
+	/**
+	 * This method is used to validate whether the email is valid to add in database or not
+	 * It will validate whether email is valid or not, email ID is repeated or not, username is available in db or not
+	 * @param newEmail
+	 * @param username
+	 * @return
+	 * @throws DBException
+	 */
+	public static boolean isUpdateEmailValid(String newEmail, String username) throws DBException {
+		boolean valid = false;
+		if(UtilValidator.isEmailValid(newEmail)) {
+			if(isEmailNotRepeated(newEmail)) {
+				if(isUsernamePresent(username)) {
+					valid = true;
+				} else {
+					throw new UserInvalidException("User not found");
+				}
+			} else {
+				throw new UserRepeatedException("Email ID is already used by a user");
+			}
+		} else {
+			throw new UserInvalidException("Please enter valid email ID"); 
+		}
+		
 		return valid;
 	}
 }

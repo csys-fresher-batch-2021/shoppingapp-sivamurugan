@@ -18,6 +18,11 @@
 			<input type="number" name="newMobileNumber" pattern="[6789][0-9]{9}" placeholder="Enter New Number" required>
 			<button type="submit" class="btn btn-success">Update</button>
 		</form>
+		<form action="UpdateEmailServlet" method="post">
+			<label for="newEmail"> New Email ID:</label>
+			<input type="email" name="newEmail" placeholder="Enter new Email" required>
+			<button type="submit" class="btn btn-success">Update</button>
+		</form>
 		<form action="SelfRemoveAccountServlet" method="post">
 			<button type="submit" class="btn btn-danger">Remove Account</button>
 		</form>

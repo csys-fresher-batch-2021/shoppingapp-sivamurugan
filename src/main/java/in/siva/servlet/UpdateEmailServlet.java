@@ -12,40 +12,43 @@ import in.siva.exception.UserRepeatedException;
 import in.siva.service.UserService;
 
 /**
- * Servlet implementation class UpdateMobileServlet
+ * Servlet implementation class UpdateEmailServlet
  */
-@WebServlet("/UpdateMobileServlet")
-public class UpdateMobileServlet extends HttpServlet {
+@WebServlet("/UpdateEmailServlet")
+public class UpdateEmailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public UpdateMobileServlet() {
-        super();
-    }
+
+	public UpdateEmailServlet() {
+		super();
+	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-    @Override
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		// To get mobile number from user
+		String newEmail = request.getParameter("newEmail");
+		newEmail = newEmail.toLowerCase();
+
+		// To get logged in username
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("LOGGED_IN_USER");
+
 		try {
-			// To get mobile number from user
-			long mobileNumber = Long.parseLong(request.getParameter("newMobileNumber"));
-			
-			// To get logged in username
-			HttpSession session = request.getSession();
-			String username = (String)session.getAttribute("LOGGED_IN_USER");
-			
-			UserService.updateMobileNumber(mobileNumber, username);
-			String infoMessage = "Mobile Number Updated Successfully";
+
+			UserService.updateEmail(newEmail, username);
+			String infoMessage = "Email Address Updated Successfully";
 			response.sendRedirect("editProfile.jsp?infoMessage=" + infoMessage);
-			
-		} catch(DBException | UserRepeatedException | UserInvalidException e){
+
+		} catch (DBException | UserRepeatedException | UserInvalidException e) {
 			try {
 				response.sendRedirect("editProfile.jsp?errorMessage=" + e.getMessage());
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		} catch (IOException | NumberFormatException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

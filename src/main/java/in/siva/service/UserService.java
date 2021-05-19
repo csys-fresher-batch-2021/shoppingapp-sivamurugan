@@ -118,4 +118,17 @@ public class UserService {
 		}
 	}
 	
+	/**
+	 * This method is used to provide update email service
+	 * If entered email is valid and not repeated it will update email ID
+	 * @param newEmail
+	 * @param username
+	 * @throws DBException
+	 */
+	public static void updateEmail(String newEmail, String username) throws DBException {
+		if(UserValidator.isUpdateEmailValid(newEmail, username)) {
+			UserDetailDao.updateEmail(newEmail, username);
+		}
+	}
+	
 }
