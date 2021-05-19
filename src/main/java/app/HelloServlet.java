@@ -15,13 +15,21 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/hello")
 public class HelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-      
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		out.println("Hello");
+     
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response){
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			out.println("Hello");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

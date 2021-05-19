@@ -19,7 +19,7 @@ String role = (String) session.getAttribute("ROLE");
       <li class="nav-item active">
         <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
       </li>
-      <% if (loggedInUsername != null && role != null && role.equalsIgnoreCase("Admin")){ %>
+      <% if (loggedInUsername != null && role != null && role.equalsIgnoreCase("A")){ %>
       <li class="nav-item">
         <a class="nav-link" href="addproducts.jsp">Add Products</a>
       </li>
@@ -36,9 +36,12 @@ String role = (String) session.getAttribute("ROLE");
         <a class="nav-link" href="viewUsers.jsp">View Users</a>
       </li>
       <%} %>
-      <% if (loggedInUsername != null && role != null && !role.equalsIgnoreCase("Admin")){ %>
+      <% if (loggedInUsername != null && role != null && !role.equalsIgnoreCase("A")){ %>
       <li class="nav-item">
         <a class="nav-link" href="ListProducts.jsp">View Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="buyProducts.jsp">Buy Products</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="editProfile.jsp">Edit Profile</a>

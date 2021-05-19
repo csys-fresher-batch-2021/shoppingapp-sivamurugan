@@ -1,12 +1,11 @@
 package in.siva.servlet;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import in.siva.exception.DBException;
 import in.siva.exception.ProductInvalidException;
 import in.siva.service.ProductService;
 
@@ -28,7 +27,7 @@ public class RemoveProductServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     @Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response){
 		try {
 			// To get product name from input box
 			String productName = request.getParameter("productName");
@@ -37,12 +36,18 @@ public class RemoveProductServlet extends HttpServlet {
 			// Information for user
 			String infoMessage = "Product Removed Successfully";
 			response.sendRedirect("removeProduct.jsp?infoMessage=" + infoMessage);
-		} catch(ProductInvalidException e) {
+		} catch(ProductInvalidException | DBException e) {
 			
 			// Error message for user
 			String errorMessage = e.getMessage();
-			response.sendRedirect("removeProduct.jsp?errorMessage=" + errorMessage);
-		}
+			try {
+				response.sendRedirect("removeProduct.jsp?errorMessage=" + errorMessage);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 	}
 
 }

@@ -1,9 +1,8 @@
 package in.siva.model;
 
 public class UserDetail {
-
-	static UserDetail obj = null;
-	private UserDetail() {
+	
+	public UserDetail() {
 		// Default constructor
 	}
 
@@ -37,6 +36,70 @@ public class UserDetail {
 		this.email = email;
 		this.username = username;
 		this.password = password;
+		this.role = role;
+	}
+	
+	/**
+	 * This method is used to set name
+	 * @param name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * This method is used to set age
+	 * @param age
+	 */
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
+	/**
+	 * This method is used to set gender 
+	 * @param gender
+	 */
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	
+	/**
+	 * This method is used to set mobile number
+	 * @param mobileNumber
+	 */
+	public void setMobileNumber(long mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+	
+	/**
+	 * This method is used to set email
+	 * @param email
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	/**
+	 * This method is used to set username
+	 * @param username
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	/**
+	 * This method is used to set password
+	 * @param password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	/**
+	 * This method is used to set role
+	 * @param role
+	 */
+	public void setRole(String role) {
 		this.role = role;
 	}
 	
@@ -103,12 +166,6 @@ public class UserDetail {
 	 */
 	public String getRole() {
 		return role;
-	}
-
-	@Override
-	public String toString() {
-		return "UserDetail [name=" + name + ", age=" + age + ", gender=" + gender + ", mobileNumber=" + mobileNumber
-				+ ", email=" + email + ", username=" + username + ", password=" + password + ", role=" + role + "]";
 	}
 	
 	

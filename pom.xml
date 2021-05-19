@@ -46,6 +46,11 @@
 			<version>1.9.3</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.20</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>app</finalName>

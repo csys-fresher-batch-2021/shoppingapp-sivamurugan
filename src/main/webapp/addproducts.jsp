@@ -9,7 +9,8 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 	<form action = "AddProductServlet" method = "post">
-		<h3>Add Products</h3>
+		<figure>
+		<figcaption>Add Product</figcaption>
 		<table>
 		<tr>
 		<th scope = "col">
@@ -48,12 +49,14 @@
 				</td>
 				<td>
 					<select name = "category" required>
-					<option value = "vegetables">Vegetables</option>
-					<option value = "fruits"> Fruits </option>
+					<option value = "V">Vegetables</option>
+					<option value = "F"> Fruits </option>
 					</select>
 				</td>
 			</tr>
-		</table><br>
+		</table>
+		</figure>
+		<br>
 		
 		<button type = "submit" class = "btn btn-info">Submit</button>
 

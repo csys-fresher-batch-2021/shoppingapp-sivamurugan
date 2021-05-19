@@ -1,12 +1,11 @@
 package in.siva.servlet;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import in.siva.exception.DBException;
 import in.siva.exception.UserInvalidException;
 import in.siva.service.UserService;
 
@@ -30,7 +29,7 @@ public class RemoveAccountServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     @Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			
 			// To get input from user and to remove account
@@ -40,10 +39,16 @@ public class RemoveAccountServlet extends HttpServlet {
 			// Information for user
 			String infoMessage = "User Removed Successfully";
 			response.sendRedirect("removeAccount.jsp?infoMessage=" + infoMessage);
-		} catch(UserInvalidException e) {
+		} catch(UserInvalidException | DBException e) {
 			// Error message for user
 			String errorMessage = e.getMessage();
-			response.sendRedirect("removeAccount.jsp?errorMessage=" + errorMessage);
+			try {
+				response.sendRedirect("removeAccount.jsp?errorMessage=" + errorMessage);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

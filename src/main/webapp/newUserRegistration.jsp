@@ -16,9 +16,9 @@
 			
 			<label for = "gender"> Gender :</label>
 			<select name = "gender" required>
-				<option value = "Male">Male</option>
-				<option value = "Female">Female</option>
-				<option value = "other">Other</option>
+				<option value = "M">Male</option>
+				<option value = "F">Female</option>
+				<option value = "O">Other</option>
 			</select><br />
 			
 			<label for = "mobileNumber"> Mobile No (+91):</label>
@@ -35,8 +35,8 @@
 
 			<label for = "role">Role :</label>
 			<select name = "role" required>
-				<option value = "User"> User </option>
-				<option value = "Admin" disabled> Admin </option>
+				<option value = "U"> User </option>
+				<option value = "A"> Admin </option>
 			</select><br/>
 			<button type = "submit" class = "btn btn-info">Submit</button>
 		</form>

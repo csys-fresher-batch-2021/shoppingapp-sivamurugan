@@ -1,13 +1,12 @@
 package in.siva.servlet;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
+import in.siva.exception.DBException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import in.siva.exception.InvalidLoginException;
 import in.siva.service.UserService;
 
@@ -29,7 +28,7 @@ public class LoginValidationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     @Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		
 		try {
 			
@@ -46,12 +45,18 @@ public class LoginValidationServlet extends HttpServlet {
 			response.sendRedirect("ListProducts.jsp?infoMessage=" + infoMessage);
 			
 			
-		} catch(InvalidLoginException e) {
+		} catch(InvalidLoginException | DBException e) {
 			
 			// To give error message to user
 			String errorMessage = e.getMessage();
-			response.sendRedirect("loginPage.jsp?errorMessage=" + errorMessage);
-		}
+			try {
+				response.sendRedirect("loginPage.jsp?errorMessage=" + errorMessage);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 	}
 
 }
