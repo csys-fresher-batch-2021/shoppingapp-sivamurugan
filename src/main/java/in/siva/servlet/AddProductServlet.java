@@ -50,7 +50,7 @@ public class AddProductServlet extends HttpServlet {
 		}
 
 		// Exception message if product details didn't met requirements
-		catch (ProductInvalidException | DBException e) {
+		catch (ProductInvalidException | DBException | NumberFormatException e) {
 			String errorMessage = e.getMessage();
 			try {
 				response.sendRedirect("addproducts.jsp?errorMessage=" + errorMessage);
@@ -58,13 +58,6 @@ public class AddProductServlet extends HttpServlet {
 				e1.printStackTrace();
 			}
 
-		} catch (NumberFormatException e) {
-			String errorMessage = "Invalid Quantity or Price";
-			try {
-				response.sendRedirect("addproducts.jsp?errorMessage=" + errorMessage);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

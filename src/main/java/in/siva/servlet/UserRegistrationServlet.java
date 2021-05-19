@@ -54,19 +54,10 @@ public class UserRegistrationServlet extends HttpServlet {
 			// Redirect to login page after registration
 			String infoMessage = "Account Created Successfully";
 			response.sendRedirect("loginPage.jsp?infoMessage=" + infoMessage);
-		} catch (UserInvalidException | UserRepeatedException | DBException e) {
+		} catch (UserInvalidException | UserRepeatedException | DBException | NumberFormatException e) {
 
 			// Invalid product message if details entered were wrong
 			String errorMessage = e.getMessage();
-			try {
-				response.sendRedirect("newUserRegistration.jsp?errorMessage=" + errorMessage);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		} catch (NumberFormatException e) {
-
-			// Number format exception for mobile number if mobile number is entered wrong
-			String errorMessage = "Invalid mobile number";
 			try {
 				response.sendRedirect("newUserRegistration.jsp?errorMessage=" + errorMessage);
 			} catch (IOException e1) {
