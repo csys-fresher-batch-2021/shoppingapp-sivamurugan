@@ -68,9 +68,7 @@ public class ProductService {
 	 * @throws ClassNotFoundException
 	 */
 	public static void removeProduct(String productName) throws DBException {
-
-		productName = productName.toLowerCase();
-		
+		// Business logic
 		if (ProductValidator.isProductMatches(productName)) {
 			ProductDetailDao.removeProduct(productName);
 		} else {
