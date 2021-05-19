@@ -177,4 +177,39 @@ public class UserDetailDao {
 			ConnectionUtil.close(pst, con);
 		}
 	}
+	
+	/**
+	 * This method is used to update user's mobile number 
+	 * It will update mobile number where given username matches with database
+	 * @param newNumber
+	 * @param username
+	 * @throws DBException
+	 */
+	public static void updateMobile(long newNumber, String username) throws DBException {
+		Connection con = null;
+		PreparedStatement pst = null;
+		try {
+			// To establish connection
+			con = ConnectionUtil.getConnection();
+
+			// SQl commands
+			String sql = "UPDATE userdetails SET mobile_no = ? WHERE username = ?";
+			// To Execute
+			pst = con.prepareStatement(sql);
+
+			pst.setLong(1, newNumber);
+			pst.setString(2, username);
+
+			pst.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			throw new DBException("Sorry! Unable to update mobile Number");
+		}
+
+		finally {
+			// Release the connection
+			ConnectionUtil.close(pst, con);
+		}
+	}
 }

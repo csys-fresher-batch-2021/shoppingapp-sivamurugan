@@ -104,5 +104,18 @@ public class UserService {
 			throw new UserInvalidException("User not found");
 		}
 	}
+	/**
+	 * This method is used to provide update mobile number service
+	 * It will check whether the username is present  in  db or not
+	 * If username present then mobile number will be updated
+	 * @param username
+	 * @param newMobileNumber
+	 * @throws DBException 
+	 */
+	public static void updateMobileNumber(long newMobileNumber, String username) throws DBException {
+		if(UserValidator.isUpdateMobileValid(newMobileNumber, username)) {
+			UserDetailDao.updateMobile(newMobileNumber, username);
+		}
+	}
 	
 }
