@@ -17,7 +17,7 @@ public class AddProductTest {
 
 		// Creating object for product 1
 
-		ProductDetail product1 = new ProductDetail("Tomato", 40, 500, "V");
+		ProductDetail product1 = new ProductDetail("Tomato", 40, 500);
 
 		try {
 			ProductService.addProduct(product1);
@@ -38,7 +38,7 @@ public class AddProductTest {
 	public void validProductTest2() {
 
 		// Creating object for product 2
-		ProductDetail product2 = new ProductDetail("Potato", 60, 500, "V");
+		ProductDetail product2 = new ProductDetail("Potato", 60, 500);
 
 		try {
 			ProductService.addProduct(product2);
@@ -60,7 +60,7 @@ public class AddProductTest {
 	public void invalidProductTest1() {
 
 		// Creating object for product 3
-		ProductDetail product3 = new ProductDetail(" ", 24, 500, "V");
+		ProductDetail product3 = new ProductDetail(" ", 24, 500);
 
 		try {
 			ProductService.addProduct(product3);
@@ -81,7 +81,7 @@ public class AddProductTest {
 	public void invalidProductTest2() {
 
 		// Creating object for product 4
-		ProductDetail product4 = new ProductDetail("potato", -4, 430, "V");
+		ProductDetail product4 = new ProductDetail("potato", -4, 430);
 
 		try {
 			ProductService.addProduct(product4);
@@ -103,7 +103,7 @@ public class AddProductTest {
 	public void addingRepeatedProduct() {
 
 		// Creating object for product 4
-		ProductDetail product5 = new ProductDetail("potato", 76, 430, "V");
+		ProductDetail product5 = new ProductDetail("potato", 76, 430);
 
 		try {
 			ProductService.addProduct(product5);

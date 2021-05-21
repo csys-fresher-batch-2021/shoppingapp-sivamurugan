@@ -6,18 +6,16 @@ public class ProductDetail {
 	private String name;
 	private int price;
 	private int quantity;
-	private String category;
 	
 	public ProductDetail() {
 		// Default constructor
 	}
 	
 	// Get values of product details using constructor
-	public ProductDetail(String name, int price, int quantity, String category){
+	public ProductDetail(String name, int price, int quantity){
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
-		this.category = category;
 	}
 	/**
 	 * This method is used to set name for product
@@ -43,13 +41,6 @@ public class ProductDetail {
 		this.quantity = quantity;
 	}
 	
-	/**
-	 * This method is used to set category of the product
-	 * @param category
-	 */
-	public void setCategory(String category) {
-		this.category = category;
-	}
 	
 	/**
 	 * This method is used to get product name
@@ -74,14 +65,4 @@ public class ProductDetail {
 	public int getQuantity() {
 		return quantity;
 	}
-	
-	/**
-	 * This method is used to get product category
-	 * @return
-	 */
-	public String getCategory() {
-		return category;
-	}
-	
-	
 }

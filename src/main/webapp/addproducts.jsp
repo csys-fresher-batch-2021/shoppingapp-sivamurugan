@@ -43,17 +43,6 @@
 					<input type = "number" name = "productQuantity" placeholder = "Produt quantity in Kg" min = 1 max = 500 required>
 				</td>
 			</tr>
-			<tr>
-				<td>
-					Category 
-				</td>
-				<td>
-					<select name = "category" required>
-					<option value = "V">Vegetables</option>
-					<option value = "F"> Fruits </option>
-					</select>
-				</td>
-			</tr>
 		</table>
 		</figure>
 		<br>

@@ -30,14 +30,13 @@ public class ProductDetailDao {
 			// To Get the connection
 			connection = ConnectionUtil.getConnection();
 			// Query
-			String sql = "INSERT INTO productdetails(name, price, quantity, category) VALUES(?,?,?,?)";
+			String sql = "INSERT INTO productdetails(name, price, quantity) VALUES(?,?,?)";
 			// To Execute
 			pst = connection.prepareStatement(sql);
 
 			pst.setString(1, product.getName());
 			pst.setInt(2, product.getPrice());
 			pst.setInt(3, product.getQuantity());
-			pst.setString(4, product.getCategory());
 
 			pst.executeUpdate();
 
@@ -83,9 +82,8 @@ public class ProductDetailDao {
 				String name = rs.getString("name");
 				int price = rs.getInt("price");
 				int quantity = rs.getInt("quantity");
-				String category = rs.getString("category");
 
-				ProductDetail product = new ProductDetail(name, price, quantity, category);
+				ProductDetail product = new ProductDetail(name, price, quantity);
 
 				productDetails.add(product);
 			}

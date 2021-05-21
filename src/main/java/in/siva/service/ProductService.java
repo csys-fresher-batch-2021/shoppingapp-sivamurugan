@@ -46,8 +46,7 @@ public class ProductService {
 		ProductDetail validProduct = setProductNameLowercase(product);
 		// Business Logic
 		if (UtilValidator.isStringValid(validProduct.getName()) && UtilValidator.isNumberValid(validProduct.getPrice())
-				&& UtilValidator.isNumberValid(validProduct.getQuantity())
-				&& UtilValidator.isStringValid(validProduct.getCategory())) {
+				&& UtilValidator.isNumberValid(validProduct.getQuantity())) {
 			if (isProductNotRepeated(validProduct.getName())) {
 				ProductDetailDao.addProduct(validProduct);
 			} else {
