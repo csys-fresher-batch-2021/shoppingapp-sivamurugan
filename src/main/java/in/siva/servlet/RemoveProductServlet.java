@@ -31,6 +31,7 @@ public class RemoveProductServlet extends HttpServlet {
 		try {
 			// To get product name from input box
 			String productName = request.getParameter("productName");
+			productName= productName.toLowerCase();
 			ProductService.removeProduct(productName);
 			
 			// Information for user
