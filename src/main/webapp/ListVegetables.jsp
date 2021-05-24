@@ -1,5 +1,5 @@
-<%@page import="in.siva.dao.ProductDetailDao"%>
-<%@page import="in.siva.model.ProductDetail"%>
+<%@page import="in.siva.dao.VegDetailDao"%>
+<%@page import="in.siva.model.VegDetail"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,15 +20,15 @@
 				</tr>
 				<%
 				int i = 0;
-				List<ProductDetail> products = ProductDetailDao.getProductDetails();
-				for (ProductDetail product : products) {
-						i++;
+				List<VegDetail> vegetables = VegDetailDao.findAll();
+				for (VegDetail veg : vegetables) {
+					i++;
 				%>
 				<tr>
 					<td><%=i%></td>
-					<td><%=product.getName()%></td>
-					<td><%=product.getPrice()%> /-</td>
-					<td><%=product.getQuantity()%></td>
+					<td><%=veg.getName()%></td>
+					<td><%=veg.getPrice()%> /-</td>
+					<td><%=veg.getQuantity()%></td>
 				</tr>
 				<%
 				}

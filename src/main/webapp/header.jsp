@@ -21,13 +21,13 @@ String role = (String) session.getAttribute("ROLE");
       </li>
       <% if (loggedInUsername != null && role != null && role.equalsIgnoreCase("A")){ %>
       <li class="nav-item">
-        <a class="nav-link" href="addproducts.jsp">Add Products</a>
+        <a class="nav-link" href="addVegetable.jsp">Add Vegetables</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="ListProducts.jsp">View Products</a>
+        <a class="nav-link" href="ListVegetables.jsp">View Vegetables</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="removeProduct.jsp">Remove Product</a>
+        <a class="nav-link" href="removeVegetable.jsp">Remove Vegetable</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="removeAccount.jsp">Remove User</a>
@@ -42,6 +42,9 @@ String role = (String) session.getAttribute("ROLE");
       </li>
       <li class="nav-item">
         <a class="nav-link" href="editProfile.jsp">Edit Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="SelectVegetables.jsp">Buy Vegetables</a>
       </li>
       <%} %>
       <li class="nav-item dropdown">

@@ -3,22 +3,22 @@ package in.siva.service;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import in.siva.exception.DBException;
-import in.siva.exception.ProductInvalidException;
+import in.siva.exception.VegInvalidException;
 
-public class RemoveProductTest {
+public class RemoveVegTest {
 
 	/**
 	 * In this test case valid product name is given so product removed
 	 */
 	@Test
-	public void validProductRemoveTest() {
+	public void validRemoveVegTest() {
 		try {
 			try {
-				ProductService.removeProduct("Apple");
+				VegetableService.removeVeg("Apple");
 			} catch (DBException e) {
 				fail();
 			}
-		} catch (ProductInvalidException e) {
+		} catch (VegInvalidException e) {
 			fail();
 		}
 	}
@@ -28,11 +28,11 @@ public class RemoveProductTest {
 	 * message
 	 */
 	@Test
-	public void invalidProductRemoveTest() {
+	public void invalidVegRemoveTest() {
 		try {
-				ProductService.removeProduct("Grapes");
+				VegetableService.removeVeg("Grapes");
 	
-		} catch (ProductInvalidException e) {
+		} catch (VegInvalidException e) {
 			assertEquals("Invalid Product Name", e.getMessage());
 		} catch (DBException e) {
 			fail();

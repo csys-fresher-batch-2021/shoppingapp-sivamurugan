@@ -3,26 +3,26 @@ package in.siva.service;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import in.siva.exception.DBException;
-import in.siva.exception.ProductInvalidException;
-import in.siva.model.ProductDetail;
+import in.siva.exception.VegInvalidException;
+import in.siva.model.VegDetail;
 
-public class AddProductTest {
+public class AddVegetableTest {
 
 	/**
 	 * This test case has valid product details and hence it will add product
 	 * details
 	 */
 	@Test
-	public void validProductTest1() {
+	public void validVegTest1() {
 
 		// Creating object for product 1
 
-		ProductDetail product1 = new ProductDetail("Tomato", 40, 500);
+		VegDetail veg1 = new VegDetail("Tomato", 40, 500);
 
 		try {
-			ProductService.addProduct(product1);
+			VegetableService.addVeg(veg1);
 
-		} catch (ProductInvalidException e) {
+		} catch (VegInvalidException e) {
 			fail();
 		} catch (DBException e) {
 			fail();
@@ -35,15 +35,15 @@ public class AddProductTest {
 	 * details
 	 */
 	@Test
-	public void validProductTest2() {
+	public void validVegTest2() {
 
 		// Creating object for product 2
-		ProductDetail product2 = new ProductDetail("Potato", 60, 500);
+		VegDetail veg2 = new VegDetail("Potato", 60, 500);
 
 		try {
-			ProductService.addProduct(product2);
+			VegetableService.addVeg(veg2);
 
-		} catch (ProductInvalidException e) {
+		} catch (VegInvalidException e) {
 			fail();
 		} catch (DBException e) {
 			fail();
@@ -57,15 +57,15 @@ public class AddProductTest {
 	 * details
 	 */
 	@Test
-	public void invalidProductTest1() {
+	public void invalidVegTest1() {
 
 		// Creating object for product 3
-		ProductDetail product3 = new ProductDetail(" ", 24, 500);
+		VegDetail veg = new VegDetail(" ", 24, 500);
 
 		try {
-			ProductService.addProduct(product3);
+			VegetableService.addVeg(veg);
 			fail();
-		} catch (ProductInvalidException e) {
+		} catch (VegInvalidException e) {
 			assertEquals("Invalid Product Details", e.getMessage());
 		} catch (DBException e) {
 			fail();
@@ -78,15 +78,15 @@ public class AddProductTest {
 	 * details
 	 */
 	@Test
-	public void invalidProductTest2() {
+	public void invalidVegTest2() {
 
 		// Creating object for product 4
-		ProductDetail product4 = new ProductDetail("potato", -4, 430);
+		VegDetail veg = new VegDetail("potato", -4, 430);
 
 		try {
-			ProductService.addProduct(product4);
+			VegetableService.addVeg(veg);
 			fail();
-		} catch (ProductInvalidException e) {
+		} catch (VegInvalidException e) {
 			assertEquals("Invalid Product Details", e.getMessage());
 		} catch (DBException e) {
 			fail();
@@ -100,15 +100,15 @@ public class AddProductTest {
 	 * already exists
 	 */
 	@Test
-	public void addingRepeatedProduct() {
+	public void addingRepeatedVeg() {
 
 		// Creating object for product 4
-		ProductDetail product5 = new ProductDetail("potato", 76, 430);
+		VegDetail veg = new VegDetail("potato", 76, 430);
 
 		try {
-			ProductService.addProduct(product5);
+			VegetableService.addVeg(veg);
 			fail();
-		} catch (ProductInvalidException e) {
+		} catch (VegInvalidException e) {
 			assertEquals("Product Already Exists", e.getMessage());
 		} catch (DBException e) {
 			fail();
