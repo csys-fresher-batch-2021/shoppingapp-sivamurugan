@@ -7,14 +7,12 @@ import in.siva.dao.VegDetailDao;
 import in.siva.dao.SalesDetailsDAO;
 import in.siva.dto.BillDetailsDTO;
 import in.siva.dto.SalesDetailDTO;
-import in.siva.dto.SelectedVegetablesDTO;
 import in.siva.exception.DBException;
 import in.siva.exception.InvalidSelectionException;
 import in.siva.logics.BillCalculator;
 import in.siva.model.VegDetail;
 import in.siva.model.SalesDetail;
 import in.siva.model.BillDetail;
-import in.siva.model.SelectedVegetables;
 import in.siva.util.DateTimeUtil;
 import in.siva.validator.VegetableValidator;
 
@@ -31,8 +29,7 @@ public class SalesService {
 
 	}
 
-	public static double getTotalBill(List<BillDetail> billDetails) throws DBException {
-		
+	public static double getTotalBill(List<BillDetail> billDetails) {
 		return BillCalculator.getTotalBill(billDetails);
 	}
 
@@ -58,5 +55,4 @@ public class SalesService {
 		}
 
 	}
-
 }

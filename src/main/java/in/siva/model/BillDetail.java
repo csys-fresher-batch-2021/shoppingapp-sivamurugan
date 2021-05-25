@@ -1,11 +1,7 @@
 package in.siva.model;
 
 public class BillDetail {
-	@Override
-	public String toString() {
-		return "BillDetail [vegName=" + vegName + ", price=" + price + ", quantity=" + quantity + ", eachVegBill="
-				+ eachVegBill + "]";
-	}
+	
 	private String vegName;
 	private int price;
 	private int quantity;
@@ -35,5 +31,11 @@ public class BillDetail {
 	}
 	public void setEachVegBill(double eachVegBill) {
 		this.eachVegBill = eachVegBill;
+	}
+	
+	@Override
+	public String toString() {
+		return "BillDetail [vegName=" + vegName + ", price=" + price + ", quantity=" + quantity + ", eachVegBill="
+				+ eachVegBill + "]";
 	}
 }

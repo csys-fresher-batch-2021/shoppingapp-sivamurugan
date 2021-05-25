@@ -123,7 +123,7 @@ public class VegDetailDao {
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DBException("Something went wrong! Unable to remove Product");
+			throw new DBException("Something went wrong! Unable to remove vegetable");
 		} finally {
 			// Release the connection
 			ConnectionUtil.close(pst, con);
@@ -147,7 +147,7 @@ public class VegDetailDao {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DBException("Something went wrong! Unable to remove Product");
+			throw new DBException("Something went wrong! Unable to get price");
 		} finally {
 			// Release the connection
 			ConnectionUtil.close(pst, con);
@@ -172,7 +172,7 @@ public class VegDetailDao {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DBException("Something went wrong!");
+			throw new DBException("Something went wrong! Unable to get stock quantity");
 		} finally {
 			// Release the connection
 			ConnectionUtil.close(pst, con);
@@ -199,7 +199,7 @@ public class VegDetailDao {
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DBException("Sorry! Something went wrong");
+			throw new DBException("Sorry! Something went wrong.. Unable to update stock");
 		}
 
 		finally {

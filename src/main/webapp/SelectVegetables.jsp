@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <%@page import="in.siva.model.VegDetail"%>
 <%@page import="in.siva.dao.VegDetailDao"%>
-<%@page import="in.siva.dao.ProductDetailDao"%>
-<%@page import="in.siva.model.ProductDetail"%>
 <%@page import="java.util.List"%>
 <html lang="en">
 <head>

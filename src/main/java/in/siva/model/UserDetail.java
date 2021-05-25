@@ -167,6 +167,12 @@ public class UserDetail {
 	public String getRole() {
 		return role;
 	}
+
+	@Override
+	public String toString() {
+		return "UserDetail [name=" + name + ", age=" + age + ", gender=" + gender + ", mobileNumber=" + mobileNumber
+				+ ", email=" + email + ", username=" + username + ", password=" + password + ", role=" + role + "]";
+	}
 	
 	
 }

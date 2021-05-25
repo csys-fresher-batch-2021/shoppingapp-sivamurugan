@@ -5,10 +5,7 @@ import java.util.List;
 
 import in.siva.dao.VegDetailDao;
 import in.siva.exception.DBException;
-import in.siva.exception.InvalidSelectionException;
 import in.siva.model.BillDetail;
-import in.siva.model.VegDetail;
-import in.siva.model.SelectedVegetables;
 import in.siva.validator.VegetableValidator;
 
 public class BillCalculator {
@@ -31,11 +28,6 @@ public class BillCalculator {
 			
 		}
 		return eachVegBill;
-	}
-	public static void main(String[] args) throws DBException {
-		String[] s = {"tomato", "potato", "ukhudf"};
-		String[] a = {"30","20","10"};
-		System.out.println(billForEachVegetable(s, a));
 	}
 	
 	public static double getTotalBill(List<BillDetail> billDetails) {

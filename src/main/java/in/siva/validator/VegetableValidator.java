@@ -5,7 +5,6 @@ import java.util.List;
 import in.siva.dao.VegDetailDao;
 import in.siva.exception.DBException;
 import in.siva.model.VegDetail;
-import in.siva.model.SelectedVegetables;
 
 public class VegetableValidator {
 
@@ -30,17 +29,5 @@ public class VegetableValidator {
 			}
 		}
 		return exists;
-	}
-	
-	
-	public static boolean isVegetableValid(SelectedVegetables vegetable) throws DBException {
-		boolean valid = false;
-		if(isVegMatches(vegetable.getName())){
-			if(UtilValidator.isNumberValid(vegetable.getQuantity())) {
-				valid = true;
-			}
-		}
-		
-		return valid;
 	}
 }

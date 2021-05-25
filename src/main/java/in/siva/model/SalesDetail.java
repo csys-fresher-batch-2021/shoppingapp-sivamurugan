@@ -3,6 +3,7 @@ package in.siva.model;
 import java.sql.Timestamp;
 
 public class SalesDetail {
+	
 	private String username;
 	private String vegName;
 	private double vegPrice;
@@ -47,6 +48,12 @@ public class SalesDetail {
 	}
 	public void setVegPrice(double vegPrice) {
 		this.vegPrice = vegPrice;
+	}
+	
+	@Override
+	public String toString() {
+		return "SalesDetail [username=" + username + ", vegName=" + vegName + ", vegPrice=" + vegPrice + ", eachPrice="
+				+ eachPrice + ", quantity=" + quantity + ", dateTime=" + dateTime + "]";
 	}
 	
 }

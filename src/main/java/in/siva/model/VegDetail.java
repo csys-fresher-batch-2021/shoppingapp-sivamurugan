@@ -65,4 +65,11 @@ public class VegDetail {
 	public int getQuantity() {
 		return quantity;
 	}
+
+	@Override
+	public String toString() {
+		return "VegDetail [name=" + name + ", price=" + price + ", quantity=" + quantity + "]";
+	}
+	
+	
 }
