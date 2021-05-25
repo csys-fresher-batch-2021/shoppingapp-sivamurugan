@@ -1,6 +1,8 @@
 package in.siva.service;
 
 import java.sql.SQLException;
+import java.util.List;
+
 import in.siva.dao.UserDetailDao;
 import in.siva.exception.DBException;
 import in.siva.exception.InvalidLoginException;
@@ -129,6 +131,11 @@ public class UserService {
 		if(UserValidator.isUpdateEmailValid(newEmail, username)) {
 			UserDetailDao.updateEmail(newEmail, username);
 		}
+	}
+
+
+	public static List<UserDetail> getAllUsers() throws DBException {
+		return UserDetailDao.getUserDetails();
 	}
 	
 }
