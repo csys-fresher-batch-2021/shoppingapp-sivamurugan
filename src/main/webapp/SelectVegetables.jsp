@@ -5,6 +5,18 @@
 <html lang="en">
 <head>
 <title>Select Vegetables</title>
+<style type="text/css">
+input.checkbox {
+	width: 20px;
+	height: 20px;
+	display: block;
+	position: relative;
+	padding-left: 45px;
+	margin-bottom: 15px;
+	cursor: pointer;
+	font-size: 20px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -29,10 +41,11 @@
 						<td><%=veg.getName()%></td>
 						<td><%=veg.getPrice()%> /-</td>
 						<td><input type="checkbox" id="select_<%=i%>" name="select"
-							value="<%=veg.getName()%>" onclick="isVegChecked(<%=i%>)"></td>
+							class="checkbox" value="<%=veg.getName()%>"
+							onclick="isVegChecked(<%=i%>)"></td>
 						<td><input type="number" id="quantity_<%=i%>" name="quantity"
 							placeholder="Enter Quantity" value=0 min=0
-							max=<%=veg.getQuantity()%> disabled required>Kg</td>
+							max=<%=veg.getQuantity()%> disabled required autofocus>Kg</td>
 						<td><%=veg.getQuantity()%></td>
 					</tr>
 					<%
