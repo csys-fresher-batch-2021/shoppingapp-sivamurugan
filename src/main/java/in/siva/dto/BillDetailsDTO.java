@@ -28,8 +28,6 @@ public class BillDetailsDTO {
 				vegetable.setQuantity(vegQuantity);
 				vegetable.setEachVegBill(bill);
 				billDetails.add(vegetable);
-			} else {
-				throw new NullPointerException();
 			}
 		}
 		return billDetails;

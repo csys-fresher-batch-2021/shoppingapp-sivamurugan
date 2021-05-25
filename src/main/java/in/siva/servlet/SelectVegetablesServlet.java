@@ -22,10 +22,7 @@ import in.siva.service.SalesService;
 @WebServlet("/SelectVegetablesServlet")
 public class SelectVegetablesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public SelectVegetablesServlet() {
-        super();
-    }
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -46,7 +43,7 @@ public class SelectVegetablesServlet extends HttpServlet {
 			
 		} catch (DBException | InvalidSelectionException | ServletException | IOException e) {
 			e.printStackTrace();
-		} catch(NullPointerException e) {
+		} catch(Exception e) {
 			String errorMessage = "Sorry You haven't selected any vegetables..! Select atleast one product to continue";
 			try {
 				response.sendRedirect("SelectVegetables.jsp?errorMessage=" + errorMessage);

@@ -1,6 +1,5 @@
 package in.siva.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import in.siva.dao.VegDetailDao;
@@ -8,13 +7,11 @@ import in.siva.dao.SalesDetailsDAO;
 import in.siva.dto.BillDetailsDTO;
 import in.siva.dto.SalesDetailDTO;
 import in.siva.exception.DBException;
-import in.siva.exception.InvalidSelectionException;
 import in.siva.logics.BillCalculator;
-import in.siva.model.VegDetail;
 import in.siva.model.SalesDetail;
 import in.siva.model.BillDetail;
 import in.siva.util.DateTimeUtil;
-import in.siva.validator.VegetableValidator;
+import in.siva.validator.BillValidator;
 
 public class SalesService {
 	private SalesService() {
@@ -22,10 +19,13 @@ public class SalesService {
 	}
 
 	public static List<BillDetail> getBill(String[] selectedVegs, String[] quantities)
-			throws DBException {
+			throws Exception {
 		List<Double> billForEachVeg = BillCalculator.billForEachVegetable(selectedVegs, quantities);
 
-		return BillDetailsDTO.getBillForEachVeg(selectedVegs, quantities, billForEachVeg);
+		List<BillDetail> billDetails = BillDetailsDTO.getBillForEachVeg(selectedVegs, quantities, billForEachVeg);
+		BillValidator.isBillValid(billDetails);
+		
+		return billDetails;
 
 	}
 
@@ -39,7 +39,6 @@ public class SalesService {
 	
 	public static int getStockQuantity(SalesDetail saleDetail) throws DBException {
 		int stockQuantity = VegDetailDao.findStockByName(saleDetail.getVegName());
-		System.out.println(stockQuantity - saleDetail.getQuantity());
 		return (stockQuantity - saleDetail.getQuantity());
 		
 		

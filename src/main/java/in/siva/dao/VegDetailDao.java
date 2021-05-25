@@ -30,7 +30,7 @@ public class VegDetailDao {
 			// To Get the connection
 			connection = ConnectionUtil.getConnection();
 			// Query
-			String sql = "INSERT INTO productdetails(name, price, quantity) VALUES(?,?,?)";
+			String sql = "INSERT INTO veg_details(name, price, quantity) VALUES(?,?,?)";
 			// To Execute
 			pst = connection.prepareStatement(sql);
 
@@ -72,7 +72,7 @@ public class VegDetailDao {
 			con = ConnectionUtil.getConnection();
 
 			// SQl commands
-			String sql = "SELECT * FROM productdetails";
+			String sql = "SELECT * FROM veg_details ORDER BY name";
 
 			// Execute query
 			pst = con.prepareStatement(sql);
@@ -113,7 +113,7 @@ public class VegDetailDao {
 			con = ConnectionUtil.getConnection();
 
 			// SQl commands
-			String sql = "DELETE FROM productdetails WHERE name = ?";
+			String sql = "DELETE FROM veg_details WHERE name = ?";
 			// To Execute
 			pst = con.prepareStatement(sql);
 
@@ -138,7 +138,7 @@ public class VegDetailDao {
 		try {
 			con = ConnectionUtil.getConnection();
 			
-			String sql = "SELECT price FROM productdetails WHERE name= ?";
+			String sql = "SELECT price FROM veg_details WHERE name= ?";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, name);
 			rs = pst.executeQuery();
@@ -163,7 +163,7 @@ public class VegDetailDao {
 		try {
 			con = ConnectionUtil.getConnection();
 			
-			String sql = "SELECT quantity FROM productdetails WHERE name= ?";
+			String sql = "SELECT quantity FROM veg_details WHERE name= ?";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, name);
 			rs = pst.executeQuery();
@@ -188,7 +188,7 @@ public class VegDetailDao {
 			con = ConnectionUtil.getConnection();
 
 			// SQl commands
-			String sql = "UPDATE productdetails SET quantity = ? WHERE name = ?";
+			String sql = "UPDATE veg_details SET quantity = ? WHERE name = ?";
 			// To Execute
 			pst = con.prepareStatement(sql);
 
