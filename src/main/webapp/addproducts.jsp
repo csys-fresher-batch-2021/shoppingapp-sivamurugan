@@ -1,5 +1,3 @@
-<%@page import="in.siva.service.ProductService"%>
-<%@page import="in.siva.model.ProductDetail"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
