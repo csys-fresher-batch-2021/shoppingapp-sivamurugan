@@ -39,7 +39,6 @@ public class ViewUsers extends HttpServlet {
 			
 		
 		} catch (DBException | IOException e) {
-			e.printStackTrace();
 			object.addProperty("errorMessage", e.getMessage());
 		}
 		
