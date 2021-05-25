@@ -19,8 +19,8 @@ import in.siva.service.UserService;
 /**
  * Servlet implementation class ViewUsers
  */
-@WebServlet("/ViewUsers")
-public class ViewUsers extends HttpServlet {
+@WebServlet("/ViewUsersServlet")
+public class ViewUsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -28,6 +28,7 @@ public class ViewUsers extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response){
+		// To convert provided list into JSON Object
 		Gson users = new Gson();
 		JsonObject object = new JsonObject();
 		try {
