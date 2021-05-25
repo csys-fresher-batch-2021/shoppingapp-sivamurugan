@@ -37,6 +37,7 @@ public class ViewUsersServlet extends HttpServlet {
 			String jsonUsers = users.toJson(userList);
 			
 			out.println(jsonUsers);
+			out.flush();
 			
 		
 		} catch (DBException | IOException e) {
