@@ -1,5 +1,3 @@
-<%@page import="in.siva.service.VegetableService"%>
-<%@page import="in.siva.model.VegDetail"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
