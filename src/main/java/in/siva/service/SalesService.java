@@ -7,6 +7,7 @@ import in.siva.dao.SalesDetailsDAO;
 import in.siva.dto.BillDetailsDTO;
 import in.siva.dto.SalesDetailDTO;
 import in.siva.exception.DBException;
+import in.siva.exception.EmptyBillException;
 import in.siva.logics.BillCalculator;
 import in.siva.model.SalesDetail;
 import in.siva.model.BillDetail;
@@ -23,10 +24,11 @@ public class SalesService {
 	 * @param selectedVegs
 	 * @param quantities
 	 * @return
+	 * @throws EmptyBillException 
+	 * @throws DBException 
 	 * @throws Exception
 	 */
-	public static List<BillDetail> getBill(String[] selectedVegs, String[] quantities)
-			throws Exception {
+	public static List<BillDetail> getBill(String[] selectedVegs, String[] quantities) throws DBException, EmptyBillException {
 		
 		//To get bill for each vegetable
 		List<Double> billForEachVeg = BillCalculator.billForEachVegetable(selectedVegs, quantities);
@@ -81,10 +83,19 @@ public class SalesService {
 		String dateTime = getDateTime();
 		for (BillDetail billDetail : billDetails) {
 			SalesDetail saleDetail = SalesDetailDTO.setSalesDetail(billDetail, username, dateTime);
-			SalesDetailsDAO.save(saleDetail);
+			SalesDetailsDAO.saveSalesDetails(saleDetail);
 			int stockQuantity = getNewStockQuantity(saleDetail);
 			VegDetailDao.updateStock(saleDetail.getVegName(), stockQuantity);
 		}
 
+	}
+	
+	/**
+	 * This method is used to return get all sales details
+	 * @return
+	 * @throws DBException
+	 */
+	public static List<SalesDetail> getAllSalesDetails() throws DBException {
+		return SalesDetailsDAO.findAllSalesDetails();
 	}
 }
