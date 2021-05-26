@@ -138,8 +138,4 @@ public class UserService {
 		return UserDetailDao.getUserDetails();
 	}
 	
-	public static List<UserDetail> getAllUsers() throws DBException {
-		return UserDetailDao.getUserDetails();
-	}
-	
 }

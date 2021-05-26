@@ -52,6 +52,9 @@
 </body>
 
 <script>
+/**
+ * This method is used to get all users details
+ */
 function getAllUsers(){
 	let url = "ViewUsersServlet";
 	fetch(url).then(res=> res.json()).then(res=>{
@@ -74,6 +77,9 @@ function getAllUsers(){
 	});
 }
 
+/**
+ * This method is used to get all admin details
+ */
 function getAllAdmins(){
 	let url = "ViewUsersServlet";
 	fetch(url).then(res=> res.json()).then(res=>{

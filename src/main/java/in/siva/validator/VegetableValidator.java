@@ -30,4 +30,23 @@ public class VegetableValidator {
 		}
 		return exists;
 	}
+	
+	/**
+	 * This method is used to check whether the product is repeated or not
+	 * 
+	 * @param vegName
+	 * @throws DBException 
+	 */
+
+	public static boolean isVegNotRepeated(String vegName) throws DBException{
+		boolean valid = true;
+		List<VegDetail> vegDetails = VegDetailDao.findAll();
+		for (VegDetail product : vegDetails) {
+			if (product.getName().equalsIgnoreCase(vegName)) {
+				valid = false;
+				break;
+			}
+		}
+		return valid;
+	}
 }

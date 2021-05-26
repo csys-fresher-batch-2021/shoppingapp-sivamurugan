@@ -16,6 +16,16 @@ input.checkbox {
 	cursor: pointer;
 	font-size: 20px;
 }
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
 </style>
 </head>
 <body>
@@ -28,9 +38,11 @@ input.checkbox {
 					<tr>
 						<th scope="col">Name</th>
 						<th scope="col">Price</th>
+						<th scope="col">Availability (Kg)</th>
 						<th scope="col">Select</th>
-						<th scope="col">Quantity</th>
-						<th scope="col">Availability</th>
+						<th scope="col">Quantity (Kg)</th>
+						<th scope="col">Amount (Rs)</th>
+
 					</tr>
 					<%
 					List<VegDetail> vegetables = VegDetailDao.findAll();
@@ -40,18 +52,24 @@ input.checkbox {
 					<tr>
 						<td><%=veg.getName()%></td>
 						<td><%=veg.getPrice()%> /-</td>
+						<td><%=veg.getQuantity()%></td>
 						<td><input type="checkbox" id="select_<%=i%>" name="select"
 							class="checkbox" value="<%=veg.getName()%>"
 							onclick="isVegChecked(<%=i%>)"></td>
-						<td><input type="number" id="quantity_<%=i%>" name="quantity"
-							placeholder="Enter Quantity" value=0 min=0
-							max=<%=veg.getQuantity()%> disabled required autofocus>Kg</td>
-						<td><%=veg.getQuantity()%></td>
+						<td><input type="number" id="quantity_<%=i%>" name="quantity" onkeydown="false"
+							onchange="estimateBill(<%=i%>)" placeholder="Enter Quantity"
+							value=0 min=0 max=<%=veg.getQuantity()%> disabled required></td>
+						<td id="printBill_<%=i%>" ></td>
+
 					</tr>
 					<%
 					i++;
 					}
 					%>
+					<tr>
+						<td>Your Total Bill is :</td>
+						<td id="totalBill"></td>
+					</tr>
 				</table>
 			</figure>
 			<button type="submit" class="btn btn-success">Proceed</button>
@@ -61,6 +79,7 @@ input.checkbox {
 	</main>
 </body>
 <script type="text/javascript">
+
 function isVegChecked(i){
 	let selected = document.querySelector("#select_"+i);
 	let quantity = document.querySelector("#quantity_"+i);
@@ -70,5 +89,30 @@ function isVegChecked(i){
 		quantity.setAttribute("disabled", true);
 	}
 }
+
+
+function estimateBill(i){
+	let vegQuantity = document.querySelector("#quantity_"+i).value;
+	let url = "GetVegDetailsServlet";
+	fetch(url).then(res=> res.json()).then(res=>{
+		let vegDetails = res;
+		price = vegDetails[i].price * vegQuantity;
+		
+		document.querySelector("#printBill_"+i).innerHTML= price;
+		
+
+		totalBillFunction(price);
+		
+	})	
+}
+let totalBill=0;
+function totalBillFunction(price){
+	
+	totalBill += price;
+	document.querySelector("#totalBill").innerHTML = totalBill;
+	
+}
+
+
 </script>
 </html>
