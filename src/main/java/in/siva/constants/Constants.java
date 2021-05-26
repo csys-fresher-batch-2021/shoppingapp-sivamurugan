@@ -9,5 +9,5 @@ public class Constants {
 	public static final String FEMALE = "F";
 	public static final String ADMIN = "A";
 	public static final String USER = "U";
-	
+
 }

@@ -6,10 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 public class ConnectionUtil {
 	private ConnectionUtil() {
 		// Default constructor
 	}
+	
+	private static final String DRIVER_CLASS = System.getenv("spring.datasource.driver-class-name");
+	private static final String URL = System.getenv("spring.datasource.url");
+	private static final String USERNAME = System.getenv("spring.datasource.username");
+	private static final String PASSWORD = System.getenv("spring.datasource.password");
 	
 	/**
 	 * This method is used to establish connection between java and database
@@ -18,10 +24,10 @@ public class ConnectionUtil {
 	 * @throws SQLException
 	 */
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
-		String driverClass = "org.postgresql.Driver";
-		String url = "jdbc:postgresql://localhost/ShopApp";
-		String username = "postgres";
-		String password = "Sivamurugan";
+		String driverClass = DRIVER_CLASS;
+		String url = URL;
+		String username = USERNAME;
+		String password = PASSWORD;
 		
 		// To Load the jdbc driver in memory
 		Class.forName(driverClass);

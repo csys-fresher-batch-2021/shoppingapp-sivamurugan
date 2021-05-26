@@ -2,6 +2,7 @@ package in.siva.service;
 
 import java.sql.SQLException;
 import java.util.List;
+
 import in.siva.dao.VegDetailDao;
 import in.siva.exception.DBException;
 import in.siva.exception.VegInvalidException;
@@ -13,25 +14,6 @@ public class VegetableService {
 
 	private VegetableService() {
 		// Default constructor
-	}
-
-	/**
-	 * This method is used to check whether the product is repeated or not
-	 * 
-	 * @param vegName
-	 * @throws DBException 
-	 */
-
-	public static boolean isVegNotRepeated(String vegName) throws DBException{
-		boolean valid = true;
-		List<VegDetail> vegDetails = VegDetailDao.findAll();
-		for (VegDetail product : vegDetails) {
-			if (product.getName().equalsIgnoreCase(vegName)) {
-				valid = false;
-				break;
-			}
-		}
-		return valid;
 	}
 
 	/**
@@ -47,7 +29,7 @@ public class VegetableService {
 		// Business Logic
 		if (UtilValidator.isStringValid(validVeg.getName()) && UtilValidator.isNumberValid(validVeg.getPrice())
 				&& UtilValidator.isNumberValid(validVeg.getQuantity())) {
-			if (isVegNotRepeated(validVeg.getName())) {
+			if (VegetableValidator.isVegNotRepeated(validVeg.getName())) {
 				VegDetailDao.saveVeg(validVeg);
 			} else {
 				throw new VegInvalidException("Product Already Exists");
@@ -88,6 +70,10 @@ public class VegetableService {
 		name = name.toLowerCase();
 		vegetable.setName(name);
 		return vegetable;
+	}
+	
+	public static List<VegDetail> getVegDetails() throws DBException {
+		return VegDetailDao.findAll();
 	}
 
 }
