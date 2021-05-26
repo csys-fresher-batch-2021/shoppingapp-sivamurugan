@@ -15,7 +15,6 @@ import com.google.gson.JsonObject;
 
 import in.siva.exception.DBException;
 import in.siva.model.VegDetail;
-import in.siva.service.SalesService;
 import in.siva.service.VegetableService;
 
 /**
