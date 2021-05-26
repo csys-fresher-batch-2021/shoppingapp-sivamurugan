@@ -1,18 +1,18 @@
 package in.siva.model;
 
-public class ProductDetail {
+public class VegDetail {
 
 	// Declaring types of details for a product
 	private String name;
 	private int price;
 	private int quantity;
 	
-	public ProductDetail() {
+	public VegDetail() {
 		// Default constructor
 	}
 	
 	// Get values of product details using constructor
-	public ProductDetail(String name, int price, int quantity){
+	public VegDetail(String name, int price, int quantity){
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
@@ -65,4 +65,11 @@ public class ProductDetail {
 	public int getQuantity() {
 		return quantity;
 	}
+
+	@Override
+	public String toString() {
+		return "VegDetail [name=" + name + ", price=" + price + ", quantity=" + quantity + "]";
+	}
+	
+	
 }

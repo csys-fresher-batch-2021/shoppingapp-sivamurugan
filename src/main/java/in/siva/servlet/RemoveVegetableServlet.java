@@ -6,20 +6,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import in.siva.exception.DBException;
-import in.siva.exception.ProductInvalidException;
-import in.siva.service.ProductService;
+import in.siva.exception.VegInvalidException;
+import in.siva.service.VegetableService;
 
 /**
  * Servlet implementation class RemoveProductServlet
  */
-@WebServlet("/RemoveProductServlet")
-public class RemoveProductServlet extends HttpServlet {
+@WebServlet("/RemoveVegetableServlet")
+public class RemoveVegetableServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RemoveProductServlet() {
+    public RemoveVegetableServlet() {
         super();
     }
 
@@ -30,19 +30,19 @@ public class RemoveProductServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response){
 		try {
 			// To get product name from input box
-			String productName = request.getParameter("productName");
+			String productName = request.getParameter("vegName");
 			productName= productName.toLowerCase();
-			ProductService.removeProduct(productName);
+			VegetableService.removeVeg(productName);
 			
 			// Information for user
-			String infoMessage = "Product Removed Successfully";
-			response.sendRedirect("removeProduct.jsp?infoMessage=" + infoMessage);
-		} catch(ProductInvalidException | DBException e) {
+			String infoMessage = "Vegetable Removed Successfully";
+			response.sendRedirect("removeVegetable.jsp?infoMessage=" + infoMessage);
+		} catch(VegInvalidException | DBException e) {
 			
 			// Error message for user
 			String errorMessage = e.getMessage();
 			try {
-				response.sendRedirect("removeProduct.jsp?errorMessage=" + errorMessage);
+				response.sendRedirect("removeVegetable.jsp?errorMessage=" + errorMessage);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
