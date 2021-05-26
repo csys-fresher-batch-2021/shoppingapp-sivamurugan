@@ -5,7 +5,6 @@ import java.util.List;
 
 import in.siva.dao.VegDetailDao;
 import in.siva.exception.DBException;
-import in.siva.exception.VegInvalidException;
 import in.siva.model.BillDetail;
 
 public class BillDetailsDTO {
@@ -13,9 +12,22 @@ public class BillDetailsDTO {
 		// To avoid object creation in other class
 	}
 
-	public static List<BillDetail> getBillForEachVeg(String[] selectedVeg, String[] quantities,
+	/**
+	 * This method is used to get bill amount for vegetables
+	 * It will all details of bill in a BillDetail Object and add them in a list
+	 * And finally it will return the list of billDetails
+	 * @param selectedVeg
+	 * @param quantities
+	 * @param eachVegBill
+	 * @return
+	 * @throws DBException
+	 */
+	public static List<BillDetail> getBillForVeg(String[] selectedVeg, String[] quantities,
 			List<Double> eachVegBill) throws DBException {
+		// List to add billDetails
 		final List<BillDetail> billDetails = new ArrayList<>();
+		
+		// Business Logic
 		for (int i = 0; i < selectedVeg.length; i++) {
 			String vegName = selectedVeg[i];
 			int vegQuantity = Integer.parseInt(quantities[i]);

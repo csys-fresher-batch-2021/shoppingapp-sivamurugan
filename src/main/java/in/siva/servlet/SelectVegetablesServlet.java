@@ -29,15 +29,20 @@ public class SelectVegetablesServlet extends HttpServlet {
 	 */
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response){
+    	// To get values from jsp page
 		String[] quantityValues = request.getParameterValues("quantity");
 		String[] selectedVegetables = request.getParameterValues("select");
 		try {
+			// To get billDetails and total bill from service
 			List<BillDetail> billDetails = SalesService.getBill(selectedVegetables, quantityValues);
 			Double totalBill = SalesService.getTotalBill(billDetails);
+			
 			HttpSession session = request.getSession();
+			// To store billDetails & total bill
 			session.setAttribute("billDetails", billDetails);
 			request.setAttribute("billDetails", billDetails);
 			request.setAttribute("totalBill", totalBill);
+			
 	        RequestDispatcher dis = request.getRequestDispatcher("BillPage.jsp");
  	        dis.forward(request, response);
 			

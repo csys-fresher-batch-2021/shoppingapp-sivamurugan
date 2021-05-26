@@ -13,7 +13,7 @@ import in.siva.sql.ConnectionUtil;
 public class UserDetailDao {
 
 	private UserDetailDao() {
-		// Default constructor
+		// private Constructor to avoid object creation in other class
 	}
 
 	/**

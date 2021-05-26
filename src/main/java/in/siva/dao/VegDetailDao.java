@@ -13,11 +13,11 @@ import in.siva.sql.ConnectionUtil;
 public class VegDetailDao {
 
 	private VegDetailDao() {
-		// Default constructor
+		// private constructor to avoid object creation in other class
 	}
 
 	/**
-	 * This method is used to add product in database
+	 * This method is used to add vegetables in database
 	 * 
 	 * @param vegetable
 	 * @throws DBException
@@ -52,8 +52,8 @@ public class VegDetailDao {
 	}
 
 	/**
-	 * This method is used to get product details from database It will add database
-	 * product details in a ArrayList Then it will return the ArrayList
+	 * This method is used to get vegetable details from database It will add database
+	 * vegetable details in a ArrayList Then it will return the ArrayList
 	 * 
 	 * @return
 	 * @throws DBException
@@ -99,7 +99,7 @@ public class VegDetailDao {
 	}
 
 	/**
-	 * This method is used to remove a product from database with product name
+	 * This method is used to remove a vegetable from database with vegetable name
 	 * 
 	 * @param name
 	 * @throws DBException
@@ -130,17 +130,27 @@ public class VegDetailDao {
 		}
 	}
 	
+	/**
+	 * This method is used to get vegetable price by vegetable name
+	 * @param name
+	 * @return
+	 * @throws DBException
+	 */
 	public static int findPriceByName(String name) throws DBException {
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		Integer price = null;
 		try {
+			// To establish connection
 			con = ConnectionUtil.getConnection();
 			
+			// SQL query
 			String sql = "SELECT price FROM veg_details WHERE name= ?";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, name);
+			
+			// execute query
 			rs = pst.executeQuery();
 			if(rs.next()) {
 				price = rs.getInt("price");
@@ -155,17 +165,27 @@ public class VegDetailDao {
 		return price;
 	}
 	
+	/**
+	 * This method is used to get vegetable stock quantity by vegetable name 
+	 * @param name
+	 * @return
+	 * @throws DBException
+	 */
 	public static int findStockByName(String name) throws DBException {
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		Integer quantity = null;
 		try {
+			// To establish connection
 			con = ConnectionUtil.getConnection();
 			
+			// SQL query
 			String sql = "SELECT quantity FROM veg_details WHERE name= ?";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, name);
+			
+			// To execute query
 			rs = pst.executeQuery();
 			if(rs.next()) {
 				quantity = rs.getInt("quantity");
@@ -180,6 +200,12 @@ public class VegDetailDao {
 		return quantity;
 	}
 	
+	/**
+	 * This method is used to update stock quantity by vegetable name 
+	 * @param name
+	 * @param newStock
+	 * @throws DBException
+	 */
 	public static void updateStock(String name, int newStock) throws DBException {
 		Connection con = null;
 		PreparedStatement pst = null;

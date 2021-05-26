@@ -15,41 +15,74 @@ import in.siva.validator.BillValidator;
 
 public class SalesService {
 	private SalesService() {
-
+		// To avoid object creation in other class
 	}
 
+	/**
+	 * This method is used to get bill amount for selected vegetables and quantities
+	 * @param selectedVegs
+	 * @param quantities
+	 * @return
+	 * @throws Exception
+	 */
 	public static List<BillDetail> getBill(String[] selectedVegs, String[] quantities)
 			throws Exception {
+		
+		//To get bill for each vegetable
 		List<Double> billForEachVeg = BillCalculator.billForEachVegetable(selectedVegs, quantities);
 
-		List<BillDetail> billDetails = BillDetailsDTO.getBillForEachVeg(selectedVegs, quantities, billForEachVeg);
+		// To get bill details
+		List<BillDetail> billDetails = BillDetailsDTO.getBillForVeg(selectedVegs, quantities, billForEachVeg);
+		
+		// Bill validation
 		BillValidator.isBillValid(billDetails);
 		
 		return billDetails;
 
 	}
 
+	/**
+	 * This method is used to get total bill amount of a purchase
+	 * @param billDetails
+	 * @return
+	 */
 	public static double getTotalBill(List<BillDetail> billDetails) {
 		return BillCalculator.getTotalBill(billDetails);
 	}
 
+	/**
+	 * This method is used to get date and time of purchase
+	 * @return
+	 */
 	public static String getDateTime() {
 		return DateTimeUtil.getDateTime();
 	}
 	
-	public static int getStockQuantity(SalesDetail saleDetail) throws DBException {
+	/**
+	 * This method is used to get new stock quantity after purchase
+	 * @param saleDetail
+	 * @return
+	 * @throws DBException
+	 */
+	public static int getNewStockQuantity(SalesDetail saleDetail) throws DBException {
 		int stockQuantity = VegDetailDao.findStockByName(saleDetail.getVegName());
 		return (stockQuantity - saleDetail.getQuantity());
 		
 		
 	}
 
+	/**
+	 * This method is used to store salesDetails of a purchase after order confirmed
+	 * @param username
+	 * @param billDetails
+	 * @throws DBException
+	 */
 	public static void storeSalesDetails(String username, List<BillDetail> billDetails) throws DBException {
 		String dateTime = getDateTime();
 		for (BillDetail billDetail : billDetails) {
 			SalesDetail saleDetail = SalesDetailDTO.setSalesDetail(billDetail, username, dateTime);
 			SalesDetailsDAO.save(saleDetail);
-			int stockQuantity = getStockQuantity(saleDetail);
+			int stockQuantity = getNewStockQuantity(saleDetail);
 			VegDetailDao.updateStock(saleDetail.getVegName(), stockQuantity);
 		}
 

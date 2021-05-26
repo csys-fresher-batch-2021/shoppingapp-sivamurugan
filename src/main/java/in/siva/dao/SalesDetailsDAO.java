@@ -9,10 +9,15 @@ import in.siva.model.SalesDetail;
 import in.siva.sql.ConnectionUtil;
 
 public class SalesDetailsDAO {
-	SalesDetailsDAO(){
-		
+	private SalesDetailsDAO(){
+		// To avoid object creation in other class
 	}
 	
+	/**
+	 * This method is used to save salesDetails in db
+	 * @param salesDetail
+	 * @throws DBException
+	 */
 	public static void save(SalesDetail salesDetail) throws DBException {
 		Connection connection = null;
 		PreparedStatement pst = null;
@@ -39,7 +44,7 @@ public class SalesDetailsDAO {
 		}
 
 		finally {
-			// Step 4: Release the connection
+			// Release the connection
 			ConnectionUtil.close(pst, connection);
 		}
 	}
