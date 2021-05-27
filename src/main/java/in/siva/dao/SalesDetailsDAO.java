@@ -1,6 +1,7 @@
 package in.siva.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,7 +30,7 @@ public class SalesDetailsDAO {
 			// To Get the connection
 			connection = ConnectionUtil.getConnection();
 			// Query
-			String sql = "INSERT INTO sales_details(username, veg_name, veg_price, veg_quantity, each_veg_bill, date_time) VALUES(?,?,?,?,?,?)";
+			String sql = "INSERT INTO sales_details(username, veg_name, veg_price, veg_quantity, each_veg_bill, date_time, delivery_date, status) VALUES(?,?,?,?,?,?,?,?)";
 			// To Execute
 			pst = connection.prepareStatement(sql);
 
@@ -39,6 +40,8 @@ public class SalesDetailsDAO {
 			pst.setInt(4, salesDetail.getQuantity());
 			pst.setDouble(5, salesDetail.getEachPrice());
 			pst.setTimestamp(6,salesDetail.getDateTime());
+			pst.setDate(7, salesDetail.getDeliveryDate());
+			pst.setString(8, salesDetail.getStatus());
 
 			pst.executeUpdate();
 
@@ -53,6 +56,11 @@ public class SalesDetailsDAO {
 		}
 	}
 	
+	/**
+	 * This method is used to get all sales details in a list of SalesDetail Object
+	 * @return
+	 * @throws DBException
+	 */
 	public static List<SalesDetail> findAllSalesDetails() throws DBException {
 		Connection con = null;
 		PreparedStatement pst = null;
@@ -77,6 +85,8 @@ public class SalesDetailsDAO {
 				int vegQuantity = rs.getInt("veg_quantity");
 				double eachVegPrice = rs.getDouble("each_veg_bill");
 				Timestamp dateTime = rs.getTimestamp("date_time");
+				Date date = rs.getDate("delivery_date");
+				String status = rs.getString("status");
 				
 				SalesDetail orderDetails = new SalesDetail();
 				orderDetails.setUsername(username);
@@ -85,6 +95,8 @@ public class SalesDetailsDAO {
 				orderDetails.setQuantity(vegQuantity);
 				orderDetails.setVegName(vegName);
 				orderDetails.setVegPrice(vegPrice);
+				orderDetails.setDeliveryDate(date);
+				orderDetails.setStatus(status);
 
 				salesDetails.add(orderDetails);
 			}

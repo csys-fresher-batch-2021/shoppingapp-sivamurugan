@@ -46,9 +46,26 @@
 		</figure>
 		<br />
 		<form action="OrderConfirmServlet" method="post">
+			<label for="deliveryDate">Select Delivery Date :</label>
+			<input type="date" id="deliveryDate" name="date" required><br/><br/>
 			<button type="submit" class="btn btn-success">Order Now</button>
 			<a href="SelectVegetables.jsp" class="btn btn-danger">Back</a>
 		</form>
 	</main>
 </body>
+<script>
+setDate();
+function setDate(){
+	let date = new Date();
+	let currentDate = date.toJSON().substring(0,10);                           
+    let endDate = date.setDate(date.getDate()+5); 
+    let maxDate = new Date(endDate);
+    let maxDateStr = maxDate.toJSON().substring(0,10);
+	//let currentTime = date.substring(11,19);
+	
+	document.querySelector("#deliveryDate").setAttribute('value', currentDate);
+	document.querySelector("#deliveryDate").setAttribute('min', currentDate);
+	document.querySelector("#deliveryDate").setAttribute('max', maxDateStr);
+}
+</script>
 </html>

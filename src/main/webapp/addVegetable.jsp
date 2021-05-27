@@ -2,6 +2,34 @@
 <html lang="en">
 <head>
 <title>Add Vegetable</title>
+<style>
+.addVeg th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #047A76;
+	color: white;
+}
+
+.addVeg {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.addVeg td, #vegDetails th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+.addVeg tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.addVeg tr:hover {
+	background-color: #ddd;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -9,7 +37,7 @@
 	<form action = "AddVegetableServlet" method = "post">
 		<figure>
 		<figcaption>Add Vegetable</figcaption>
-		<table>
+		<table class="addVeg">
 		<tr>
 		<th scope = "col">
 		</th>

@@ -25,6 +25,7 @@ public class SalesDetailsServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<SalesDetail> salesDetails;
 		try {
@@ -34,7 +35,7 @@ public class SalesDetailsServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println(salesDetailsStr);
 			out.flush();
-		} catch (DBException e) {
+		} catch (DBException | IOException e) {
 			e.printStackTrace();
 		}
 		

@@ -2,90 +2,158 @@ package in.siva.service;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.omg.CORBA.DoubleSeqHelper;
 
 import in.siva.exception.DBException;
-import in.siva.logics.BillCalculator;
+import in.siva.exception.EmptyBillException;
+import in.siva.exception.InvalidQuantityException;
 import in.siva.model.BillDetail;
-import in.siva.validator.BillValidator;
 
 public class CustomerPurchaseTest {
-
+	
+	/**
+	 * This test case has proper vegetable detail and quantity So bill amount is calculated and 
+	 * result has been validated
+	 * @throws DBException
+	 */
 	@Test
-	public void validCustomerTotalBillTest() throws DBException {
-		final List<BillDetail> billDetails = new ArrayList<>();
-		BillDetail billDetail1 = new BillDetail();
-		BillDetail billDetail2 = new BillDetail();
+	public void totalBillTest1() throws DBException {
+		String[] selectedVegs = {"onion","tomato"}; // Not available in shop
+		String[] quantities = {"2", "5"};
 		
-		billDetail1.setVegName("tomato");
-		billDetail1.setPrice(30);
-		billDetail1.setQuantity(10);
-		billDetail1.setEachVegBill(300);
+		List<BillDetail> billDetails;
+		try {
+			billDetails = SalesService.getBill(selectedVegs, quantities);
+			Double totalBill = SalesService.getTotalBill(billDetails);
+			assertEquals(320.0, totalBill,0.0);
+		} catch (DBException | EmptyBillException e) {
+			e.printStackTrace();
+		}
 		
-		billDetail2.setVegName("potato");
-		billDetail2.setPrice(40);
-		billDetail2.setQuantity(10);
-		billDetail2.setEachVegBill(400);
-		
-		billDetails.add(billDetail1);
-		billDetails.add(billDetail2);
-		
-		double bill = SalesService.getTotalBill(billDetails);
-		assertEquals(700.0, bill, 0.0);
 	}
 	
+	/**
+	 * In this test case bill amount is calculated for different vegetables and 
+	 * result validated
+	 * @throws DBException
+	 */
 	@Test
-	public void invalidCustomerTotalBillTest() throws DBException {
-		List<BillDetail> billDetails = new ArrayList<>();
-		BillDetail billDetail1 = new BillDetail();
-		BillDetail billDetail2 = new BillDetail();
+	public void totalBillTest2() throws DBException {
+		String[] selectedVegs = {"beans","tomato"}; // Not available in shop
+		String[] quantities = {"5", "5"};
 		
-		billDetail1.setVegName("tomato");
-		billDetail1.setPrice(40);
-		billDetail1.setQuantity(10);
-		billDetail1.setEachVegBill(400);
+		List<BillDetail> billDetails;
+		try {
+			billDetails = SalesService.getBill(selectedVegs, quantities);
+			Double totalBill = SalesService.getTotalBill(billDetails);
+			assertEquals(400.0, totalBill,0.0);
+		} catch (DBException | EmptyBillException e) {
+			e.printStackTrace();
+		}
 		
-		billDetail2.setVegName("potato");
-		billDetail2.setPrice(90);
-		billDetail2.setQuantity(10);
-		billDetail2.setEachVegBill(900);
-		
-		billDetails.add(billDetail1);
-		billDetails.add(billDetail2);
-		
-		double bill = SalesService.getTotalBill(billDetails);
-		assertNotEquals(700.0, bill, 0.0);
 	}
 	
+	/**
+	 * In this test case quantities are entered as zero so exception occured and exception message validated
+	 * @throws DBException
+	 */
 	@Test
-	public void validEachVegBillTest() throws DBException {
-		String[] selectedVegs = {"tomato", "potato"};
-		String[] quantities = {"5","2"};
-		List<Double> billForEachVeg = BillCalculator.billForEachVegetable(selectedVegs, quantities);
-		String billForVeg = String.valueOf(billForEachVeg);
-		assertEquals("[200.0, 110.0]", billForVeg);
-	}
-	
-	@Test
-	public void invalidEachVegBillTest() throws DBException {
-		String[] selectedVegs = {"onion"}; // Not available in shop
-		String[] quantities = {"5"};
-		List<Double> billForEachVeg = BillCalculator.billForEachVegetable(selectedVegs, quantities);
-		String billForVeg = String.valueOf(billForEachVeg);
-		assertEquals("[300.0]", billForVeg);
-	}
-	
-	@Test
-	public void invalidBillTest() throws DBException {
-		String[] selectedVegs = {"onion", "tomato"}; // Not available in shop
+	public void withoutQuantityTest() throws DBException {
+		String[] selectedVegs = {"beans","tomato"}; // Not available in shop
 		String[] quantities = {"0", "0"};
-		List<Double> billForEachVeg = BillCalculator.billForEachVegetable(selectedVegs, quantities);
-		String billForVeg = String.valueOf(billForEachVeg);
-		assertEquals("[0.0, 0.0]", billForVeg);
+		
+		List<BillDetail> billDetails;
+		try {
+			billDetails = SalesService.getBill(selectedVegs, quantities);
+			Double totalBill = SalesService.getTotalBill(billDetails);
+			fail();
+		} catch (DBException | InvalidQuantityException | EmptyBillException | NullPointerException e) {
+			assertEquals("You didn't entered any Quantities. Please enter quantity", e.getMessage());
+		}
+		
+	}
+	
+	/**
+	 * In this test case negative value for quantity is given so exception message validated
+	 * @throws DBException
+	 */
+	@Test
+	public void withNegativeQuality() throws DBException {
+		String[] selectedVegs = {"beans","tomato"}; // Not available in shop
+		String[] quantities = {"10", "-8"};
+		
+		List<BillDetail> billDetails;
+		try {
+			billDetails = SalesService.getBill(selectedVegs, quantities);
+			Double totalBill = SalesService.getTotalBill(billDetails);
+			fail();
+		} catch (DBException | EmptyBillException | InvalidQuantityException | NullPointerException e) {
+			assertEquals("You entered Invalid Quantity", e.getMessage());
+		}
+		
+	}
+	
+	/**
+	 * In this test case only one vegetable selected but 2 quantities entered by user
+	 * So in this case selected product price is calculated and validated
+	 * @throws DBException
+	 */
+	@Test
+	public void sizeDiffBwQuantityAndVeg() throws DBException {
+		String[] selectedVegs = {"beans"}; // Not available in shop
+		String[] quantities = {"10", "8"};
+		
+		List<BillDetail> billDetails;
+		try {
+			billDetails = SalesService.getBill(selectedVegs, quantities);
+			Double totalBill = SalesService.getTotalBill(billDetails);
+			assertEquals(400.0, totalBill, 0.0);
+		} catch (DBException | EmptyBillException | InvalidQuantityException | NullPointerException e) {
+			fail();
+		}
+		
 	}
 
+	/**
+	 * In this test case no product is selected and quantity entered so exception message validated
+	 * @throws DBException
+	 */
+	@Test
+	public void withoutDetailsTest() throws DBException {
+		String[] selectedVegs = {}; // Not available in shop
+		String[] quantities = {};
+		
+		List<BillDetail> billDetails;
+		try {
+			billDetails = SalesService.getBill(selectedVegs, quantities);
+			Double totalBill = SalesService.getTotalBill(billDetails);
+			fail();
+		} catch (DBException | EmptyBillException | InvalidQuantityException | NullPointerException e) {
+			assertEquals("You didn't entered any Quantities. Please enter quantity", e.getMessage());
+		}
+		
+	}
+	
+	/**
+	 * In this test case no vegetables no vegetables selected but quantity entered so exception message validated 
+	 * @throws DBException
+	 */
+	@Test
+	public void withQuantityWithoutVegTest() throws DBException {
+		String[] selectedVegs = {}; // Not available in shop
+		String[] quantities = {"2","4"};
+		
+		List<BillDetail> billDetails;
+		try {
+			billDetails = SalesService.getBill(selectedVegs, quantities);
+			Double totalBill = SalesService.getTotalBill(billDetails);
+			fail();
+		} catch (DBException | EmptyBillException | InvalidQuantityException | NullPointerException e) {
+			assertEquals("You didn't entered any Quantities. Please enter quantity", e.getMessage());
+		}
+		
+	}
+	
 }

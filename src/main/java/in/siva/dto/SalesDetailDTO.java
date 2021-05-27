@@ -1,5 +1,6 @@
 package in.siva.dto;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import in.siva.model.BillDetail;
@@ -17,14 +18,15 @@ public class SalesDetailDTO {
 	 * @param dateTime
 	 * @return
 	 */
-	public static SalesDetail setSalesDetail(BillDetail vegDetail, String username, String dateTime) {
+	public static SalesDetail setSalesDetail(BillDetail vegDetail, String username, String dateTime, String deliveryDate) {
 		
-		// To obtain required paramaters
+		// To obtain required parameters
 		String vegName = vegDetail.getVegName();
 		double vegPrice = (double)vegDetail.getPrice();
 		int vegQuantity = vegDetail.getQuantity();
 		double eachVegBill = vegDetail.getEachVegBill();
 		Timestamp dateTimeDb = Timestamp.valueOf(dateTime);
+		Date deliveryDateDb = Date.valueOf(deliveryDate);
 		
 		// To create object for sales details of user
 		SalesDetail orderDetail = new SalesDetail();
@@ -36,6 +38,7 @@ public class SalesDetailDTO {
 		orderDetail.setQuantity(vegQuantity);
 		orderDetail.setEachPrice(eachVegBill);
 		orderDetail.setDateTime(dateTimeDb);
+		orderDetail.setDeliveryDate(deliveryDateDb);
 		
 		return orderDetail;
 	}

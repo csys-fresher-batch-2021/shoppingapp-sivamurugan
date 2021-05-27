@@ -3,13 +3,41 @@
 <html lang="en">
 <head>
 <title>View Users</title>
+<style>
+.userDetails th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #8A0A1F;
+	color: white;
+}
+
+.userDetails {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.userDetails td, #userDetails th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+.userDetails tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.userDetails tr:hover {
+	background-color: #ddd;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<figure>
 			<figcaption>List Of Users</figcaption>
-			<table class="table table-bordered">
+			<table class="userDetails">
 				<tr>
 					<th scope="col">S.No</th>
 					<th scope="col">Name</th>
@@ -28,7 +56,7 @@
 
 		<figure>
 			<figcaption>List Of Admins</figcaption>
-			<table class="table table-bordered">
+			<table class="userDetails">
 				<thead>
 					<tr>
 						<th scope="col">S.No</th>

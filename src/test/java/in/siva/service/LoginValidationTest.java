@@ -15,7 +15,7 @@ public class LoginValidationTest {
 	public void validUserLoginTest() {
 		try {
 			String infoMessage = UserService.loginValidation("SivaMurugan", "Sivasys123@", Constants.USER);
-			assertEquals("User Login Successful", infoMessage);
+			assertEquals("Login Successful", infoMessage);
 		} catch (InvalidLoginException e) {
 			fail();
 		} catch (DBException e) {
@@ -58,7 +58,7 @@ public class LoginValidationTest {
 	public void validAdminLoginTest() {
 		try {
 			String infoMessage = UserService.loginValidation("admin", "Admin123@", Constants.ADMIN);
-			assertEquals("Admin Login Successful", infoMessage);
+			assertEquals("Login Successful", infoMessage);
 		} catch (InvalidLoginException e) {
 			fail();
 		} catch (DBException e) {

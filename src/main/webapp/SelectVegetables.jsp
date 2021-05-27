@@ -66,10 +66,6 @@ input[type=number] {
 					i++;
 					}
 					%>
-					<tr>
-						<td>Your Total Bill is :</td>
-						<td id="totalBill"></td>
-					</tr>
 				</table>
 			</figure>
 			<button type="submit" class="btn btn-success">Proceed</button>
@@ -80,6 +76,9 @@ input[type=number] {
 </body>
 <script type="text/javascript">
 
+/**
+ * This method is used to enable input box if select box is checked
+ */
 function isVegChecked(i){
 	let selected = document.querySelector("#select_"+i);
 	let quantity = document.querySelector("#quantity_"+i);
@@ -91,25 +90,21 @@ function isVegChecked(i){
 }
 
 
+/**
+ * This method is used to calculate bill when user enters quantity
+ */
 function estimateBill(i){
 	let vegQuantity = document.querySelector("#quantity_"+i).value;
-	let url = "GetVegDetailsServlet";
-	fetch(url).then(res=> res.json()).then(res=>{
-		let vegDetails = res;
-		price = vegDetails[i].price * vegQuantity;
-		
-		document.querySelector("#printBill_"+i).innerHTML= price;
-		
-
-		totalBillFunction(price);
-		
-	})	
-}
-let totalBill=0;
-function totalBillFunction(price){
-	
-	totalBill += price;
-	document.querySelector("#totalBill").innerHTML = totalBill;
+	if(vegQuantity > 0){
+		let url = "GetVegDetailsServlet";
+		fetch(url).then(res=> res.json()).then(res=>{
+			let vegDetails = res;
+			price = vegDetails[i].price * vegQuantity;
+			
+			document.querySelector("#printBill_"+i).innerHTML= price;
+			
+		})	
+	}
 	
 }
 
