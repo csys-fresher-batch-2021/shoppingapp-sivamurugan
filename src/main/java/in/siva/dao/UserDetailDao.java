@@ -91,8 +91,16 @@ public class UserDetailDao {
 				String password = rs.getString("password");
 				String role = rs.getString("role");
 
-				UserDetail user = new UserDetail(name, age, gender, mobileNumber, email, username, password, role);
-
+				UserDetail user = new UserDetail();
+				user.setAge(age);
+				user.setEmail(email);
+				user.setGender(gender);
+				user.setMobileNumber(mobileNumber);
+				user.setName(name);
+				user.setPassword(password);
+				user.setRole(role);
+				user.setUsername(username);
+				
 				userDetails.add(user);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
