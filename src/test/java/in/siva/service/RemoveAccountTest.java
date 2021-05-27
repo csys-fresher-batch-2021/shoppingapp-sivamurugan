@@ -13,8 +13,17 @@ public class RemoveAccountTest {
 	 * This method is used to add user initially 
 	 */
 	static {
-		UserDetail user = new UserDetail("Bala Krishnan", 48, Constants.MALE, 9789546789l, "bala@gmail.com", "bala",
-				"Sivasys123@", Constants.USER);
+		UserDetail user = new UserDetail();
+		
+		user.setName("Bala Krishnan");
+		user.setAge(48);
+		user.setGender(Constants.MALE);
+		user.setMobileNumber(9789546789l);
+		user.setEmail("bala@gmail.com");
+		user.setUsername("bala");
+		user.setPassword("Sivasys123@");
+		user.setRole(Constants.USER);
+		
 		try {
 			UserService.addUser(user);
 		} catch (DBException e) {

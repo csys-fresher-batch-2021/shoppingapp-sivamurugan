@@ -46,7 +46,16 @@ public class UserRegistrationServlet extends HttpServlet {
 			String role = request.getParameter("role");
 
 			// To add user details in ArrayList
-			UserDetail user = new UserDetail(name, age, gender, mobileNumber, email, username, password, role);
+			UserDetail user = new UserDetail();
+			user.setAge(age);
+			user.setEmail(email);
+			user.setGender(gender);
+			user.setMobileNumber(mobileNumber);
+			user.setName(name);
+			user.setPassword(password);
+			user.setRole(role);
+			user.setUsername(username);
+			
 			UserService.addUser(user);
 
 			// System.out.println(user); (Used to check whether user details stored are not)
