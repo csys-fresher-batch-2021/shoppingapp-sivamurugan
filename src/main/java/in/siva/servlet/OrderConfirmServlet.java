@@ -3,7 +3,6 @@ package in.siva.servlet;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,14 +36,15 @@ public class OrderConfirmServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		// To get logged in username & billDetails
 		String username = (String) session.getAttribute("LOGGED_IN_USER");
+		String deliveryDate = request.getParameter("date");
 		List<BillDetail> billDetails = (List<BillDetail>) session.getAttribute("billDetails");
 		try {
 			// To store purchase details
-			SalesService.storeSalesDetails(username, billDetails);
+			SalesService.storeSalesDetails(username, deliveryDate, billDetails);
 			response.sendRedirect("OrderConfirmedPage.jsp");
 		} catch (DBException e) {
 			try {
-				response.sendRedirect("SelectProducts.jsp?errorMessage=" + e.getMessage());
+				response.sendRedirect("SelectVegetables.jsp?errorMessage=" + e.getMessage());
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

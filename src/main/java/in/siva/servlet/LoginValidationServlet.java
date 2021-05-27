@@ -42,7 +42,7 @@ public class LoginValidationServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("LOGGED_IN_USER", username);
 			session.setAttribute("ROLE", role);
-			response.sendRedirect("ListVegetables.jsp?infoMessage=" + infoMessage);
+			response.sendRedirect("index.jsp?infoMessage=" + infoMessage);
 			
 			
 		} catch(InvalidLoginException | DBException e) {

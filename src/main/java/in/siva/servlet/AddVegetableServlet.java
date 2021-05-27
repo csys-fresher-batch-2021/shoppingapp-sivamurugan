@@ -54,7 +54,7 @@ public class AddVegetableServlet extends HttpServlet {
 			try {
 				response.sendRedirect("addVegetable.jsp?errorMessage=" + errorMessage);
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				e.printStackTrace();
 			}
 
 		} catch (IOException e) {

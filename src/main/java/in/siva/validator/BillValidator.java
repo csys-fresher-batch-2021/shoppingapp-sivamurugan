@@ -17,7 +17,7 @@ public class BillValidator {
 	 */
 	public static void isBillValid(List<BillDetail> billDetails) throws EmptyBillException {
 		if(billDetails.isEmpty()) {
-			throw new EmptyBillException();
+			throw new EmptyBillException("You didn't entered any Quantities. Please enter quantity");
 		}
 	}
 }

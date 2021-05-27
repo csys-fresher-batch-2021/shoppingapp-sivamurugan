@@ -5,7 +5,7 @@ public class EmptyBillException extends Exception {
 	/**
 	 * It will throw a Invalid Bill Exception if bill values are not valid
 	 */
-	public EmptyBillException() {
-		super();
+	public EmptyBillException(String message) {
+		super(message);
 	}
 }

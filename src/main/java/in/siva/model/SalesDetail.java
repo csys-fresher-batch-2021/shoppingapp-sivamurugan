@@ -1,5 +1,6 @@
 package in.siva.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class SalesDetail {
@@ -10,6 +11,8 @@ public class SalesDetail {
 	private double eachPrice;
 	private int quantity;
 	private Timestamp dateTime;
+	private Date deliveryDate;
+	private String status = "PENDING";
 	
 	/**
 	 * To get username of user
@@ -107,10 +110,28 @@ public class SalesDetail {
 		this.vegPrice = vegPrice;
 	}
 	
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "SalesDetail [username=" + username + ", vegName=" + vegName + ", vegPrice=" + vegPrice + ", eachPrice="
-				+ eachPrice + ", quantity=" + quantity + ", dateTime=" + dateTime + "]";
+				+ eachPrice + ", quantity=" + quantity + ", dateTime=" + dateTime + ", deliveryDate=" + deliveryDate
+				+ ", status=" + status + "]";
 	}
 	
 }

@@ -21,10 +21,14 @@ String role = (String) session.getAttribute("ROLE");
       </li>
       <% if (loggedInUsername != null && role != null && role.equalsIgnoreCase("A")){ %>
       <li class="nav-item">
+        <a class="nav-link" href="ViewSalesDetails.jsp">Order Details</a>
+      </li>
+      
+      <li class="nav-item">
         <a class="nav-link" href="addVegetable.jsp">Add Vegetables</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="ListVegetables.jsp">View Vegetables</a>
+        <a class="nav-link" href="index.jsp">View Vegetables</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="removeVegetable.jsp">Remove Vegetable</a>
@@ -38,7 +42,7 @@ String role = (String) session.getAttribute("ROLE");
       <%} %>
       <% if (loggedInUsername != null && role != null && !role.equalsIgnoreCase("A")){ %>
       <li class="nav-item">
-        <a class="nav-link" href="ListProducts.jsp">View Products</a>
+        <a class="nav-link" href="index.jsp">View Vegetables</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="editProfile.jsp">Edit Profile</a>
