@@ -28,16 +28,6 @@ public class UserDetail {
 	 * @param username
 	 * @param password
 	 */
-	public UserDetail(String name, int age, String gender, long mobileNumber, String email, String username, String password, String role) {
-		this.name = name;
-		this.age = age;
-		this.gender = gender;
-		this.mobileNumber = mobileNumber;
-		this.email = email;
-		this.username = username;
-		this.password = password;
-		this.role = role;
-	}
 	
 	/**
 	 * This method is used to set name
