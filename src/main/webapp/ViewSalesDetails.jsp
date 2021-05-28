@@ -54,6 +54,7 @@
 						<th scope="col">Ordered Date</th>
 						<th scope="col">Ordered Time</th>
 						<th scope="col">Delivery Date</th>
+						<th scope="col">Payment method</th>
 						<th scope="col">Status</th>
 					</tr>
 					<tbody id="searchOrderDetails">
@@ -63,7 +64,7 @@
 		</section>
 		<p id="notFound"></p>
 
-		<label for="date">Get order details for a specific day</label><br />
+		<label for="date">Get order details of a specific day sales</label><br />
 		<input type="date" id="date" required>
 		<button class="btn btn-info" onclick="getOrdersByDate()">Submit</button>
 
@@ -80,7 +81,7 @@
 						<th scope="col">Ordered Date</th>
 						<th scope="col">Ordered Time</th>
 						<th scope="col">Delivery Date</th>
-						<th scope="col">Payment Method</th>
+						<th scope="col" > Payment Method</th>
 						<th scope="col">Status</th>
 					</tr>
 					<tbody id="ordersByDateBody">
@@ -107,7 +108,7 @@
 						<th scope="col">Ordered Date</th>
 						<th scope="col">Ordered Time</th>
 						<th scope="col">Delivery Date</th>
-						<th scope="col">Payment Method</th>
+						<th scope="col"> Payment Method </th>
 						<th scope="col">Status</th>
 					</tr>
 					<tbody id="ordersByDeliveryDateBody">
@@ -133,7 +134,7 @@
 						<th scope="col">Ordered Date</th>
 						<th scope="col">Ordered Time</th>
 						<th scope="col">Delivery Date</th>
-						<th scope="col">Payment Method</th>
+						<th scope="col" > Payment Method </th>
 						<th scope="col">Status</th>
 					</tr>
 					<tbody id="allSalesDetails">
@@ -263,7 +264,6 @@ function searchOrders(){
 		alert("Please enter username");
 		window.location.href="ViewSalesDetails.jsp";
 	}
-	
 	let url = "SalesDetailsServlet";
 	fetch(url).then(res=> res.json()).then(res=>{
 		let salesList = res;
