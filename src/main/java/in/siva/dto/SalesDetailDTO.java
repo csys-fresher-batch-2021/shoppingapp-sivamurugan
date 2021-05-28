@@ -18,7 +18,7 @@ public class SalesDetailDTO {
 	 * @param dateTime
 	 * @return
 	 */
-	public static SalesDetail setSalesDetail(BillDetail vegDetail, String username, String dateTime, String deliveryDate) {
+	public static SalesDetail setSalesDetail(BillDetail vegDetail, String username, String dateTime, String deliveryDate, String paymentMethod) {
 		
 		// To obtain required parameters
 		String vegName = vegDetail.getVegName();
@@ -39,6 +39,7 @@ public class SalesDetailDTO {
 		orderDetail.setEachPrice(eachVegBill);
 		orderDetail.setDateTime(dateTimeDb);
 		orderDetail.setDeliveryDate(deliveryDateDb);
+		orderDetail.setPaymentMethod(paymentMethod);
 		
 		return orderDetail;
 	}

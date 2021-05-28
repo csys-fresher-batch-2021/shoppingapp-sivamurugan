@@ -3,8 +3,6 @@
 <head>
 <title>Sales Details</title>
 <style>
-
-
 #salesDetailsTable th {
 	padding-top: 12px;
 	padding-bottom: 12px;
@@ -37,109 +35,113 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<h1>Get Order Details</h1>
-			<label for="username">Type username of user to get order
-				details</label><br /> <input type="text" id="username"
-				placeholder="Enter username" required>
-			<button class="btn btn-info" onclick="searchOrders()">Search</button>
-			<br />
+		<label for="username">Type username of user to get order
+			details</label><br /> <input type="text" id="username"
+			placeholder="Enter username" required>
+		<button class="btn btn-info" onclick="searchOrders()">Search</button>
+		<br />
 
-			<section id="searchOrders">
-				<figure>
-					<figcaption>Sales Details</figcaption>
-					<table id="salesDetailsTable">
-						<tr>
-							<th scope="col">S.No</th>
-							<th scope="col">Username</th>
-							<th scope="col">Vegetable</th>
-							<th scope="col">quantity (Kg)</th>
-							<th scope="col">Amount (Rs)</th>
-							<th scope="col">Ordered Date</th>
-							<th scope="col">Ordered Time</th>
-							<th scope="col">Delivery Date</th>
-							<th scope="col">Status</th>
-						</tr>
-						<tbody id="searchOrderDetails">
-						</tbody>
-					</table>
-				</figure>
-			</section>
-			<p id="notFound"></p>
+		<section id="searchOrders">
+			<figure>
+				<figcaption>Sales Details</figcaption>
+				<table id="salesDetailsTable">
+					<tr>
+						<th scope="col">S.No</th>
+						<th scope="col">Username</th>
+						<th scope="col">Vegetable</th>
+						<th scope="col">quantity (Kg)</th>
+						<th scope="col">Amount (Rs)</th>
+						<th scope="col">Ordered Date</th>
+						<th scope="col">Ordered Time</th>
+						<th scope="col">Delivery Date</th>
+						<th scope="col">Payment method</th>
+						<th scope="col">Status</th>
+					</tr>
+					<tbody id="searchOrderDetails">
+					</tbody>
+				</table>
+			</figure>
+		</section>
+		<p id="notFound"></p>
 
-			<label for="date">Get order details for a specific day</label><br />
-			<input type="date" id="date" required>
-			<button class="btn btn-info" onclick="getOrdersByDate()">Submit</button>
+		<label for="date">Get order details of a specific day sales</label><br />
+		<input type="date" id="date" required>
+		<button class="btn btn-info" onclick="getOrdersByDate()">Submit</button>
 
-			<section id="searchOrdersByDate">
-				<figure>
-					<figcaption>Sales Details</figcaption>
-					<table id="salesDetailsTable">
-						<tr>
-							<th scope="col">S.No</th>
-							<th scope="col">Username</th>
-							<th scope="col">Vegetable</th>
-							<th scope="col">quantity (Kg)</th>
-							<th scope="col">Amount (Rs)</th>
-							<th scope="col">Ordered Date</th>
-							<th scope="col">Ordered Time</th>
-							<th scope="col">Delivery Date</th>
-							<th scope="col">Status</th>
-						</tr>
-						<tbody id="ordersByDateBody">
-						</tbody>
-					</table>
-				</figure>
-			</section>
-			<p id="notFoundForDate"></p>
-			
-			<label for="date">Get order details for a specific delivery date</label><br />
-			<input type="date" id="deliveryDate" required>
-			<button class="btn btn-info" onclick="getOrdersByDeliveryDate()">Submit</button>
+		<section id="searchOrdersByDate">
+			<figure>
+				<figcaption>Sales Details</figcaption>
+				<table id="salesDetailsTable">
+					<tr>
+						<th scope="col">S.No</th>
+						<th scope="col">Username</th>
+						<th scope="col">Vegetable</th>
+						<th scope="col">quantity (Kg)</th>
+						<th scope="col">Amount (Rs)</th>
+						<th scope="col">Ordered Date</th>
+						<th scope="col">Ordered Time</th>
+						<th scope="col">Delivery Date</th>
+						<th scope="col" > Payment Method</th>
+						<th scope="col">Status</th>
+					</tr>
+					<tbody id="ordersByDateBody">
+					</tbody>
+				</table>
+			</figure>
+		</section>
+		<p id="notFoundForDate"></p>
 
-			<section id="ordersByDeliveryDate">
-				<figure>
-					<figcaption>Sales Details</figcaption>
-					<table id="salesDetailsTable">
-						<tr>
-							<th scope="col">S.No</th>
-							<th scope="col">Username</th>
-							<th scope="col">Vegetable</th>
-							<th scope="col">quantity (Kg)</th>
-							<th scope="col">Amount (Rs)</th>
-							<th scope="col">Ordered Date</th>
-							<th scope="col">Ordered Time</th>
-							<th scope="col">Delivery Date</th>
-							<th scope="col">Status</th>
-						</tr>
-						<tbody id="ordersByDeliveryDateBody">
-						</tbody>
-					</table>
-				</figure>
-			</section>
-			<p id="notFoundForDelivery"></p>
-			
-			<br /> <label for="info">Get all order details here :</label>
-			<button class="btn btn-danger" onclick="viewAllFunc()">View
-				All</button>
-			<section id="viewAll">
-				<figure>
-					<figcaption>Sales Details</figcaption>
-					<table id="salesDetailsTable">
-						<tr>
-							<th scope="col">S.No</th>
-							<th scope="col">Username</th>
-							<th scope="col">Vegetable</th>
-							<th scope="col">quantity (Kg)</th>
-							<th scope="col">Amount (Rs)</th>
-							<th scope="col">Ordered Date</th>
-							<th scope="col">Ordered Time</th>
-							<th scope="col">Delivery Date</th>
-							<th scope="col">Status</th>
-						</tr>
-						<tbody id="allSalesDetails">
-						</tbody>
-					</table>
-				</figure>
-			</section>
+		<label for="date">Get order details for a specific delivery
+			date</label><br /> <input type="date" id="deliveryDate" required>
+		<button class="btn btn-info" onclick="getOrdersByDeliveryDate()">Submit</button>
+
+		<section id="ordersByDeliveryDate">
+			<figure>
+				<figcaption>Sales Details</figcaption>
+				<table id="salesDetailsTable">
+					<tr>
+						<th scope="col">S.No</th>
+						<th scope="col">Username</th>
+						<th scope="col">Vegetable</th>
+						<th scope="col">quantity (Kg)</th>
+						<th scope="col">Amount (Rs)</th>
+						<th scope="col">Ordered Date</th>
+						<th scope="col">Ordered Time</th>
+						<th scope="col">Delivery Date</th>
+						<th scope="col"> Payment Method </th>
+						<th scope="col">Status</th>
+					</tr>
+					<tbody id="ordersByDeliveryDateBody">
+					</tbody>
+				</table>
+			</figure>
+		</section>
+		<p id="notFoundForDelivery"></p>
+
+		<br /> <label for="info">Get all order details here :</label>
+		<button class="btn btn-danger" onclick="viewAllFunc()">View
+			All</button>
+		<section id="viewAll">
+			<figure>
+				<figcaption>Sales Details</figcaption>
+				<table id="salesDetailsTable">
+					<tr>
+						<th scope="col">S.No</th>
+						<th scope="col">Username</th>
+						<th scope="col">Vegetable</th>
+						<th scope="col">quantity (Kg)</th>
+						<th scope="col">Amount (Rs)</th>
+						<th scope="col">Ordered Date</th>
+						<th scope="col">Ordered Time</th>
+						<th scope="col">Delivery Date</th>
+						<th scope="col" > Payment Method </th>
+						<th scope="col">Status</th>
+					</tr>
+					<tbody id="allSalesDetails">
+					</tbody>
+				</table>
+			</figure>
+		</section>
 	</main>
 </body>
 
@@ -236,7 +238,7 @@ function writeAllData(salesList){
 		content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
 		"</td><td>" + orderDetails.vegName + "</td><td>" + orderDetails.quantity + 
 		"</td><td>" + orderDetails.eachPrice + "</td><td>"  + date +
-		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.status + "</td></tr>";
+		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
 	} 
 	document.querySelector("#allSalesDetails").innerHTML= content;
 }
@@ -298,7 +300,7 @@ function writeTableData(filtered){
 		content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
 		"</td><td>" + orderDetails.vegName + "</td><td>" + orderDetails.quantity + 
 		"</td><td>" + orderDetails.eachPrice + "</td><td>"  + date +
-		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.status + "</td></tr>";
+		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
 	} 
 	
 	document.querySelector("#searchOrderDetails").innerHTML= content;
@@ -342,7 +344,7 @@ function writeOrdersByDate(filtered){
 		content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
 		"</td><td>" + orderDetails.vegName + "</td><td>" + orderDetails.quantity + 
 		"</td><td>" + orderDetails.eachPrice + "</td><td>"  + date +
-		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.status + "</td></tr>";
+		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
 	} 
 	
 	document.querySelector("#ordersByDateBody").innerHTML= content;
@@ -448,7 +450,7 @@ function writeOrdersByDeliveryDate(filtered){
 		content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
 		"</td><td>" + orderDetails.vegName + "</td><td>" + orderDetails.quantity + 
 		"</td><td>" + orderDetails.eachPrice + "</td><td>"  + date +
-		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.status + "</td></tr>";
+		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
 	} 
 	
 	document.querySelector("#ordersByDeliveryDateBody").innerHTML= content;
