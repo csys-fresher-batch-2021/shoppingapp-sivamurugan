@@ -82,6 +82,7 @@
 							<th scope="col">Ordered Date</th>
 							<th scope="col">Ordered Time</th>
 							<th scope="col">Delivery Date</th>
+							<th scope="col">Payment Method</th>
 							<th scope="col">Status</th>
 						</tr>
 						<tbody id="ordersByDateBody">
@@ -108,6 +109,7 @@
 							<th scope="col">Ordered Date</th>
 							<th scope="col">Ordered Time</th>
 							<th scope="col">Delivery Date</th>
+							<th scope="col">Payment Method</th>
 							<th scope="col">Status</th>
 						</tr>
 						<tbody id="ordersByDeliveryDateBody">
@@ -133,6 +135,7 @@
 							<th scope="col">Ordered Date</th>
 							<th scope="col">Ordered Time</th>
 							<th scope="col">Delivery Date</th>
+							<th scope="col">Payment Method</th>
 							<th scope="col">Status</th>
 						</tr>
 						<tbody id="allSalesDetails">
@@ -236,7 +239,7 @@ function writeAllData(salesList){
 		content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
 		"</td><td>" + orderDetails.vegName + "</td><td>" + orderDetails.quantity + 
 		"</td><td>" + orderDetails.eachPrice + "</td><td>"  + date +
-		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.status + "</td></tr>";
+		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
 	} 
 	document.querySelector("#allSalesDetails").innerHTML= content;
 }
@@ -262,6 +265,7 @@ function searchOrders(){
 		alert("Please enter username");
 		window.location.href="ViewSalesDetails.jsp";
 	}
+	
 	let url = "SalesDetailsServlet";
 	fetch(url).then(res=> res.json()).then(res=>{
 		let salesList = res;
@@ -298,7 +302,7 @@ function writeTableData(filtered){
 		content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
 		"</td><td>" + orderDetails.vegName + "</td><td>" + orderDetails.quantity + 
 		"</td><td>" + orderDetails.eachPrice + "</td><td>"  + date +
-		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.status + "</td></tr>";
+		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
 	} 
 	
 	document.querySelector("#searchOrderDetails").innerHTML= content;
@@ -342,7 +346,7 @@ function writeOrdersByDate(filtered){
 		content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
 		"</td><td>" + orderDetails.vegName + "</td><td>" + orderDetails.quantity + 
 		"</td><td>" + orderDetails.eachPrice + "</td><td>"  + date +
-		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.status + "</td></tr>";
+		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
 	} 
 	
 	document.querySelector("#ordersByDateBody").innerHTML= content;
@@ -448,7 +452,7 @@ function writeOrdersByDeliveryDate(filtered){
 		content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
 		"</td><td>" + orderDetails.vegName + "</td><td>" + orderDetails.quantity + 
 		"</td><td>" + orderDetails.eachPrice + "</td><td>"  + date +
-		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.status + "</td></tr>";
+		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
 	} 
 	
 	document.querySelector("#ordersByDeliveryDateBody").innerHTML= content;

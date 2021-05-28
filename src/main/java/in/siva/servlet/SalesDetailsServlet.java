@@ -34,7 +34,7 @@ public class SalesDetailsServlet extends HttpServlet {
 			String salesDetailsStr = jsonObj.toJson(salesDetails);
 			PrintWriter out = response.getWriter();
 			out.println(salesDetailsStr);
-			out.flush();
+			out.flush(); 
 		} catch (DBException | IOException e) {
 			e.printStackTrace();
 		}

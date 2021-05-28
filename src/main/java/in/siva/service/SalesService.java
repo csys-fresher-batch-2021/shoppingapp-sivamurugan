@@ -79,10 +79,10 @@ public class SalesService {
 	 * @param billDetails
 	 * @throws DBException
 	 */
-	public static void storeSalesDetails(String username, String deliveryDate, List<BillDetail> billDetails) throws DBException {
+	public static void storeSalesDetails(String username, String deliveryDate, String paymentMethod, List<BillDetail> billDetails) throws DBException {
 		String dateTime = getDateTime();
 		for (BillDetail billDetail : billDetails) {
-			SalesDetail saleDetail = SalesDetailDTO.setSalesDetail(billDetail, username, dateTime, deliveryDate);
+			SalesDetail saleDetail = SalesDetailDTO.setSalesDetail(billDetail, username, dateTime, deliveryDate, paymentMethod);
 			SalesDetailsDAO.saveSalesDetails(saleDetail);
 			int stockQuantity = getNewStockQuantity(saleDetail);
 			VegDetailDao.updateStock(saleDetail.getVegName(), stockQuantity);
@@ -98,4 +98,12 @@ public class SalesService {
 	public static List<SalesDetail> getAllSalesDetails() throws DBException {
 		return SalesDetailsDAO.findAllSalesDetails();
 	}
+	
+	/**
+	public static void updateStatus() throws DBException {
+		String currentDateStr = DateTimeUtil.getDateTime();
+		Timestamp currentDate = Timestamp.valueOf(currentDateStr);
+		SalesDetailsDAO.updateStatus(currentDate);
+	}
+	*/
 }

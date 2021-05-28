@@ -48,6 +48,15 @@
 		<form action="OrderConfirmServlet" method="post">
 			<label for="deliveryDate">Select Delivery Date :</label>
 			<input type="date" id="deliveryDate" name="date" required><br/><br/>
+			<label for="paymentMethod">Select Your Payment method:</label>
+			<select name="paymentMethod" required>
+				<option disabled>---SELECT---</option>
+				<option value="Net Banking">NET BANKING</option>
+				<option value="UPI ID">UPI ID</option>
+				<option value="Credit Card">CREDIT CARD</option>
+				<option value="Debit Card">DEBIT CARD</option>
+				<option value="Cash On Delivery">CASH ON DELIVERY</option>
+			</select><br/>
 			<button type="submit" class="btn btn-success">Order Now</button>
 			<a href="SelectVegetables.jsp" class="btn btn-danger">Back</a>
 		</form>

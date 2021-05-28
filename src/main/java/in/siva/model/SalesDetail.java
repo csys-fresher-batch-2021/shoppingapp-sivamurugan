@@ -13,7 +13,16 @@ public class SalesDetail {
 	private Timestamp dateTime;
 	private Date deliveryDate;
 	private String status = "PENDING";
+	private String paymentMethod;
 	
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
 	/**
 	 * To get username of user
 	 * @return

@@ -14,12 +14,13 @@ import in.siva.model.SalesDetail;
 import in.siva.sql.ConnectionUtil;
 
 public class SalesDetailsDAO {
-	private SalesDetailsDAO(){
+	private SalesDetailsDAO() {
 		// To avoid object creation in other class
 	}
-	
+
 	/**
 	 * This method is used to save salesDetails in db
+	 * 
 	 * @param salesDetail
 	 * @throws DBException
 	 */
@@ -30,7 +31,7 @@ public class SalesDetailsDAO {
 			// To Get the connection
 			connection = ConnectionUtil.getConnection();
 			// Query
-			String sql = "INSERT INTO sales_details(username, veg_name, veg_price, veg_quantity, each_veg_bill, date_time, delivery_date, status) VALUES(?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO sales_details(username, veg_name, veg_price, veg_quantity, each_veg_bill, date_time, delivery_date, payment, status) VALUES(?,?,?,?,?,?,?,?,?)";
 			// To Execute
 			pst = connection.prepareStatement(sql);
 
@@ -39,9 +40,10 @@ public class SalesDetailsDAO {
 			pst.setDouble(3, salesDetail.getVegPrice());
 			pst.setInt(4, salesDetail.getQuantity());
 			pst.setDouble(5, salesDetail.getEachPrice());
-			pst.setTimestamp(6,salesDetail.getDateTime());
+			pst.setTimestamp(6, salesDetail.getDateTime());
 			pst.setDate(7, salesDetail.getDeliveryDate());
-			pst.setString(8, salesDetail.getStatus());
+			pst.setString(8, salesDetail.getPaymentMethod());
+			pst.setString(9, salesDetail.getStatus());
 
 			pst.executeUpdate();
 
@@ -55,9 +57,10 @@ public class SalesDetailsDAO {
 			ConnectionUtil.close(pst, connection);
 		}
 	}
-	
+
 	/**
 	 * This method is used to get all sales details in a list of SalesDetail Object
+	 * 
 	 * @return
 	 * @throws DBException
 	 */
@@ -86,8 +89,9 @@ public class SalesDetailsDAO {
 				double eachVegPrice = rs.getDouble("each_veg_bill");
 				Timestamp dateTime = rs.getTimestamp("date_time");
 				Date date = rs.getDate("delivery_date");
+				String payment = rs.getString("payment");
 				String status = rs.getString("status");
-				
+
 				SalesDetail orderDetails = new SalesDetail();
 				orderDetails.setUsername(username);
 				orderDetails.setDateTime(dateTime);
@@ -96,6 +100,7 @@ public class SalesDetailsDAO {
 				orderDetails.setVegName(vegName);
 				orderDetails.setVegPrice(vegPrice);
 				orderDetails.setDeliveryDate(date);
+				orderDetails.setPaymentMethod(payment);
 				orderDetails.setStatus(status);
 
 				salesDetails.add(orderDetails);
