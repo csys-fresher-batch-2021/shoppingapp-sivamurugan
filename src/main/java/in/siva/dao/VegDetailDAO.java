@@ -10,9 +10,9 @@ import in.siva.exception.DBException;
 import in.siva.model.VegDetail;
 import in.siva.sql.ConnectionUtil;
 
-public class VegDetailDao {
+public class VegDetailDAO {
 
-	private VegDetailDao() {
+	private VegDetailDAO() {
 		// private constructor to avoid object creation in other class
 	}
 

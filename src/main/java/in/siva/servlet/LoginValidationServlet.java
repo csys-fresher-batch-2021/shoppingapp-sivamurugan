@@ -35,8 +35,8 @@ public class LoginValidationServlet extends HttpServlet {
 			// To get information from user
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
-			String role = request.getParameter("role");
-			String infoMessage = UserService.loginValidation(username, password, role);
+			String role = UserService.loginValidation(username, password);
+			String infoMessage = "Login Successful";
 			
 			// To store user details in session
 			HttpSession session = request.getSession();

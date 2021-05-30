@@ -40,7 +40,7 @@
 			<table class="userDetails">
 				<tr>
 					<th scope="col">S.No</th>
-					<th scope="col">Name</th>
+					<th scope="col">Customer Name</th>
 					<th scope="col">Age</th>
 					<th scope="col">Username</th>
 					<th scope="col">Mobile Number</th>
@@ -60,7 +60,7 @@
 				<thead>
 					<tr>
 						<th scope="col">S.No</th>
-						<th scope="col">Name</th>
+						<th scope="col">Admin Name</th>
 						<th scope="col">Age</th>
 						<th scope="col">Username</th>
 						<th scope="col">Mobile Number</th>
@@ -75,7 +75,25 @@
 		</figure>
 
 
+		<figure>
+			<figcaption>List Of Workers</figcaption>
+			<table class="userDetails">
+				<thead>
+					<tr>
+						<th scope="col"> S.No </th>
+						<th scope="col"> Worker Name </th>
+						<th scope="col"> Age</th>
+						<th scope="col"> Username </th>
+						<th scope="col"> Mobile Number </th>
+						<th scope="col"> Email </th>
+					</tr>
+				</thead>
+				<tbody id="allWorkers">
+				</tbody>
 
+
+			</table>
+		</figure>
 	</main>
 </body>
 
@@ -129,7 +147,29 @@ function getAllAdmins(){
 	});
 }
 
+function getAllWorkers(){
+	let url = "ViewUsersServlet";
+	fetch(url).then(res=> res.json()).then(res=>{
+		let userList = res;
+		
+		let content = "";
+		let i=0;
+		for(let worker of userList){
+			if(worker.role=="C"){
+				i++;
+				content += "<tr><td>" + i + "</td><td>" + worker.name +
+				"</td><td>" + worker.age + "</td><td>" + worker.username + 
+				"</td><td>" + worker.mobileNumber + "</td><td>" + worker.email +
+				"</td></tr>";
+			}
+		}
+		document.querySelector("#allWorkers").innerHTML= content;
+		
+	});
+}
+
 getAllUsers();
 getAllAdmins();
+getAllWorkers();
 </script>
 </html>

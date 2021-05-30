@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import in.siva.exception.DBException;
-import in.siva.model.SalesDetail;
+import in.siva.model.OrderDetail;
 import in.siva.service.SalesService;
 
 /**
@@ -27,13 +27,13 @@ public class SalesDetailsServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<SalesDetail> salesDetails;
+		List<OrderDetail> orderDetails;
 		try {
-			salesDetails = SalesService.getAllSalesDetails();
+			orderDetails = SalesService.getAllOrderDetails();
 			Gson jsonObj = new Gson();
-			String salesDetailsStr = jsonObj.toJson(salesDetails);
+			String orderDetailsStr = jsonObj.toJson(orderDetails);
 			PrintWriter out = response.getWriter();
-			out.println(salesDetailsStr);
+			out.println(orderDetailsStr);
 			out.flush(); 
 		} catch (DBException | IOException e) {
 			e.printStackTrace();

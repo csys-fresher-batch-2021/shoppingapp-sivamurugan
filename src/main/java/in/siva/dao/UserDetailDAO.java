@@ -10,9 +10,9 @@ import in.siva.exception.DBException;
 import in.siva.model.UserDetail;
 import in.siva.sql.ConnectionUtil;
 
-public class UserDetailDao {
+public class UserDetailDAO {
 
-	private UserDetailDao() {
+	private UserDetailDAO() {
 		// private Constructor to avoid object creation in other class
 	}
 
@@ -221,6 +221,12 @@ public class UserDetailDao {
 		}
 	}
 	
+	/**
+	 * This method is used to update email id of a user
+	 * @param newEmail
+	 * @param username
+	 * @throws DBException
+	 */
 	public static void updateEmail(String newEmail, String username) throws DBException {
 		Connection con = null;
 		PreparedStatement pst = null;
@@ -247,5 +253,44 @@ public class UserDetailDao {
 			// Release the connection
 			ConnectionUtil.close(pst, con);
 		}
+	}
+	
+	/**
+	 * This method is used to get role of a specific login details
+	 * @param username
+	 * @param password
+	 * @return
+	 * @throws DBException
+	 */
+	public static String getRole(String username, String password) throws DBException {
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String role = null;
+		try {
+			// To establish connection
+			con = ConnectionUtil.getConnection();
+
+			// SQl commands
+			String sql = "SELECT role FROM userdetails WHERE username = ? and password = ?";
+			// To Execute
+			pst = con.prepareStatement(sql);
+			pst.setString(1, username);
+			pst.setString(2, password);
+			
+			rs = pst.executeQuery();
+			if(rs.next()) {
+				 role = rs.getString("role");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			throw new DBException("Sorry! Something went wrong");
+		}
+
+		finally {
+			// Close connection between java and db
+			ConnectionUtil.close(rs, pst, con);
+		}
+		return role;
 	}
 }

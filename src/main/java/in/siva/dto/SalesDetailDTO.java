@@ -2,45 +2,71 @@ package in.siva.dto;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import in.siva.model.BillDetail;
-import in.siva.model.SalesDetail;
+import in.siva.model.OrderDetail;
+import in.siva.model.OrderItem;
 
 public class SalesDetailDTO {
 	private SalesDetailDTO() {
 		// To avoid object creation in other class
 	}
-	
+
 	/**
-	 * This method sets username of the purchasing user and bill details in a object and returns it 
-	 * @param vegDetail
-	 * @param username
-	 * @param dateTime
+	 * This method adds vegetable details in order details for output (FrontEnd)
+	 * @param orderDetail
+	 * @param orderItems
 	 * @return
 	 */
-	public static SalesDetail setSalesDetail(BillDetail vegDetail, String username, String dateTime, String deliveryDate, String paymentMethod) {
-		
-		// To obtain required parameters
-		String vegName = vegDetail.getVegName();
-		double vegPrice = (double)vegDetail.getPrice();
-		int vegQuantity = vegDetail.getQuantity();
-		double eachVegBill = vegDetail.getEachVegBill();
-		Timestamp dateTimeDb = Timestamp.valueOf(dateTime);
-		Date deliveryDateDb = Date.valueOf(deliveryDate);
-		
-		// To create object for sales details of user
-		SalesDetail orderDetail = new SalesDetail();
-		
-		// To add values in object
-		orderDetail.setUsername(username);
-		orderDetail.setVegName(vegName);
-		orderDetail.setVegPrice(vegPrice);
-		orderDetail.setQuantity(vegQuantity);
-		orderDetail.setEachPrice(eachVegBill);
-		orderDetail.setDateTime(dateTimeDb);
-		orderDetail.setDeliveryDate(deliveryDateDb);
-		orderDetail.setPaymentMethod(paymentMethod);
-		
+	public static OrderDetail setOrderDetailsForOutput(OrderDetail orderDetail, List<OrderItem> orderItems) {
+		orderDetail.setOrderItems(orderItems);
 		return orderDetail;
 	}
+
+	public static List<OrderItem> setOrderItems(List<BillDetail> vegDetails) {
+		List<OrderItem> orderItemList = new ArrayList<>();
+		for (BillDetail vegDetail : vegDetails) {
+			String vegName = vegDetail.getVegName();
+			double vegPrice = (double) vegDetail.getPrice();
+			int vegQuantity = vegDetail.getQuantity();
+			double eachVegBill = vegDetail.getEachVegBill();
+
+			// To create object for order items
+			OrderItem vegetable = new OrderItem();
+			vegetable.setVegName(vegName);
+			vegetable.setPrice(vegPrice);
+			vegetable.setQuantity(vegQuantity);
+			vegetable.setEachVegPrice(eachVegBill);
+			orderItemList.add(vegetable);
+		}
+
+		return orderItemList;
+	}
+
+	/**
+	 * This method is used to set order details in a object to pass to DAO
+	 * @param username
+	 * @param totalBill
+	 * @param createdDateTime
+	 * @param deliveryDate
+	 * @param paymentMethod
+	 * @return
+	 */
+	public static OrderDetail setOrderDetailsForDb(String username, double totalBill, Timestamp createdDateTime,
+			Date deliveryDate, String paymentMethod) {
+		// To create object for order details of user
+		OrderDetail orderDetail = new OrderDetail();
+
+		// To add values in object
+		orderDetail.setCreatedDate(createdDateTime);
+		orderDetail.setUsername(username);
+		orderDetail.setTotalBill(totalBill);
+		orderDetail.setPaymentMethod(paymentMethod);
+		orderDetail.setDeliveryDate(deliveryDate);
+
+		return orderDetail;
+	}
+
 }

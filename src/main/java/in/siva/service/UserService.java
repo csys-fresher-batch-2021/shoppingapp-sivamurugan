@@ -3,7 +3,7 @@ package in.siva.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import in.siva.dao.UserDetailDao;
+import in.siva.dao.UserDetailDAO;
 import in.siva.exception.DBException;
 import in.siva.exception.InvalidLoginException;
 import in.siva.exception.UserInvalidException;
@@ -31,7 +31,7 @@ public class UserService {
 		if (UserValidator.isUserValid(user)) {
 			if (UserValidator.isUserNotRepeated(user)) {
 				UserDetail validUser = changeEmailToLowerCase(user);
-				UserDetailDao.addUser(validUser);
+				UserDetailDAO.addUser(validUser);
 			} else {
 				throw new UserRepeatedException("Sorry! Some details you entered were already registered by a user");
 			}
@@ -51,15 +51,15 @@ public class UserService {
 	 * @throws DBException 
 	 */
 
-	public static String loginValidation(String username, String password, String role) throws DBException {
-		String infoMessage = null;
-		if(UserLoginValidator.userValidator(username, password, role)) {
-			infoMessage = "Login Successful";
+	public static String loginValidation(String username, String password) throws DBException {
+		String role = null;
+		if(UserLoginValidator.userValidator(username, password)) {
+			role = UserDetailDAO.getRole(username, password);
 		} else {
 			throw new InvalidLoginException("Invalid Login Credentials! Try Again");
 		}
 		
-		return infoMessage;
+		return role;
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class UserService {
 	public static void removeAccount(String username) throws DBException{
 		
 		if(UserValidator.isUsernamePresent(username)) {
-			UserDetailDao.removeUser(username);
+			UserDetailDAO.removeUser(username);
 		} else {
 			throw new UserInvalidException("User not found");
 		}
@@ -101,7 +101,7 @@ public class UserService {
 	 */
 	public static void updateName(String newName, String username) throws DBException {
 		if(UserValidator.isUpdateNameValid(newName, username)) {
-			UserDetailDao.updateName(newName, username);
+			UserDetailDAO.updateName(newName, username);
 		} else {
 			throw new UserInvalidException("User not found");
 		}
@@ -116,7 +116,7 @@ public class UserService {
 	 */
 	public static void updateMobileNumber(long newMobileNumber, String username) throws DBException {
 		if(UserValidator.isUpdateMobileValid(newMobileNumber, username)) {
-			UserDetailDao.updateMobile(newMobileNumber, username);
+			UserDetailDAO.updateMobile(newMobileNumber, username);
 		}
 	}
 	
@@ -129,13 +129,18 @@ public class UserService {
 	 */
 	public static void updateEmail(String newEmail, String username) throws DBException {
 		if(UserValidator.isUpdateEmailValid(newEmail, username)) {
-			UserDetailDao.updateEmail(newEmail, username);
+			UserDetailDAO.updateEmail(newEmail, username);
 		}
 	}
 
 
+	/**
+	 * This method is used to get all user details from DAO
+	 * @return
+	 * @throws DBException
+	 */
 	public static List<UserDetail> getAllUsers() throws DBException {
-		return UserDetailDao.getUserDetails();
+		return UserDetailDAO.getUserDetails();
 	}
 	
 }

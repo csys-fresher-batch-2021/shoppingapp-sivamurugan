@@ -3,7 +3,7 @@ package in.siva.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.siva.dao.VegDetailDao;
+import in.siva.dao.VegDetailDAO;
 import in.siva.exception.DBException;
 import in.siva.model.BillDetail;
 
@@ -32,7 +32,7 @@ public class BillDetailsDTO {
 			String vegName = selectedVeg[i];
 			int vegQuantity = Integer.parseInt(quantities[i]);
 			if (vegQuantity != 0) {
-				int price = VegDetailDao.findPriceByName(vegName);
+				int price = VegDetailDAO.findPriceByName(vegName);
 				double bill = eachVegBill.get(i);
 				BillDetail vegetable = new BillDetail();
 				vegetable.setVegName(vegName);
