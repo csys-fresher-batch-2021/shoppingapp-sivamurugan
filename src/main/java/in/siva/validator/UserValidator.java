@@ -1,7 +1,7 @@
 package in.siva.validator;
 
 import java.util.List;
-import in.siva.dao.UserDetailDao;
+import in.siva.dao.UserDetailDAO;
 import in.siva.exception.DBException;
 import in.siva.exception.UserInvalidException;
 import in.siva.exception.UserRepeatedException;
@@ -47,7 +47,7 @@ public class UserValidator {
 		// Declaration
 		boolean valid = true;
 		// To get user details
-		List<UserDetail> userDetails = UserDetailDao.getUserDetails();
+		List<UserDetail> userDetails = UserDetailDAO.getUserDetails();
 		// Business Logic
 		for (UserDetail userDetail : userDetails) {
 			if (user.getEmail().equalsIgnoreCase(userDetail.getEmail())
@@ -72,7 +72,7 @@ public class UserValidator {
 	 */
 	public static boolean isUsernamePresent(String username) throws DBException {
 		boolean exists = false;
-		List<UserDetail> userDetails = UserDetailDao.getUserDetails();
+		List<UserDetail> userDetails = UserDetailDAO.getUserDetails();
 		for (UserDetail user : userDetails) {
 			if (user.getUsername().equals(username)) {
 				exists = true;
@@ -92,7 +92,7 @@ public class UserValidator {
 	 */
 	public static boolean isMobileNotRepeated(long mobileNumber) throws DBException {
 		boolean isNotRepeated = true;
-		List<UserDetail> userDetails = UserDetailDao.getUserDetails();
+		List<UserDetail> userDetails = UserDetailDAO.getUserDetails();
 		for (UserDetail user : userDetails) {
 			if (user.getMobileNumber() == mobileNumber) {
 				isNotRepeated = false;
@@ -113,7 +113,7 @@ public class UserValidator {
 	 */
 	public static boolean isEmailNotRepeated(String email) throws DBException {
 		boolean isNotRepeated = true;
-		List<UserDetail> userDetails = UserDetailDao.getUserDetails();
+		List<UserDetail> userDetails = UserDetailDAO.getUserDetails();
 		for(UserDetail user : userDetails) {
 			if(user.getEmail().equals(email)) {
 				isNotRepeated = false;

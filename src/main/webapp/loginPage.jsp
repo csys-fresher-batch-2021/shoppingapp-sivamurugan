@@ -21,11 +21,6 @@ section {
 				<label for="password">Password :</label> <input type="password"
 					name="password" placeholder="Enter Password" required><br />
 
-				<label for="role">Role :</label> <select name="role">
-					<option value="U">USER</option>
-					<option value="A">ADMIN</option>
-				</select><br />
-
 				<button type="submit" class="btn btn-success">Submit</button>
 				<button type="reset" class="btn btn-danger">Clear</button>
 				<a href="newUserRegistration.jsp" class="btn btn-info">New User?

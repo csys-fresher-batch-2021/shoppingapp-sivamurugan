@@ -35,8 +35,9 @@
 
 			<label for = "role">Role :</label>
 			<select name = "role" required>
-				<option value = "U"> User </option>
+				<option value = "U"> Customer </option>
 				<option value = "A"> Admin </option>
+				<option value = "C">Sales Man</option>
 			</select><br/>
 			<button type = "submit" class = "btn btn-info">Submit</button>
 		</form>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@page import="in.siva.model.VegDetail"%>
-<%@page import="in.siva.dao.VegDetailDao"%>
+<%@page import="in.siva.dao.VegDetailDAO"%>
 <%@page import="java.util.List"%>
 <html lang="en">
 <head>
@@ -45,9 +45,9 @@ input[type=number] {
 
 					</tr>
 					<%
-					List<VegDetail> vegetables = VegDetailDao.findAll();
-					int i = 0;
-					for (VegDetail veg : vegetables) {
+					List<VegDetail> vegetables = VegDetailDAO.findAll();
+								int i = 0;
+								for (VegDetail veg : vegetables) {
 					%>
 					<tr>
 						<td><%=veg.getName()%></td>

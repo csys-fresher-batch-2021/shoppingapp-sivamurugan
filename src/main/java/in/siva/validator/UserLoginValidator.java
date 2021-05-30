@@ -1,7 +1,7 @@
 package in.siva.validator;
 
 import java.util.List;
-import in.siva.dao.UserDetailDao;
+import in.siva.dao.UserDetailDAO;
 import in.siva.exception.DBException;
 import in.siva.model.UserDetail;
 
@@ -21,17 +21,17 @@ public class UserLoginValidator {
 	 * @return
 	 * @throws DBException 
 	 */
-	public static boolean userValidator(String username, String password, String role) throws DBException {
+	public static boolean userValidator(String username, String password) throws DBException {
 
 		// Declaration
 		boolean valid = false;
 
 		// To get user details
-		List<UserDetail> userDetils = UserDetailDao.getUserDetails();
+		List<UserDetail> userDetils = UserDetailDAO.getUserDetails();
 
 		// Business Logic
 			for (UserDetail user : userDetils) {
-				if (user.getUsername().equals(username) && user.getPassword().equals(password) && user.getRole().equals(role)) {
+				if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
 					valid = true;
 					break;
 				}

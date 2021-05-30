@@ -14,8 +14,8 @@ public class LoginValidationTest {
 	@Test
 	public void validUserLoginTest() {
 		try {
-			String infoMessage = UserService.loginValidation("SivaMurugan", "Sivasys123@", Constants.USER);
-			assertEquals("Login Successful", infoMessage);
+			String role = UserService.loginValidation("Karan", "Karan123@");
+			assertEquals("U", role);
 		} catch (InvalidLoginException e) {
 			fail();
 		} catch (DBException e) {
@@ -29,7 +29,7 @@ public class LoginValidationTest {
 	@Test
 	public void invalidUsernameLoginTest() {
 		try {
-			String infoMessage = UserService.loginValidation("siva1234", "Sivasys123@", Constants.USER);
+			String infoMessage = UserService.loginValidation("siva1234", "Sivasys123@");
 		} catch (InvalidLoginException e) {
 			assertEquals("Invalid Login Credentials! Try Again", e.getMessage());
 		} catch (DBException e) {
@@ -43,7 +43,7 @@ public class LoginValidationTest {
 	@Test
 	public void invalidPasswordLoginTest() {
 		try {
-			String infoMessage = UserService.loginValidation("hihihi", "Sivasys12@", Constants.USER);
+			String infoMessage = UserService.loginValidation("hihihi", "Sivasys12@");
 		} catch (InvalidLoginException e) {
 			assertEquals("Invalid Login Credentials! Try Again", e.getMessage());
 		} catch (DBException e) {
@@ -57,8 +57,8 @@ public class LoginValidationTest {
 	@Test
 	public void validAdminLoginTest() {
 		try {
-			String infoMessage = UserService.loginValidation("admin", "Admin123@", Constants.ADMIN);
-			assertEquals("Login Successful", infoMessage);
+			String role = UserService.loginValidation("Admin2", "Admin123@");
+			assertEquals("A", role);
 		} catch (InvalidLoginException e) {
 			fail();
 		} catch (DBException e) {
@@ -73,7 +73,7 @@ public class LoginValidationTest {
 	@Test
 	public void invalidAdminLoginTest() {
 		try {
-			String infoMessage = UserService.loginValidation("adm", "admin123@", Constants.ADMIN);
+			String role = UserService.loginValidation("adm", "admin123@");
 		} catch (InvalidLoginException e) {
 			assertEquals("Invalid Login Credentials! Try Again", e.getMessage());
 		} catch (DBException e) {

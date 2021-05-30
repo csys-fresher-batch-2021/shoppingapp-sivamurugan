@@ -2,7 +2,7 @@ package in.siva.validator;
 
 
 import java.util.List;
-import in.siva.dao.VegDetailDao;
+import in.siva.dao.VegDetailDAO;
 import in.siva.exception.DBException;
 import in.siva.model.VegDetail;
 
@@ -19,7 +19,7 @@ public class VegetableValidator {
 	 * @throws DBException 
 	 */
 	public static boolean isVegMatches(String vegName) throws DBException {
-		List<VegDetail> productDetails = VegDetailDao.findAll();
+		List<VegDetail> productDetails = VegDetailDAO.findAll();
 		boolean exists = false;
 		vegName = vegName.toLowerCase();
 		for (VegDetail product : productDetails) {
@@ -40,7 +40,7 @@ public class VegetableValidator {
 
 	public static boolean isVegNotRepeated(String vegName) throws DBException{
 		boolean valid = true;
-		List<VegDetail> vegDetails = VegDetailDao.findAll();
+		List<VegDetail> vegDetails = VegDetailDAO.findAll();
 		for (VegDetail product : vegDetails) {
 			if (product.getName().equalsIgnoreCase(vegName)) {
 				valid = false;

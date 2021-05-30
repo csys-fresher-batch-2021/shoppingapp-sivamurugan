@@ -7,7 +7,7 @@
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: left;
-	background-color: #047A76;
+	background-color: #000E89;
 	color: white;
 }
 
@@ -22,8 +22,12 @@
 	padding: 8px;
 }
 
+#salesDetailsTable tr:nth-child(odd) {
+	background-color: #ECECEC;
+}
+
 #salesDetailsTable tr:nth-child(even) {
-	background-color: #f2f2f2;
+	background-color: #E1F7FF;
 }
 
 #salesDetailsTable tr:hover {
@@ -49,13 +53,14 @@
 						<th scope="col">S.No</th>
 						<th scope="col">Username</th>
 						<th scope="col">Vegetable</th>
-						<th scope="col">quantity (Kg)</th>
+						<th scope="col">Quantity (Kg)</th>
 						<th scope="col">Amount (Rs)</th>
 						<th scope="col">Ordered Date</th>
 						<th scope="col">Ordered Time</th>
 						<th scope="col">Delivery Date</th>
 						<th scope="col">Payment method</th>
 						<th scope="col">Status</th>
+
 					</tr>
 					<tbody id="searchOrderDetails">
 					</tbody>
@@ -76,12 +81,12 @@
 						<th scope="col">S.No</th>
 						<th scope="col">Username</th>
 						<th scope="col">Vegetable</th>
-						<th scope="col">quantity (Kg)</th>
+						<th scope="col">Quantity (Kg)</th>
 						<th scope="col">Amount (Rs)</th>
 						<th scope="col">Ordered Date</th>
 						<th scope="col">Ordered Time</th>
 						<th scope="col">Delivery Date</th>
-						<th scope="col" > Payment Method</th>
+						<th scope="col">Payment method</th>
 						<th scope="col">Status</th>
 					</tr>
 					<tbody id="ordersByDateBody">
@@ -103,12 +108,12 @@
 						<th scope="col">S.No</th>
 						<th scope="col">Username</th>
 						<th scope="col">Vegetable</th>
-						<th scope="col">quantity (Kg)</th>
+						<th scope="col">Quantity (Kg)</th>
 						<th scope="col">Amount (Rs)</th>
 						<th scope="col">Ordered Date</th>
 						<th scope="col">Ordered Time</th>
 						<th scope="col">Delivery Date</th>
-						<th scope="col"> Payment Method </th>
+						<th scope="col">Payment method</th>
 						<th scope="col">Status</th>
 					</tr>
 					<tbody id="ordersByDeliveryDateBody">
@@ -129,16 +134,17 @@
 						<th scope="col">S.No</th>
 						<th scope="col">Username</th>
 						<th scope="col">Vegetable</th>
-						<th scope="col">quantity (Kg)</th>
+						<th scope="col">Quantity (Kg)</th>
 						<th scope="col">Amount (Rs)</th>
 						<th scope="col">Ordered Date</th>
 						<th scope="col">Ordered Time</th>
 						<th scope="col">Delivery Date</th>
-						<th scope="col" > Payment Method </th>
+						<th scope="col">Payment method</th>
 						<th scope="col">Status</th>
 					</tr>
 					<tbody id="allSalesDetails">
 					</tbody>
+
 				</table>
 			</figure>
 		</section>
@@ -233,12 +239,18 @@ function writeAllData(salesList){
 	let i=0;
 	for(let orderDetails of salesList){
 		i++;
-		let time = orderDetails.dateTime.substring(13,24);
-		let date = orderDetails.dateTime.substring(0,12);
-		content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
-		"</td><td>" + orderDetails.vegName + "</td><td>" + orderDetails.quantity + 
-		"</td><td>" + orderDetails.eachPrice + "</td><td>"  + date +
-		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
+		let time = orderDetails.createdDate.substring(13,24);
+		let date = orderDetails.createdDate.substring(0,12);
+		let orderItems = orderDetails.orderItems;
+		for(let vegetable of orderItems){
+			content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
+			"</td><td>" + vegetable.vegName + "</td><td>" + vegetable.quantity + 
+			"</td><td>" + vegetable.eachVegPrice + "</td><td>"  + date +
+			"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" +
+			orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
+		}
+		
+		content+="<br/>"
 	} 
 	document.querySelector("#allSalesDetails").innerHTML= content;
 }
@@ -292,15 +304,22 @@ function writeSearchContent(filtered){
  */
 function writeTableData(filtered){
 	let content = "";
+	let vegTable = ""
 	let i=0;
 	for(let orderDetails of filtered){
 		i++;
-		let time = orderDetails.dateTime.substring(13,24);
-		let date = orderDetails.dateTime.substring(0,12);
-		content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
-		"</td><td>" + orderDetails.vegName + "</td><td>" + orderDetails.quantity + 
-		"</td><td>" + orderDetails.eachPrice + "</td><td>"  + date +
-		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
+		let time = orderDetails.createdDate.substring(13,24);
+		let date = orderDetails.createdDate.substring(0,12);
+		let orderItems = orderDetails.orderItems;
+		for(let vegetable of orderItems){
+			content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
+			"</td><td>" + vegetable.vegName + "</td><td>" + vegetable.quantity + 
+			"</td><td>" + vegetable.eachVegPrice + "</td><td>"  + date +
+			"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" +
+			orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
+		}
+		
+		content+="<br/>"
 	} 
 	
 	document.querySelector("#searchOrderDetails").innerHTML= content;
@@ -316,7 +335,7 @@ function getOrdersByDate(){
 	let url = "SalesDetailsServlet";
 	fetch(url).then(res=> res.json()).then(res=>{
 		let salesList = res;
-		let filtered = salesList.filter(s => String(convertDateTime(s.dateTime)).startsWith(date));
+		let filtered = salesList.filter(s => String(convertDateTime(s.createdDate)).startsWith(date));
 		writeContent(filtered);
 	});
 }
@@ -336,15 +355,22 @@ function convertDateTime(dateTime){
  */
 function writeOrdersByDate(filtered){
 	let content = "";
+	let vegTable = ""
 	let i=0;
 	for(let orderDetails of filtered){
 		i++;
-		let time = orderDetails.dateTime.substring(13,24);
-		let date = orderDetails.dateTime.substring(0,12);
-		content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
-		"</td><td>" + orderDetails.vegName + "</td><td>" + orderDetails.quantity + 
-		"</td><td>" + orderDetails.eachPrice + "</td><td>"  + date +
-		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
+		let time = orderDetails.createdDate.substring(13,24);
+		let date = orderDetails.createdDate.substring(0,12);
+		let orderItems = orderDetails.orderItems;
+		for(let vegetable of orderItems){
+			content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
+			"</td><td>" + vegetable.vegName + "</td><td>" + vegetable.quantity + 
+			"</td><td>" + vegetable.eachVegPrice + "</td><td>"  + date +
+			"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" +
+			orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
+		}
+		
+		content+="<br/>"
 	} 
 	
 	document.querySelector("#ordersByDateBody").innerHTML= content;
@@ -442,18 +468,25 @@ function searchOrdersByDelieryDate(){
  */
 function writeOrdersByDeliveryDate(filtered){
 	let content = "";
+	let vegTable = ""
 	let i=0;
 	for(let orderDetails of filtered){
 		i++;
-		let time = orderDetails.dateTime.substring(13,24);
-		let date = orderDetails.dateTime.substring(0,12);
-		content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
-		"</td><td>" + orderDetails.vegName + "</td><td>" + orderDetails.quantity + 
-		"</td><td>" + orderDetails.eachPrice + "</td><td>"  + date +
-		"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" + orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
+		let time = orderDetails.createdDate.substring(13,24);
+		let date = orderDetails.createdDate.substring(0,12);
+		let orderItems = orderDetails.orderItems;
+		for(let vegetable of orderItems){
+			content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
+			"</td><td>" + vegetable.vegName + "</td><td>" + vegetable.quantity + 
+			"</td><td>" + vegetable.eachVegPrice + "</td><td>"  + date +
+			"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" +
+			orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
+		}
+		
+		content+="<br/>"
 	} 
-	
-	document.querySelector("#ordersByDeliveryDateBody").innerHTML= content;
+		
+		document.querySelector("#ordersByDeliveryDateBody").innerHTML= content;
 }
 
 </script>

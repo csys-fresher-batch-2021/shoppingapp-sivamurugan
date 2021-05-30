@@ -1,6 +1,8 @@
 package in.siva.service;
 
 import static org.junit.Assert.*;
+
+
 import org.junit.Test;
 import in.siva.exception.DBException;
 import in.siva.exception.UserInvalidException;
@@ -16,6 +18,7 @@ public class UpdateNameTest {
 		String username = "Karan";
 		try {
 			UserService.updateName(newName, username);
+			
 		} catch (DBException e) {
 			fail();
 		}

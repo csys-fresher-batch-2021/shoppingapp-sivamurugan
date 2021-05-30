@@ -3,7 +3,7 @@ package in.siva.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import in.siva.dao.VegDetailDao;
+import in.siva.dao.VegDetailDAO;
 import in.siva.exception.DBException;
 import in.siva.exception.VegInvalidException;
 import in.siva.model.VegDetail;
@@ -30,7 +30,7 @@ public class VegetableService {
 		if (UtilValidator.isStringValid(validVeg.getName()) && UtilValidator.isNumberValid(validVeg.getPrice())
 				&& UtilValidator.isNumberValid(validVeg.getQuantity())) {
 			if (VegetableValidator.isVegNotRepeated(validVeg.getName())) {
-				VegDetailDao.saveVeg(validVeg);
+				VegDetailDAO.saveVeg(validVeg);
 			} else {
 				throw new VegInvalidException("Product Already Exists");
 			}
@@ -51,7 +51,7 @@ public class VegetableService {
 	public static void removeVeg(String vegName) throws DBException {
 		// Business logic
 		if (VegetableValidator.isVegMatches(vegName)) {
-			VegDetailDao.deleteVegByName(vegName);
+			VegDetailDAO.deleteVegByName(vegName);
 		} else {
 			throw new VegInvalidException("Invalid Product Name");
 		}
@@ -72,8 +72,13 @@ public class VegetableService {
 		return vegetable;
 	}
 	
+	/**
+	 * This method is used to get all vegetable details from DAO
+	 * @return
+	 * @throws DBException
+	 */
 	public static List<VegDetail> getVegDetails() throws DBException {
-		return VegDetailDao.findAll();
+		return VegDetailDAO.findAll();
 	}
 
 }

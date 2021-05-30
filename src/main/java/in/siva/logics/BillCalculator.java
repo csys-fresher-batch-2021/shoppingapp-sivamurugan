@@ -3,7 +3,7 @@ package in.siva.logics;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.siva.dao.VegDetailDao;
+import in.siva.dao.VegDetailDAO;
 import in.siva.exception.DBException;
 import in.siva.exception.InvalidQuantityException;
 import in.siva.model.BillDetail;
@@ -36,7 +36,7 @@ public class BillCalculator {
 				
 			} else {
 				if (VegetableValidator.isVegMatches(vegName)) {
-					int price = VegDetailDao.findPriceByName(vegName);
+					int price = VegDetailDAO.findPriceByName(vegName);
 					bill = (double) vegQuantity * (double) price;
 					eachVegBill.add(bill);
 				}
