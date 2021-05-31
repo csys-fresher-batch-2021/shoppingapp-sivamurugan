@@ -45,7 +45,6 @@ public class SalesDetailsDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.COMMON_ERROR_DB);
 		}
 
@@ -85,7 +84,6 @@ public class SalesDetailsDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.COMMON_ERROR_DB);
 		}
 
@@ -125,7 +123,6 @@ public class SalesDetailsDAO {
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.COMMON_ERROR_DB);
 		}
 
@@ -188,7 +185,6 @@ public class SalesDetailsDAO {
 				orderDetails.add(order);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.FIND_ORDER_ERROR);
 		}
 
@@ -240,7 +236,6 @@ public class SalesDetailsDAO {
 				orderItems.add(order);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.FIND_ORDER_ERROR);
 		}
 
@@ -306,7 +301,6 @@ public class SalesDetailsDAO {
 				orderDetails.add(order);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.FIND_ORDER_ERROR);
 		}
 
@@ -341,7 +335,6 @@ public class SalesDetailsDAO {
 			valid = true;
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.COMMON_ERROR_DB);
 		}
 
@@ -372,7 +365,6 @@ public class SalesDetailsDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.COMMON_ERROR_DB);
 		}
 
