@@ -49,7 +49,7 @@ public class SelectVegetablesServlet extends HttpServlet {
 		} catch (DBException | InvalidSelectionException | ServletException | IOException e) {
 			e.printStackTrace();
 		} catch(Exception e) {
-			String errorMessage = "Sorry You haven't selected any vegetables..! Select atleast one product to continue";
+			String errorMessage = "Sorry You haven't selected any vegetables..! Select atleast one vegetable to continue";
 			try {
 				response.sendRedirect("SelectVegetables.jsp?errorMessage=" + errorMessage);
 			} catch (IOException e1) {

@@ -55,7 +55,7 @@ public class SalesDetailDTO {
 	 * @return
 	 */
 	public static OrderDetail setOrderDetailsForDb(String username, double totalBill, Timestamp createdDateTime,
-			Date deliveryDate, String paymentMethod) {
+			Date deliveryDate, String paymentMethod, String deliveryAddress) {
 		// To create object for order details of user
 		OrderDetail orderDetail = new OrderDetail();
 
@@ -65,6 +65,7 @@ public class SalesDetailDTO {
 		orderDetail.setTotalBill(totalBill);
 		orderDetail.setPaymentMethod(paymentMethod);
 		orderDetail.setDeliveryDate(deliveryDate);
+		orderDetail.setAddress(deliveryAddress);
 
 		return orderDetail;
 	}

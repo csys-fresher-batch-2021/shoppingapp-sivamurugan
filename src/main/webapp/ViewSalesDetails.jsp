@@ -50,7 +50,7 @@
 				<figcaption>Sales Details</figcaption>
 				<table id="salesDetailsTable">
 					<tr>
-						<th scope="col">S.No</th>
+						<th scope="col">Order ID</th>
 						<th scope="col">Username</th>
 						<th scope="col">Vegetable</th>
 						<th scope="col">Quantity (Kg)</th>
@@ -78,7 +78,7 @@
 				<figcaption>Sales Details</figcaption>
 				<table id="salesDetailsTable">
 					<tr>
-						<th scope="col">S.No</th>
+						<th scope="col">Order ID</th>
 						<th scope="col">Username</th>
 						<th scope="col">Vegetable</th>
 						<th scope="col">Quantity (Kg)</th>
@@ -105,7 +105,7 @@
 				<figcaption>Sales Details</figcaption>
 				<table id="salesDetailsTable">
 					<tr>
-						<th scope="col">S.No</th>
+						<th scope="col">Order ID</th>
 						<th scope="col">Username</th>
 						<th scope="col">Vegetable</th>
 						<th scope="col">Quantity (Kg)</th>
@@ -131,7 +131,7 @@
 				<figcaption>Sales Details</figcaption>
 				<table id="salesDetailsTable">
 					<tr>
-						<th scope="col">S.No</th>
+						<th scope="col">Order ID</th>
 						<th scope="col">Username</th>
 						<th scope="col">Vegetable</th>
 						<th scope="col">Quantity (Kg)</th>
@@ -243,7 +243,7 @@ function writeAllData(salesList){
 		let date = orderDetails.createdDate.substring(0,12);
 		let orderItems = orderDetails.orderItems;
 		for(let vegetable of orderItems){
-			content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
+			content += "<tr><td>" + orderDetails.orderId + "</td><td>" + orderDetails.username +
 			"</td><td>" + vegetable.vegName + "</td><td>" + vegetable.quantity + 
 			"</td><td>" + vegetable.eachVegPrice + "</td><td>"  + date +
 			"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" +
@@ -312,7 +312,7 @@ function writeTableData(filtered){
 		let date = orderDetails.createdDate.substring(0,12);
 		let orderItems = orderDetails.orderItems;
 		for(let vegetable of orderItems){
-			content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
+			content += "<tr><td>" + orderDetails.orderId + "</td><td>" + orderDetails.username +
 			"</td><td>" + vegetable.vegName + "</td><td>" + vegetable.quantity + 
 			"</td><td>" + vegetable.eachVegPrice + "</td><td>"  + date +
 			"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" +
@@ -363,7 +363,7 @@ function writeOrdersByDate(filtered){
 		let date = orderDetails.createdDate.substring(0,12);
 		let orderItems = orderDetails.orderItems;
 		for(let vegetable of orderItems){
-			content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
+			content += "<tr><td>" + orderDetails.orderId + "</td><td>" + orderDetails.username +
 			"</td><td>" + vegetable.vegName + "</td><td>" + vegetable.quantity + 
 			"</td><td>" + vegetable.eachVegPrice + "</td><td>"  + date +
 			"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" +
@@ -476,7 +476,7 @@ function writeOrdersByDeliveryDate(filtered){
 		let date = orderDetails.createdDate.substring(0,12);
 		let orderItems = orderDetails.orderItems;
 		for(let vegetable of orderItems){
-			content += "<tr><td>" + i + "</td><td>" + orderDetails.username +
+			content += "<tr><td>" + orderDetails.orderId + "</td><td>" + orderDetails.username +
 			"</td><td>" + vegetable.vegName + "</td><td>" + vegetable.quantity + 
 			"</td><td>" + vegetable.eachVegPrice + "</td><td>"  + date +
 			"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" +

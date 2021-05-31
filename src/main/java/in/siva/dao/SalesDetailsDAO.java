@@ -68,7 +68,7 @@ public class SalesDetailsDAO {
 			// To Get the connection
 			connection = ConnectionUtil.getConnection();
 			// Query
-			String sql = "INSERT INTO order_details(username, total_bill, status, active, created_date, delivery_date, payment_method) VALUES(?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO order_details(username, total_bill, status, active, created_date, delivery_date, payment_method, address) VALUES(?,?,?,?,?,?,?,?)";
 
 			// To Execute
 			pst = connection.prepareStatement(sql);
@@ -80,6 +80,7 @@ public class SalesDetailsDAO {
 			pst.setTimestamp(5, order.getCreatedDate());
 			pst.setDate(6, order.getDeliveryDate());
 			pst.setString(7, order.getPaymentMethod());
+			pst.setString(8, order.getAddress());
 
 			pst.executeUpdate();
 
@@ -167,6 +168,7 @@ public class SalesDetailsDAO {
 				Timestamp createdDate = rs.getTimestamp(Constants.ORDERED_DATE);
 				Date deliveryDate = rs.getDate(Constants.DELIVERY_DATE);
 				String paymentMethod = rs.getString(Constants.PAYMENT_METHOD);
+				String address = rs.getString(Constants.ADDRESS);
 				String cancelReason = rs.getString(Constants.CANCEL_REASON);
 				
 				OrderDetail order = new OrderDetail();
@@ -180,14 +182,14 @@ public class SalesDetailsDAO {
 				order.setTotalBill(totalBill);
 				order.setUsername(username);
 				order.setOrderId(orderId);
-				order.setFeedback(cancelReason);
+				order.setAddress(address);
 				
 				
 				orderDetails.add(order);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DBException("Sorry! Unable to get order details");
+			throw new DBException(Constants.FIND_ORDER_ERROR);
 		}
 
 		finally {
@@ -239,7 +241,7 @@ public class SalesDetailsDAO {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DBException("Sorry! Unable to get sales details");
+			throw new DBException(Constants.FIND_ORDER_ERROR);
 		}
 
 		finally {
@@ -284,6 +286,7 @@ public class SalesDetailsDAO {
 				Timestamp createdDate = rs.getTimestamp(Constants.ORDERED_DATE);
 				Date deliveryDate = rs.getDate(Constants.DELIVERY_DATE);
 				String paymentMethod = rs.getString(Constants.PAYMENT_METHOD);
+				String address = rs.getString(Constants.ADDRESS);
 				String cancelReason = rs.getString(Constants.CANCEL_REASON);
 				
 				OrderDetail order = new OrderDetail();
@@ -297,13 +300,14 @@ public class SalesDetailsDAO {
 				order.setTotalBill(totalBill);
 				order.setUsername(username);
 				order.setOrderId(orderId);
+				order.setAddress(address);
 				
 				
 				orderDetails.add(order);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DBException("Sorry! Unable to get sales details");
+			throw new DBException(Constants.FIND_ORDER_ERROR);
 		}
 
 		finally {

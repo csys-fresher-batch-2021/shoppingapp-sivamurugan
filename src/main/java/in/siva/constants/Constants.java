@@ -18,7 +18,8 @@ public class Constants {
 	public static final String ORDERED_DATE = "created_date";
 	public static final String DELIVERY_DATE = "delivery_date";
 	public static final String PAYMENT_METHOD = "payment_method";
+	public static final String ADDRESS = "address";
 	public static final String CANCEL_REASON = "cancel_reason";
 	public static final String COMMON_ERROR_DB ="Something went wrong!";
-
+	public static final String FIND_ORDER_ERROR = "Sorry! Unable to get order details";
 }

@@ -37,12 +37,12 @@ public class OrderConfirmServlet extends HttpServlet {
 		// To get logged in username & billDetails
 		String username = (String) session.getAttribute("LOGGED_IN_USER");
 		String deliveryDate = request.getParameter("date");
-		
+		String address = request.getParameter("address");
 		String paymentMethod = request.getParameter("paymentMethod");
 		List<BillDetail> billDetails = (List<BillDetail>) session.getAttribute("billDetails");
 		try {
 			// To store purchase details
-			SalesService.storeOrderDetails(username, billDetails, paymentMethod, deliveryDate);
+			SalesService.storeOrderDetails(username, billDetails, paymentMethod, deliveryDate, address);
 			response.sendRedirect("OrderConfirmedPage.jsp");
 		} catch (DBException e) {
 			try {

@@ -105,7 +105,7 @@ public class UserDetailDAO {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DBException("Sorry! Unable to get ProductDetails");
+			throw new DBException("Sorry! Unable to get User details");
 		}
 
 		finally {

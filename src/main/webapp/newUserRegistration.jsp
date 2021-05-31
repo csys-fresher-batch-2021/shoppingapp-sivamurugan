@@ -27,11 +27,12 @@
 			<label for = "email">Email :</label>
 			<input type = "email" name = "email" placeholder = "Enter Email" required><br/>
 			
-			<label for = "username"> User-name :</label>	
+			<label for = "username"> Username :</label>
 			<input type = "text" name = "username" placeholder = "Enter Unique User-Name" required><br/>
 			
 			<label for = "password">Password :</label>
-			<input type = "password" name = "password" pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$" placeholder = "Enter Password" required><br/>
+			<input type = "password" name = "password" pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$" placeholder = "Enter Password" required>
+			<label>Must Contain ([a-z,A-Z,0-9][@#$%] Length should be more than 8)</label><br/>
 
 			<label for = "role">Role :</label>
 			<select name = "role" required>
