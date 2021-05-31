@@ -23,18 +23,17 @@ public class UserService {
 	 * This method is used to add user to the ArrayList
 	 * @param user
 	 * @throws DBException 
+	 * @throws UserRepeatedException 
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
-	public static void addUser(UserDetail user) throws DBException{
+	public static void addUser(UserDetail user) throws DBException, UserRepeatedException{
 		// Business Logic
 		if (UserValidator.isUserValid(user)) {
 			if (UserValidator.isUserNotRepeated(user)) {
 				UserDetail validUser = changeEmailToLowerCase(user);
 				UserDetailDAO.addUser(validUser);
-			} else {
-				throw new UserRepeatedException("Sorry! Some details you entered were already registered by a user");
-			}
+			} 
 		} else {
 			throw new UserInvalidException("Invalid User Details");
 		}
@@ -113,8 +112,9 @@ public class UserService {
 	 * @param username
 	 * @param newMobileNumber
 	 * @throws DBException 
+	 * @throws UserRepeatedException 
 	 */
-	public static void updateMobileNumber(long newMobileNumber, String username) throws DBException {
+	public static void updateMobileNumber(long newMobileNumber, String username) throws DBException, UserRepeatedException {
 		if(UserValidator.isUpdateMobileValid(newMobileNumber, username)) {
 			UserDetailDAO.updateMobile(newMobileNumber, username);
 		}
@@ -126,8 +126,9 @@ public class UserService {
 	 * @param newEmail
 	 * @param username
 	 * @throws DBException
+	 * @throws UserRepeatedException 
 	 */
-	public static void updateEmail(String newEmail, String username) throws DBException {
+	public static void updateEmail(String newEmail, String username) throws DBException, UserRepeatedException {
 		if(UserValidator.isUpdateEmailValid(newEmail, username)) {
 			UserDetailDAO.updateEmail(newEmail, username);
 		}

@@ -37,6 +37,8 @@ public class AddUserTest {
 			fail();
 		} catch (DBException e) {
 			fail();
+		} catch (UserRepeatedException e) {
+			fail();
 		}
 	}
 
@@ -63,6 +65,8 @@ public class AddUserTest {
 		} catch (UserInvalidException e) {
 			assertEquals("Invalid User Details", e.getMessage());
 		} catch (DBException e) {
+			fail();
+		} catch (UserRepeatedException e) {
 			fail();
 		}
 	}
@@ -92,6 +96,8 @@ public class AddUserTest {
 			assertEquals("Invalid User Details", e.getMessage());
 		} catch (DBException e) {
 			fail();
+		} catch (UserRepeatedException e) {
+			fail();
 		}
 	}
 
@@ -118,6 +124,8 @@ public class AddUserTest {
 		} catch (UserInvalidException e) {
 			assertEquals("Invalid User Details", e.getMessage());
 		} catch (DBException e) {
+			fail();
+		} catch (UserRepeatedException e) {
 			fail();
 		}
 	}
@@ -146,6 +154,8 @@ public class AddUserTest {
 			assertEquals("Invalid User Details", e.getMessage());
 		} catch (DBException e) {
 			fail();
+		} catch (UserRepeatedException e) {
+			fail();
 		}
 	}
 
@@ -172,6 +182,8 @@ public class AddUserTest {
 		} catch (UserInvalidException e) {
 			assertEquals("Invalid User Details", e.getMessage());
 		} catch (DBException e) {
+			fail();
+		} catch (UserRepeatedException e) {
 			fail();
 		}
 	}
@@ -200,6 +212,8 @@ public class AddUserTest {
 			assertEquals("Invalid User Details", e.getMessage());
 		} catch (DBException e) {
 			fail();
+		} catch (UserRepeatedException e) {
+			fail();
 		}
 	}
 
@@ -226,6 +240,8 @@ public class AddUserTest {
 		} catch (UserInvalidException e) {
 			assertEquals("Invalid User Details", e.getMessage());
 		} catch (DBException e) {
+			fail();
+		} catch (UserRepeatedException e) {
 			fail();
 		}
 	}
@@ -254,6 +270,8 @@ public class AddUserTest {
 			assertEquals("Invalid User Details", e.getMessage());
 		} catch (DBException e) {
 			fail();
+		} catch (UserRepeatedException e) {
+			fail();
 		}
 	}
 
@@ -280,7 +298,7 @@ public class AddUserTest {
 			fail();
 
 		} catch (UserRepeatedException e) {
-			assertEquals("Sorry! Some details you entered were already registered by a user", e.getMessage());
+			assertEquals("Sorry! This mobile number is already used by a user. Try another mobile number", e.getMessage());
 		} catch (DBException e) {
 			fail();
 		}
@@ -306,7 +324,7 @@ public class AddUserTest {
 		} catch (DBException e) {
 			fail();
 		} catch (UserRepeatedException e) {
-			assertEquals("Sorry! Some details you entered were already registered by a user", e.getMessage());
+			assertEquals("Sorry! This email is already used by a user. Try another email", e.getMessage());
 		}
 	}
 
@@ -331,7 +349,7 @@ public class AddUserTest {
 		} catch (DBException e) {
 			fail();
 		} catch (UserRepeatedException e) {
-			assertEquals("Sorry! Some details you entered were already registered by a user", e.getMessage());
+			assertEquals("Sorry! This username is already used by a user try another username", e.getMessage());
 		}
 	}
 

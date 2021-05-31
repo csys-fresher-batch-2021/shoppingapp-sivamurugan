@@ -185,4 +185,13 @@ public class SalesService {
 		
 		return valid;
 	}
+	
+	/**
+	 * This method is used to set order as expired if delivery date is past and order is not delivered
+	 * @throws DBException
+	 */
+	public static void updateExpiredOrder() throws DBException {
+		Timestamp dateTime = Timestamp.valueOf(getDateTime());
+		SalesDetailsDAO.updateExpired(dateTime);
+	}
 }

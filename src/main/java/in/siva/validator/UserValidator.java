@@ -42,21 +42,32 @@ public class UserValidator {
 	 * @param user
 	 * @return
 	 * @throws DBException
+	 * @throws UserRepeatedException 
 	 */
-	public static boolean isUserNotRepeated(UserDetail user) throws DBException {
+	public static boolean isUserNotRepeated(UserDetail user) throws DBException, UserRepeatedException {
 		// Declaration
-		boolean valid = true;
+		boolean valid = false;
 		// To get user details
 		List<UserDetail> userDetails = UserDetailDAO.getUserDetails();
 		// Business Logic
 		for (UserDetail userDetail : userDetails) {
-			if (user.getEmail().equalsIgnoreCase(userDetail.getEmail())
-					|| userDetail.getMobileNumber() == user.getMobileNumber()
-					|| user.getUsername().equals(userDetail.getUsername())) {
-				valid = false;
-				break;
-			}
+			if (!user.getEmail().equalsIgnoreCase(userDetail.getEmail())) {
+				if (userDetail.getMobileNumber() != user.getMobileNumber()) {
+					if (!user.getUsername().equals(userDetail.getUsername())) {
+						valid = true;
+					} else {
+						throw new UserRepeatedException(
+								"Sorry! This username is already used by a user try another username");
+					}
 
+				} else {
+					throw new UserRepeatedException(
+							"Sorry! This mobile number is already used by a user. Try another mobile number");
+				}
+
+			} else {
+				throw new UserRepeatedException("Sorry! This email is already used by a user. Try another email");
+			}
 		}
 		return valid;
 
@@ -102,25 +113,25 @@ public class UserValidator {
 
 		return isNotRepeated;
 	}
-	
+
 	/**
-	 * This method is used to check whether the email by user is already used by another user or not
-	 * If used it will return false
-	 * Else it will return true
+	 * This method is used to check whether the email by user is already used by
+	 * another user or not If used it will return false Else it will return true
+	 * 
 	 * @param email
 	 * @return
-	 * @throws DBException 
+	 * @throws DBException
 	 */
 	public static boolean isEmailNotRepeated(String email) throws DBException {
 		boolean isNotRepeated = true;
 		List<UserDetail> userDetails = UserDetailDAO.getUserDetails();
-		for(UserDetail user : userDetails) {
-			if(user.getEmail().equals(email)) {
+		for (UserDetail user : userDetails) {
+			if (user.getEmail().equals(email)) {
 				isNotRepeated = false;
 				break;
 			}
 		}
-		
+
 		return isNotRepeated;
 	}
 
@@ -151,8 +162,9 @@ public class UserValidator {
 	 * @param username
 	 * @return
 	 * @throws DBException
+	 * @throws UserRepeatedException 
 	 */
-	public static boolean isUpdateMobileValid(long newNumber, String username) throws DBException {
+	public static boolean isUpdateMobileValid(long newNumber, String username) throws DBException, UserRepeatedException {
 		boolean valid = false;
 		if (UtilValidator.isMobileValid(newNumber)) {
 			if (isMobileNotRepeated(newNumber)) {
@@ -171,20 +183,23 @@ public class UserValidator {
 
 		return valid;
 	}
-	
+
 	/**
-	 * This method is used to validate whether the email is valid to add in database or not
-	 * It will validate whether email is valid or not, email ID is repeated or not, username is available in db or not
+	 * This method is used to validate whether the email is valid to add in database
+	 * or not It will validate whether email is valid or not, email ID is repeated
+	 * or not, username is available in db or not
+	 * 
 	 * @param newEmail
 	 * @param username
 	 * @return
 	 * @throws DBException
+	 * @throws UserRepeatedException 
 	 */
-	public static boolean isUpdateEmailValid(String newEmail, String username) throws DBException {
+	public static boolean isUpdateEmailValid(String newEmail, String username) throws DBException, UserRepeatedException {
 		boolean valid = false;
-		if(UtilValidator.isEmailValid(newEmail)) {
-			if(isEmailNotRepeated(newEmail)) {
-				if(isUsernamePresent(username)) {
+		if (UtilValidator.isEmailValid(newEmail)) {
+			if (isEmailNotRepeated(newEmail)) {
+				if (isUsernamePresent(username)) {
 					valid = true;
 				} else {
 					throw new UserInvalidException("User not found");
@@ -193,9 +208,9 @@ public class UserValidator {
 				throw new UserRepeatedException("Email ID is already used by a user");
 			}
 		} else {
-			throw new UserInvalidException("Please enter valid email ID"); 
+			throw new UserInvalidException("Please enter valid email ID");
 		}
-		
+
 		return valid;
 	}
 }
