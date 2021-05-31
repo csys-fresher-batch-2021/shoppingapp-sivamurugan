@@ -6,6 +6,8 @@
 <html lang="en">
 <head>
 <title>Confirm Order</title>
+<style type="text/css">
+</style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -48,6 +50,8 @@
 		<form action="OrderConfirmServlet" method="post">
 			<label for="deliveryDate">Select Delivery Date :</label>
 			<input type="date" id="deliveryDate" name="date" required><br/><br/>
+			<label for="address">Address</label><br/>
+			<textarea id="address" name="address" rows="4" cols="50" required></textarea><br/><br/>
 			<label for="paymentMethod">Select Your Payment method:</label>
 			<select name="paymentMethod" required>
 				<option disabled>---SELECT---</option>

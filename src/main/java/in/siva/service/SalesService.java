@@ -90,13 +90,13 @@ public class SalesService {
 	 * @param billDetails
 	 * @throws DBException
 	 */
-	public static void storeOrderDetails(String username, List<BillDetail> billDetails, String paymentMethod, String deliveryDateStr)
+	public static void storeOrderDetails(String username, List<BillDetail> billDetails, String paymentMethod, String deliveryDateStr, String deliveryAddress)
 			throws DBException {
 		Timestamp createdDateTime = Timestamp.valueOf(getDateTime());
 		Date deliveryDate = Date.valueOf(deliveryDateStr);
 		double totalBill = getTotalBill(billDetails);
 		
-		OrderDetail orderDetails = SalesDetailDTO.setOrderDetailsForDb(username, totalBill, createdDateTime, deliveryDate, paymentMethod);
+		OrderDetail orderDetails = SalesDetailDTO.setOrderDetailsForDb(username, totalBill, createdDateTime, deliveryDate, paymentMethod, deliveryAddress);
 		
 		SalesDetailsDAO.saveOrderDetails(orderDetails);
 		Long orderId = SalesDetailsDAO.findOrderId(orderDetails);

@@ -32,11 +32,11 @@ public class VegetableService {
 			if (VegetableValidator.isVegNotRepeated(validVeg.getName())) {
 				VegDetailDAO.saveVeg(validVeg);
 			} else {
-				throw new VegInvalidException("Product Already Exists");
+				throw new VegInvalidException("Vegetable Already Exists");
 			}
 
 		} else {
-			throw new VegInvalidException("Invalid Product Details");
+			throw new VegInvalidException("Vegetable Product Details");
 		}
 	}
 
@@ -53,7 +53,7 @@ public class VegetableService {
 		if (VegetableValidator.isVegMatches(vegName)) {
 			VegDetailDAO.deleteVegByName(vegName);
 		} else {
-			throw new VegInvalidException("Invalid Product Name");
+			throw new VegInvalidException("Invalid Vegetable Name");
 		}
 	}
 

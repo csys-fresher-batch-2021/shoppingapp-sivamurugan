@@ -56,20 +56,26 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid"></main>
 	<strong>Note :</strong><p>This page only contains today's pending deliveries</p>
-	<figure>
-		<figcaption>Today's Deliveries</figcaption>
 		<%
 		List<OrderDetail> orderDetails = (List<OrderDetail>) request.getAttribute("orderDetailsForDelivery");
-		int i = 1;
-		int j = 1;
-		for (OrderDetail order : orderDetails) {
+		if(orderDetails.isEmpty()){
 		%>
+		<h4>No Deliveries Available</h4>	
+		<%
+		} else{
+			int i = 1;
+			int j = 1;
+			for (OrderDetail order : orderDetails) {
+		%>
+		<figure>
+		<figcaption>Today's Deliveries</figcaption>
 		<table class="overview">
 			<thead>
 				<tr>
 					<th scope="col">S.No</th>
 					<th scope="col">Username</th>
 					<th scope="col">Total Bill (Rs)</th>
+					<th scope="col">Address</th>
 					<th scope="col">Options</th>
 				</tr>
 			</thead>
@@ -78,6 +84,7 @@
 					<td><%=j%></td>
 					<td><%=order.getUsername()%></td>
 					<td><%=order.getTotalBill()%></td>
+					<td><%=order.getAddress() %></td>
 					<td><button class="btn btn-success"
 							onclick="delivered(<%=order.getOrderId()%>)">Deliver</button>
 						<button class="btn btn-danger"
@@ -85,7 +92,6 @@
 				</tr>
 				<br />
 				<br />
-				<figure><figcaption>Vegetables</figcaption>
 				<table class="vegDetails">
 					<thead>
 						<tr>
@@ -113,10 +119,10 @@
 						}
 						j++;
 						}
+		}
 						%>
 					</tbody>
 				</table>
-				</figure>
 			</tbody>
 		</table>
 	</figure>

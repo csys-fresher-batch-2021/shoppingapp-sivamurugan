@@ -15,6 +15,7 @@ public class OrderDetail {
 	private List<OrderItem> orderItems;
 	private Date deliveryDate;
 	private String paymentMethod;
+	private String address;
 	
 	public long getOrderId() {
 		return orderId;
@@ -75,6 +76,12 @@ public class OrderDetail {
 	}
 	public void setPaymentMethod(String paymentMethod) {
 		this.paymentMethod = paymentMethod;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	
