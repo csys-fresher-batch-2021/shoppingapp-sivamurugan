@@ -46,7 +46,6 @@ public class UserDetailDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Sorry! Something went wrong, Unable to create account");
 		}
 
@@ -104,7 +103,6 @@ public class UserDetailDAO {
 				userDetails.add(user);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Sorry! Unable to get User details");
 		}
 
@@ -138,7 +136,6 @@ public class UserDetailDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Sorry! Unable to remove user.. Try Again!");
 
 		}
@@ -176,7 +173,6 @@ public class UserDetailDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Sorry! Unable to update name");
 		}
 
@@ -211,7 +207,6 @@ public class UserDetailDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Sorry! Unable to update mobile Number");
 		}
 
@@ -245,7 +240,6 @@ public class UserDetailDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Sorry! Unable to update Email address");
 		}
 
@@ -283,7 +277,6 @@ public class UserDetailDAO {
 				 role = rs.getString("role");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Sorry! Something went wrong");
 		}
 

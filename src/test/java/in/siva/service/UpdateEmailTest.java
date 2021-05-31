@@ -12,9 +12,10 @@ public class UpdateEmailTest {
 
 	/**
 	 * This method has valid email details so details added in DB
+	 * @throws UserRepeatedException 
 	 */
 	@Test
-	public void validEmailUpdateTest() {
+	public void validEmailUpdateTest() throws UserRepeatedException {
 		String newEmail = "kannankaran98@gmail.com"; 
 		String username = "Karan";
 		try {

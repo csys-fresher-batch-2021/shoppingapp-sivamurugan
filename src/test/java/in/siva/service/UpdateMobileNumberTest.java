@@ -12,9 +12,10 @@ public class UpdateMobileNumberTest {
 	/**
 	 * This test case's username is present in db so it will update the user's
 	 * mobile number
+	 * @throws UserRepeatedException 
 	 */
 	@Test
-	public void validMobileNumberUpdateTest() {
+	public void validMobileNumberUpdateTest() throws UserRepeatedException {
 		long newMobile = 8765789876L; 
 		String username = "Karan";
 		try {
@@ -27,9 +28,10 @@ public class UpdateMobileNumberTest {
 	
 	/**
 	 * This test case has invalid username so user not found message is returned
+	 * @throws UserRepeatedException 
 	 */
 	@Test
-	public void invalidMobileNumberUpdateTest() {
+	public void invalidMobileNumberUpdateTest() throws UserRepeatedException {
 		long newMobile = 8989898989L; 
 		String username = "Invalid";
 		try {
@@ -44,9 +46,10 @@ public class UpdateMobileNumberTest {
 	
 	/**
 	 * This test case has only 9 digits as number so invalid mobile number message
+	 * @throws UserRepeatedException 
 	 */
 	@Test
-	public void invalidMobileLengthTest() {
+	public void invalidMobileLengthTest() throws UserRepeatedException {
 		long newMobile = 876578987L; 
 		String username = "Karan";
 		try {

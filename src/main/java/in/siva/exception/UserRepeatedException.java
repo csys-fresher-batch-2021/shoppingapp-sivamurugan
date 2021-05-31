@@ -1,6 +1,6 @@
 package in.siva.exception;
 
-public class UserRepeatedException extends RuntimeException {
+public class UserRepeatedException extends Exception {
 	/**
 	 * This method is used to raise user repeated exception
 	 */

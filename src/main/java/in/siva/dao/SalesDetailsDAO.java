@@ -45,7 +45,6 @@ public class SalesDetailsDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.COMMON_ERROR_DB);
 		}
 
@@ -85,7 +84,6 @@ public class SalesDetailsDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.COMMON_ERROR_DB);
 		}
 
@@ -125,7 +123,6 @@ public class SalesDetailsDAO {
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.COMMON_ERROR_DB);
 		}
 
@@ -188,7 +185,6 @@ public class SalesDetailsDAO {
 				orderDetails.add(order);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.FIND_ORDER_ERROR);
 		}
 
@@ -240,7 +236,6 @@ public class SalesDetailsDAO {
 				orderItems.add(order);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.FIND_ORDER_ERROR);
 		}
 
@@ -306,7 +301,6 @@ public class SalesDetailsDAO {
 				orderDetails.add(order);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.FIND_ORDER_ERROR);
 		}
 
@@ -341,7 +335,6 @@ public class SalesDetailsDAO {
 			valid = true;
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException(Constants.COMMON_ERROR_DB);
 		}
 
@@ -350,6 +343,35 @@ public class SalesDetailsDAO {
 			ConnectionUtil.close(pst, connection);
 		}
 		return valid;
+	}
+	
+	/**
+	 * This method is used to set order as expired if delivery date is past and status is "pending"
+	 * @param currentDate
+	 * @throws DBException
+	 */
+	public static void updateExpired(Timestamp currentDate) throws DBException {
+		Connection connection = null;
+		PreparedStatement pst = null;
+		
+		try {
+			// To Get the connection
+			connection = ConnectionUtil.getConnection();
+			
+			String sql = "UPDATE order_details SET status='EXPIRED' WHERE delivery_date < ? and status = 'PENDING'";
+			
+			pst = connection.prepareStatement(sql);
+			pst.setTimestamp(1, currentDate);
+			pst.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new DBException(Constants.COMMON_ERROR_DB);
+		}
+
+		finally {
+			// Release the connection
+			ConnectionUtil.close(pst, connection);
+		}
 	}
 	
 }

@@ -41,7 +41,6 @@ public class VegDetailDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Something went wrong! Unable to add Vegetable");
 		}
 
@@ -89,7 +88,6 @@ public class VegDetailDAO {
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Something went Wrong! Unable to get Vegetable Details");
 		} finally {
 			// Close connection between java and db
@@ -122,7 +120,6 @@ public class VegDetailDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Something went wrong! Unable to remove vegetable");
 		} finally {
 			// Release the connection
@@ -156,7 +153,6 @@ public class VegDetailDAO {
 				price = rs.getInt("price");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Something went wrong! Unable to get price");
 		} finally {
 			// Release the connection
@@ -191,7 +187,6 @@ public class VegDetailDAO {
 				quantity = rs.getInt("quantity");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Something went wrong! Unable to get stock quantity");
 		} finally {
 			// Release the connection
@@ -224,7 +219,6 @@ public class VegDetailDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Sorry! Something went wrong.. Unable to update stock");
 		}
 
