@@ -28,9 +28,10 @@ public class UpdateMobileNumberTest {
 	
 	/**
 	 * This test case has invalid username so user not found message is returned
+	 * @throws UserRepeatedException 
 	 */
 	@Test
-	public void invalidMobileNumberUpdateTest() {
+	public void invalidMobileNumberUpdateTest() throws UserRepeatedException {
 		long newMobile = 8989898989L; 
 		String username = "Invalid";
 		try {

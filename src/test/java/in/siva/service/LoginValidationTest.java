@@ -2,7 +2,6 @@ package in.siva.service;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import in.siva.constants.Constants;
 import in.siva.exception.DBException;
 import in.siva.exception.InvalidLoginException;
 

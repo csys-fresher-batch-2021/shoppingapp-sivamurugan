@@ -5,6 +5,7 @@ import org.junit.Test;
 import in.siva.constants.Constants;
 import in.siva.exception.DBException;
 import in.siva.exception.UserInvalidException;
+import in.siva.exception.UserRepeatedException;
 import in.siva.model.UserDetail;
 
 public class RemoveAccountTest {
@@ -26,7 +27,7 @@ public class RemoveAccountTest {
 		
 		try {
 			UserService.addUser(user);
-		} catch (DBException e) {
+		} catch (DBException | UserRepeatedException e) {
 			fail();
 		}
 	}
