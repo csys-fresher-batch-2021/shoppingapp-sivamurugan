@@ -5,7 +5,7 @@
 <style>
 #left {
 	float: left;
-	width: 30%;
+	width: 40%;
 	background: #ddd;
 	padding: 20px;
 }
@@ -18,7 +18,7 @@
 }
 
 #table {
-	float:right;
+	float: right;
 	font-family: Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
 	width: 100%;
@@ -51,10 +51,10 @@
 	<main class="container-fluid">
 		<section id="left">
 			<label for="username">Enter Username :</label> <input type="text"
-				id="username" placeholder="Enter Username"
-				onchange="searchOrders(<%=1%>)" required><br /> <label
-				for="orderDate">Order Date :</label> <input type="date" id="date"
-				required>
+				id="username" placeholder="Enter Username" required>
+			<button onclick="searchOrders(<%=1%>)" class="btn btn-info">Search</button>
+			<br /> <label for="orderDate">Order Date :</label> <input
+				type="date" id="date" required>
 			<button class="btn btn-info" onclick="searchOrders(<%=2%>)">Search</button>
 			<br /> <label for="deliveryDate">Delivery Date :</label> <input
 				type="date" id="deliveryDate" required>
@@ -147,7 +147,7 @@
 		for(let orderDetails of filtered){
 			console.log(filtered.length);
 			if(filtered.length != 0){
-				let time = orderDetails.createdDate.substring(13,24);
+				let time = orderDetails.createdDate.substring(12,24);
 				let date = orderDetails.createdDate.substring(0,12);
 				let orderItems = orderDetails.orderItems;
 				for(let vegetable of orderItems){
