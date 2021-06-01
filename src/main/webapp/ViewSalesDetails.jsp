@@ -66,7 +66,8 @@
 			<input type="radio" id="sort" name="sort" value="canceled"> <label
 				for="canceled">Canceled</label><br /> <input type="radio" id="sort"
 				name="sort" value="expired"> <label for="expired">Expired</label><br />
-			<button class="btn btn-success" onclick="sortByStatus()">Search</button>
+			<button class="btn btn-success" onclick="sortByStatus()">Search</button><br/>
+			<button class="btn btn-danger" onclick="searchOrders(<%=4%>)">View All</button>
 		</section>
 		<section id="right">
 			<p>All details are sorted according to latest orders</p>
@@ -127,25 +128,31 @@
 			let value;
 			if(i==1){
 				value = document.querySelector("#username").value;
-				filtered = salesList.filter(s => String(s.username).startsWith(value));
-				writeTableContent(value, filtered);
+				if(value.length == 0){
+					alert("Please enter username");
+					window.location.reload();
+				} else{
+					filtered = salesList.filter(s => String(s.username).startsWith(value));
+					writeTableContent(filtered);
+				}
 			} else if(i==2){
 				value = document.querySelector("#date").value;
 				filtered = salesList.filter(s => String(convertToDate(s.createdDate)).startsWith(value));
-				writeTableContent(value, filtered);
+				writeTableContent(filtered);
 			} else if(i==3){
 				value = document.querySelector("#deliveryDate").value;
 				filtered = salesList.filter(s => String(convertDate(s.deliveryDate)).startsWith(value));
-				writeTableContent(value, filtered);
+				writeTableContent(filtered);
+			} else if(i==4){
+				writeTableContent(salesList);
 			}
 			
 		});
 	}
 	
-	function writeTableContent(value, filtered){
+	function writeTableContent(filtered){
 		let content = "";
 		for(let orderDetails of filtered){
-			console.log(filtered.length);
 			if(filtered.length != 0){
 				let time = orderDetails.createdDate.substring(12,24);
 				let date = orderDetails.createdDate.substring(0,12);
