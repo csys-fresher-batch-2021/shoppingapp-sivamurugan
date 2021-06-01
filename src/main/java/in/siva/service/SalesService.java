@@ -21,7 +21,6 @@ import in.siva.model.OrderItem;
 import in.siva.util.DateTimeUtil;
 import in.siva.validator.BillValidator;
 import in.siva.validator.UserValidator;
-import in.siva.validator.UtilValidator;
 import in.siva.validator.VegetableValidator;
 
 public class SalesService {
@@ -230,11 +229,6 @@ public class SalesService {
 		} else {
 			throw new UserInvalidException("Please Login to see Your order details");
 		}
-		System.out.println(orderDetailsForOutput);
 		return orderDetailsForOutput;
-	}
-	
-	public static void main(String[] args) throws DBException, EmptyOrderException {
-		System.out.println(getMyOrders("rakas"));
 	}
 }
