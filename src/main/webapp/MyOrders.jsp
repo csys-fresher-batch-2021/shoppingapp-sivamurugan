@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <%@page import="in.siva.model.OrderItem"%>
-<%@page import="java.util.List"%>
 <%@page import="in.siva.model.OrderDetail"%>
+<%@page import="java.util.List"%>
 <html lang="en">
 <head>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<title>Sell Vegetables</title>
+<title>Vegetable Shopping App</title>
 <style>
 .overview th {
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: left;
-	background-color: #0EAD9D;
+	background-color: #F2AE4D;
 	color: white;
 }
 
@@ -55,27 +53,25 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid"></main>
-	<strong>Note :</strong><p>This page only contains today's pending deliveries</p>
-		<%
-		List<OrderDetail> orderDetails = (List<OrderDetail>) request.getAttribute("orderDetailsForDelivery");
-		if(orderDetails.isEmpty()){
-		%>
-		<h4>No Deliveries Available</h4>	
-		<%
-		} else{
-			int j = 1;
-			for (OrderDetail order : orderDetails) {
-		%>
-		<figure>
-		<figcaption>Today's Deliveries</figcaption>
+	<%
+	List<OrderDetail> orderDetails = (List<OrderDetail>) request.getAttribute("myOrders");
+	if (orderDetails == null) {
+	%>
+	<h4>Sorry! Your orders is empty.</h4>
+	<%
+	} else {
+		int j=1;
+		for (OrderDetail order : orderDetails) {
+	%>
+	<figure>
+		<figcaption>Your Orders</figcaption>
 		<table class="overview">
 			<thead>
 				<tr>
 					<th scope="col">S.No</th>
 					<th scope="col">Username</th>
 					<th scope="col">Total Bill (Rs)</th>
-					<th scope="col">Address</th>
-					<th scope="col">Options</th>
+					<th scope="col">Status</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -83,11 +79,7 @@
 					<td><%=j%></td>
 					<td><%=order.getUsername()%></td>
 					<td><%=order.getTotalBill()%></td>
-					<td><%=order.getAddress() %></td>
-					<td><button class="btn btn-success"
-							onclick="delivered(<%=order.getOrderId()%>)">Deliver</button>
-						<button class="btn btn-danger"
-							onclick="canceled(<%=order.getOrderId()%>)">Cancel</button>
+					<td><%=order.getStatus()%></td>
 				</tr>
 				<br />
 				<br />
@@ -119,7 +111,7 @@
 						}
 						j++;
 						}
-		}
+						}
 						%>
 					</tbody>
 				</table>
@@ -127,47 +119,4 @@
 		</table>
 	</figure>
 </body>
-<script>
-	function delivered(orderId){
-		event.preventDefault();
-		let value = confirm("Did you delivered vegetables to this destination?");
-		if(value){
-			let url = "DeliveredServlet?orderId=" + orderId;
-			axios.get(url).then(res=> {
-			
-				let result = res.data;
-				if(result){
-					alert("Successful");
-					window.location.reload();
-				}
-				else{
-					alert("Sorry Unable to confirm");
-				}
-			});
-		} else{
-			window.location.reload();
-		}
-	}
-	
-	function canceled(orderId){
-		event.preventDefault();
-		let value = confirm("Is this user canceled order?");
-		if(value){
-			let url = "CanceledServlet?orderId=" + orderId;
-			axios.get(url).then(res=> {
-			
-				let result = res.data;
-				if(result){
-					alert("Successful");
-					window.location.reload();
-				}
-				else{
-					alert("Sorry Unable to confirm");
-				}
-			});
-		} else{
-			window.location.reload();
-		}
-	}
-</script>
 </html>
