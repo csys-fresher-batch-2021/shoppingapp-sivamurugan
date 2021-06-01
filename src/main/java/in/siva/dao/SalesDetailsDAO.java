@@ -374,4 +374,67 @@ public class SalesDetailsDAO {
 		}
 	}
 	
+	/**
+	 * This method is used to get order details of a specific person
+	 * It will filter by username
+	 * @param username
+	 * @return
+	 * @throws DBException 
+	 */
+	public static List<OrderDetail> findOrdersByUsername(String username) throws DBException {
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		List<OrderDetail> orderDetails;
+		try {
+			orderDetails = new ArrayList<>();
+			// To establish connection
+			con = ConnectionUtil.getConnection();
+
+			// SQl commands
+			String sql = "SELECT * FROM order_details WHERE username = ? ORDER BY  delivery_date DESC";
+
+			// Execute query
+			pst = con.prepareStatement(sql);
+			pst.setString(1, username);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				Long orderId = rs.getLong(Constants.ORDER_ID);
+				Double totalBill = rs.getDouble(Constants.TOTAL_BILL);
+				String status = rs.getString(Constants.STATUS);
+				Boolean active = rs.getBoolean(Constants.ACTIVE);
+				Timestamp createdDate = rs.getTimestamp(Constants.ORDERED_DATE);
+				Date deliveryDate = rs.getDate(Constants.DELIVERY_DATE);
+				String paymentMethod = rs.getString(Constants.PAYMENT_METHOD);
+				String address = rs.getString(Constants.ADDRESS);
+				String cancelReason = rs.getString(Constants.CANCEL_REASON);
+				
+				OrderDetail order = new OrderDetail();
+				
+				order.setActive(active);
+				order.setCreatedDate(createdDate);
+				order.setDeliveryDate(deliveryDate);
+				order.setFeedback(cancelReason);
+				order.setPaymentMethod(paymentMethod);
+				order.setStatus(status);
+				order.setTotalBill(totalBill);
+				order.setUsername(username);
+				order.setOrderId(orderId);
+				order.setAddress(address);
+				
+				
+				orderDetails.add(order);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new DBException(Constants.FIND_ORDER_ERROR);
+		}
+
+		finally {
+			// Close connection between java and db
+			ConnectionUtil.close(rs, pst, con);
+		}
+		return orderDetails;
+	}
+	
 }

@@ -220,7 +220,7 @@
             		val = radio[i].value;
             		value = val.toLocaleUpperCase();
             		filtered = salesList.filter(s => String(s.status).startsWith(value));
-            		writeTableContent(value, filtered);
+            		writeTableContent(filtered);
             	}
         	}
 		});

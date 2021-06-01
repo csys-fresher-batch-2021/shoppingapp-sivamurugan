@@ -46,6 +46,8 @@ String role = (String) session.getAttribute("ROLE");
 						Profile</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="SelectVegetables.jsp">Buy Vegetables</a></li>
+					<li class="nav-item"><a class="nav-link"
+					href="MyOrdersServlet">My Orders</a></li>
 				<%} %>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="dropdownId"

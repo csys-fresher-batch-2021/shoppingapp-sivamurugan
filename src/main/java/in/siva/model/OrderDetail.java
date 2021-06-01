@@ -5,6 +5,13 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class OrderDetail {
+	@Override
+	public String toString() {
+		return "OrderDetail [orderId=" + orderId + ", username=" + username + ", totalBill=" + totalBill + ", status="
+				+ status + ", active=" + active + ", createdDate=" + createdDate + ", feedback=" + feedback
+				+ ", orderItems=" + orderItems + ", deliveryDate=" + deliveryDate + ", paymentMethod=" + paymentMethod
+				+ ", address=" + address + "]";
+	}
 	private long orderId;
 	private String username;
 	private double totalBill;

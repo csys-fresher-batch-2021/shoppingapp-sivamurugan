@@ -1,6 +1,11 @@
 package in.siva.model;
 
 public class OrderItem {
+	@Override
+	public String toString() {
+		return "OrderItem [orderId=" + orderId + ", vegName=" + vegName + ", price=" + price + ", quantity=" + quantity
+				+ ", eachVegPrice=" + eachVegPrice + "]";
+	}
 	private long orderId;
 	private String vegName;
 	private double price;
