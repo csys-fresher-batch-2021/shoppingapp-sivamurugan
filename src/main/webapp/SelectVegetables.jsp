@@ -26,6 +26,33 @@ input[type=number]::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield;
 }
+
+.selectVeg th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #79A814;
+	color: white;
+}
+
+.selectVeg {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.selectVeg td, #selectVeg th {
+	border: 2px solid #ddd;
+	padding: 8px;
+}
+
+.selectVeg tr {
+	background-color: #F1EEEE;
+}
+
+.selectVeg tr:hover {
+	background-color: #ddd;
+}
 </style>
 </head>
 <body>
@@ -33,8 +60,8 @@ input[type=number] {
 	<main class="container-fluid">
 		<form action="SelectVegetablesServlet" method="post">
 			<figure>
-				<figcaption>Select Vegetables And Enter Quantity</figcaption>
-				<table class="table table-bordered">
+				<figcaption>Select Vegetables And Enter Quantity</figcaption><br/>
+				<table class="selectVeg">
 					<tr>
 						<th scope="col">Name</th>
 						<th scope="col">Price</th>
