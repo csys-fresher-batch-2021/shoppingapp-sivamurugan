@@ -81,11 +81,11 @@ String role = (String) session.getAttribute("ROLE");
 	// Scriplets (Java Code)
 	String infoMessage = request.getParameter("infoMessage");
 	if(infoMessage != null){
-		out.println("<font color='green'>" + infoMessage + "</font>");
+		out.println("<h6 style='color:white; background-color:#32C617;'>" + infoMessage + "</h6>");
 	}
 	
 	String errorMessage = request.getParameter("errorMessage");
 	if(errorMessage != null){
-		out.println("<font color='red'>" + errorMessage + "</font>");
+		out.println("<h6 style='color:white; background-color:red;'>" + errorMessage + "</h6>");
 	}
 %>

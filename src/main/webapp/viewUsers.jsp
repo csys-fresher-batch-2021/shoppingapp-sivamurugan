@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<%@page import="java.util.List"%>
 <html lang="en">
 <head>
 <title>View Users</title>
