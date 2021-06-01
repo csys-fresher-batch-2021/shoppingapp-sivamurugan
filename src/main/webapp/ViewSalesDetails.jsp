@@ -5,7 +5,7 @@
 <style>
 #left {
 	float: left;
-	width: 30%;
+	width: 40%;
 	background: #ddd;
 	padding: 20px;
 }
@@ -18,7 +18,7 @@
 }
 
 #table {
-	float:right;
+	float: right;
 	font-family: Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
 	width: 100%;
@@ -51,10 +51,10 @@
 	<main class="container-fluid">
 		<section id="left">
 			<label for="username">Enter Username :</label> <input type="text"
-				id="username" placeholder="Enter Username"
-				onchange="searchOrders(<%=1%>)" required><br /> <label
-				for="orderDate">Order Date :</label> <input type="date" id="date"
-				required>
+				id="username" placeholder="Enter Username" required>
+			<button onclick="searchOrders(<%=1%>)" class="btn btn-info">Search</button>
+			<br /> <label for="orderDate">Order Date :</label> <input
+				type="date" id="date" required>
 			<button class="btn btn-info" onclick="searchOrders(<%=2%>)">Search</button>
 			<br /> <label for="deliveryDate">Delivery Date :</label> <input
 				type="date" id="deliveryDate" required>
@@ -67,6 +67,9 @@
 				for="canceled">Canceled</label><br /> <input type="radio" id="sort"
 				name="sort" value="expired"> <label for="expired">Expired</label><br />
 			<button class="btn btn-success" onclick="sortByStatus()">Search</button>
+			<br />
+			<button class="btn btn-danger" onclick="searchOrders(<%=4%>)">View
+				All</button>
 		</section>
 		<section id="right">
 			<p>All details are sorted according to latest orders</p>
@@ -99,7 +102,10 @@
 <script type="text/javascript">
 	// Calling setDate to set value & max of date field initially
 	setDate();
-
+	
+	/**
+	* This method is used to set date  values in page in default
+	*/
 	function setDate() {
 		let date = new Date();
 		let currentDate = date.toJSON().substring(0, 10);
@@ -119,6 +125,9 @@
 		document.querySelector("#deliveryDate").setAttribute('max', maxDateStr);
 	}
 	
+	/**
+	* This method is called when user clicks search button It will filter records according to their selection
+	*/
 	function searchOrders(i){
 		let url = "SalesDetailsServlet";
 		fetch(url).then(res=> res.json()).then(res=>{
@@ -127,27 +136,36 @@
 			let value;
 			if(i==1){
 				value = document.querySelector("#username").value;
-				filtered = salesList.filter(s => String(s.username).startsWith(value));
-				writeTableContent(value, filtered);
+				if(value.length == 0){
+					alert("Please enter username");
+					window.location.reload();
+				} else{
+					filtered = salesList.filter(s => String(s.username).startsWith(value));
+					writeTableContent(filtered);
+				}
 			} else if(i==2){
 				value = document.querySelector("#date").value;
 				filtered = salesList.filter(s => String(convertToDate(s.createdDate)).startsWith(value));
-				writeTableContent(value, filtered);
+				writeTableContent(filtered);
 			} else if(i==3){
 				value = document.querySelector("#deliveryDate").value;
 				filtered = salesList.filter(s => String(convertDate(s.deliveryDate)).startsWith(value));
-				writeTableContent(value, filtered);
+				writeTableContent(filtered);
+			} else if(i==4){
+				writeTableContent(salesList);
 			}
 			
 		});
 	}
 	
-	function writeTableContent(value, filtered){
+	/**
+	* This method is used to write content in table according to filtered orders
+	*/
+	function writeTableContent(filtered){
 		let content = "";
 		for(let orderDetails of filtered){
-			console.log(filtered.length);
 			if(filtered.length != 0){
-				let time = orderDetails.createdDate.substring(13,24);
+				let time = orderDetails.createdDate.substring(12,24);
 				let date = orderDetails.createdDate.substring(0,12);
 				let orderItems = orderDetails.orderItems;
 				for(let vegetable of orderItems){
@@ -165,6 +183,9 @@
 		document.querySelector("#tableBody").innerHTML = content;
 	}
 	
+	/**
+	* This method is used to convert java date with time into javascript date with time
+	*/
 	function convertToDate(dateTime){
 		let parseDate = Date.parse(dateTime);
 		let jsDateTime = new Date(parseDate);
@@ -172,6 +193,9 @@
 		return jsDate;
 	}
 	
+	/**
+	* This method is used to convert java date into javascript date
+	*/
 	function convertDate(deliveryDate){
 		let parseDate = Date.parse(deliveryDate);
 		let jsDateTime = new Date(parseDate);
@@ -181,6 +205,9 @@
 		return jsDate;
 	}
 	
+	/**
+	* This method is used to filter orders by status
+	*/
 	function sortByStatus(){
 		let url = "SalesDetailsServlet";
 		fetch(url).then(res=> res.json()).then(res=>{

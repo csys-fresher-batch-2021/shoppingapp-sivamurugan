@@ -191,7 +191,7 @@ public class SalesService {
 	 * @throws DBException
 	 */
 	public static void updateExpiredOrder() throws DBException {
-		Timestamp dateTime = Timestamp.valueOf(getDateTime());
+		Timestamp dateTime = Timestamp.valueOf(DateTimeUtil.getPreviousDate());
 		SalesDetailsDAO.updateExpired(dateTime);
 	}
 }

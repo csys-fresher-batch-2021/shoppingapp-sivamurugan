@@ -347,10 +347,10 @@ public class SalesDetailsDAO {
 	
 	/**
 	 * This method is used to set order as expired if delivery date is past and status is "pending"
-	 * @param currentDate
+	 * @param previousDate
 	 * @throws DBException
 	 */
-	public static void updateExpired(Timestamp currentDate) throws DBException {
+	public static void updateExpired(Timestamp previousDate) throws DBException {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		
@@ -361,7 +361,7 @@ public class SalesDetailsDAO {
 			String sql = "UPDATE order_details SET status='EXPIRED' WHERE delivery_date < ? and status = 'PENDING'";
 			
 			pst = connection.prepareStatement(sql);
-			pst.setTimestamp(1, currentDate);
+			pst.setTimestamp(1, previousDate);
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
