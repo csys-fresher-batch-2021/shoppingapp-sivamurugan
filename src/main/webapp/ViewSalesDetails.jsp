@@ -66,8 +66,10 @@
 			<input type="radio" id="sort" name="sort" value="canceled"> <label
 				for="canceled">Canceled</label><br /> <input type="radio" id="sort"
 				name="sort" value="expired"> <label for="expired">Expired</label><br />
-			<button class="btn btn-success" onclick="sortByStatus()">Search</button><br/>
-			<button class="btn btn-danger" onclick="searchOrders(<%=4%>)">View All</button>
+			<button class="btn btn-success" onclick="sortByStatus()">Search</button>
+			<br />
+			<button class="btn btn-danger" onclick="searchOrders(<%=4%>)">View
+				All</button>
 		</section>
 		<section id="right">
 			<p>All details are sorted according to latest orders</p>
@@ -100,7 +102,10 @@
 <script type="text/javascript">
 	// Calling setDate to set value & max of date field initially
 	setDate();
-
+	
+	/**
+	* This method is used to set date  values in page in default
+	*/
 	function setDate() {
 		let date = new Date();
 		let currentDate = date.toJSON().substring(0, 10);
@@ -120,6 +125,9 @@
 		document.querySelector("#deliveryDate").setAttribute('max', maxDateStr);
 	}
 	
+	/**
+	* This method is called when user clicks search button It will filter records according to their selection
+	*/
 	function searchOrders(i){
 		let url = "SalesDetailsServlet";
 		fetch(url).then(res=> res.json()).then(res=>{
@@ -150,6 +158,9 @@
 		});
 	}
 	
+	/**
+	* This method is used to write content in table according to filtered orders
+	*/
 	function writeTableContent(filtered){
 		let content = "";
 		for(let orderDetails of filtered){
@@ -172,6 +183,9 @@
 		document.querySelector("#tableBody").innerHTML = content;
 	}
 	
+	/**
+	* This method is used to convert java date with time into javascript date with time
+	*/
 	function convertToDate(dateTime){
 		let parseDate = Date.parse(dateTime);
 		let jsDateTime = new Date(parseDate);
@@ -179,6 +193,9 @@
 		return jsDate;
 	}
 	
+	/**
+	* This method is used to convert java date into javascript date
+	*/
 	function convertDate(deliveryDate){
 		let parseDate = Date.parse(deliveryDate);
 		let jsDateTime = new Date(parseDate);
@@ -188,6 +205,9 @@
 		return jsDate;
 	}
 	
+	/**
+	* This method is used to filter orders by status
+	*/
 	function sortByStatus(){
 		let url = "SalesDetailsServlet";
 		fetch(url).then(res=> res.json()).then(res=>{

@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class DateTimeUtil {
-	private static final long MILLIS_IN_A_DAY = 1000 * 60 * 60 * 24;
+	private static final long MILLIS_IN_A_DAY = 1000 * 60 * 1440;
 
 	private DateTimeUtil() {
 		// To avoid object creation in other class
