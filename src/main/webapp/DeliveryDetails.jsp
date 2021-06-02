@@ -128,11 +128,15 @@
 	</figure>
 </body>
 <script>
+/**
+ * This method is called when salesman clicks deliver button and status of that order is set as delivered
+ */
 	function delivered(orderId){
 		event.preventDefault();
 		let value = confirm("Did you delivered vegetables to this destination?");
 		if(value){
-			let url = "DeliveredServlet?orderId=" + orderId;
+			let status = "DELIVERED"
+			let url = "ChangeStatusServlet?orderId=" + orderId + "&status="+ status;
 			axios.get(url).then(res=> {
 			
 				let result = res.data;
@@ -149,13 +153,16 @@
 		}
 	}
 	
+	/**
+	* This method is called when salesman click cancel order if user rejects to buy it
+	*/
 	function canceled(orderId){
 		event.preventDefault();
 		let value = confirm("Is this user canceled order?");
 		if(value){
-			let url = "CanceledServlet?orderId=" + orderId;
+			let status = "CANCELED";
+			let url = "ChangeStatusServlet?orderId=" + orderId + "&status=" + status;
 			axios.get(url).then(res=> {
-			
 				let result = res.data;
 				if(result){
 					alert("Successful");

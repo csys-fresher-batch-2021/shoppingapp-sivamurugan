@@ -17,6 +17,16 @@
 	padding: 20px;
 }
 
+#noOfOrders {
+	position: absolute;
+	display : none;
+	left : 900px;
+	top: 380px;
+	width: 30%;
+	background: #F9B95E;
+	padding: 20px;
+}
+
 #table {
 	float: right;
 	font-family: Arial, Helvetica, sans-serif;
@@ -60,13 +70,14 @@
 				type="date" id="deliveryDate" required>
 			<button class="btn btn-info" onclick="searchOrders(<%=3%>)">Search</button>
 			<br /> <label for="sort">Sort By :</label><br /> <input
-				type="radio" id="sort" name="sort" value="delivered"> <label
-				for="delivered">Delivered</label><br /> <input type="radio"
-				id="sort" name="sort" value="pending"> <label for="pending">Pending</label><br />
-			<input type="radio" id="sort" name="sort" value="canceled"> <label
-				for="canceled">Canceled</label><br /> <input type="radio" id="sort"
+				type="radio" id="sort" onchange="onclick=sortByStatus()" name="sort"
+				value="delivered"> <label for="delivered">Delivered</label><br />
+			<input type="radio" onchange="onclick=sortByStatus()" id="sort"
+				name="sort" value="pending"> <label for="pending">Pending</label><br />
+			<input type="radio" id="sort" onchange="onclick=sortByStatus()"
+				name="sort" value="canceled"> <label for="canceled">Canceled</label><br />
+			<input type="radio" id="sort" onchange="onclick=sortByStatus()"
 				name="sort" value="expired"> <label for="expired">Expired</label><br />
-			<button class="btn btn-success" onclick="sortByStatus()">Search</button>
 			<br />
 			<button class="btn btn-danger" onclick="searchOrders(<%=4%>)">View
 				All</button>
@@ -75,6 +86,7 @@
 			<p>All details are sorted according to latest orders</p>
 		</section>
 		<section>
+			<div id="noOfOrders"></div>
 			<figure id="table">
 				<figcaption>List Of Orders :</figcaption>
 				<table id="table">
@@ -163,23 +175,27 @@
 	*/
 	function writeTableContent(filtered){
 		let content = "";
+		displayNoOfOrders();
+		let noOfOrders = "Sorry No Orders Found";
+		
 		for(let orderDetails of filtered){
 			if(filtered.length != 0){
+				noOfOrders = "Number Of Orders : " + filtered.length;
 				let time = orderDetails.createdDate.substring(12,24);
 				let date = orderDetails.createdDate.substring(0,12);
 				let orderItems = orderDetails.orderItems;
+				content += "<tr><td>" + orderDetails.orderId + "</td>";
 				for(let vegetable of orderItems){
-					content += "<tr><td>" + orderDetails.orderId + "</td><td>" + orderDetails.username +
+					content += "<td>" + orderDetails.username +
 					"</td><td>" + vegetable.vegName + "</td><td>" + vegetable.quantity + 
 					"</td><td>" + vegetable.eachVegPrice + "</td><td>"  + date +
 					"</td><td>" + time + "</td><td>" + orderDetails.deliveryDate + "</td><td>" +
-					orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr>";
+					orderDetails.paymentMethod + "</td><td>" + orderDetails.status + "</td></tr><tr><td></td>";
 				}
 				content += "<br/>";
-			} else{
-				content += "<tr><td>No Records Found</td></tr>";
 			}
 		} 
+		document.querySelector("#noOfOrders").innerHTML = noOfOrders;
 		document.querySelector("#tableBody").innerHTML = content;
 	}
 	
@@ -224,6 +240,10 @@
             	}
         	}
 		});
+	}
+	
+	function displayNoOfOrders(){
+		document.getElementById("noOfOrders").style.display = "block";
 	}
 </script>
 </html>

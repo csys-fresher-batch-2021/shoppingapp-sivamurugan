@@ -169,25 +169,9 @@ public class SalesService {
 	 * @return
 	 * @throws DBException
 	 */
-	public static boolean setStatusAsDelivered(Long orderId) throws DBException {
+	public static boolean setStatus(Long orderId, String status) throws DBException {
 		boolean valid = false;
-		if (SalesDetailsDAO.updateStatus("DELIVERED", orderId)) {
-			valid = true;
-		}
-
-		return valid;
-	}
-
-	/**
-	 * This method is used to set status of order as canceled
-	 * 
-	 * @param orderId
-	 * @return
-	 * @throws DBException
-	 */
-	public static boolean setStatusAsCanceled(Long orderId) throws DBException {
-		boolean valid = false;
-		if (SalesDetailsDAO.updateStatus("CANCELED", orderId)) {
+		if (SalesDetailsDAO.updateStatus(status, orderId)) {
 			valid = true;
 		}
 

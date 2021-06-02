@@ -1,7 +1,7 @@
 package in.siva.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -38,5 +38,18 @@ public class DateTimeUtil {
 
 		return sd.format(previousDate);
 
+	}
+	
+	public static boolean isDeliveryIsAfterTodayDate(java.sql.Date deliveryDateInput) throws ParseException {
+		boolean valid = false;
+		String currentDateStr = getDateTime().substring(0, 10);
+		String deliveryDateStr = String.valueOf(deliveryDateInput);
+		SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
+		Date deliveryDate = sdformat.parse(deliveryDateStr);
+		Date currenDate = sdformat.parse(currentDateStr);
+		if(deliveryDate.compareTo(currenDate) >= 0) {
+			valid = true;
+		}
+		return valid;
 	}
 }
