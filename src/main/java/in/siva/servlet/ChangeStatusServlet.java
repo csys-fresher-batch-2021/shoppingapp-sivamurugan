@@ -14,23 +14,25 @@ import com.google.gson.JsonObject;
 import in.siva.service.SalesService;
 
 /**
- * Servlet implementation class CanceledServlet
+ * Servlet implementation class ReOrderServlet
  */
-@WebServlet("/CanceledServlet")
-public class CanceledServlet extends HttpServlet {
+@WebServlet("/ChangeStatusServlet")
+public class ChangeStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//  Call Service
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Call Service
 		boolean isUpdated = false;
 		try {
 			Long orderId = Long.parseLong(request.getParameter("orderId"));
-			isUpdated = SalesService.setStatusAsCanceled(orderId);
+			String status = request.getParameter("status");
+			isUpdated = SalesService.setStatus(orderId, status);
 			PrintWriter out = response.getWriter();
 
 			JsonObject object = new JsonObject();
@@ -43,17 +45,13 @@ public class CanceledServlet extends HttpServlet {
 			e.printStackTrace();
 			try {
 				PrintWriter out = response.getWriter();
-			JsonObject object = new JsonObject();
-			object.addProperty("result", isUpdated);
-			out.println(object);
-			out.flush();
-			} catch(IOException e1) {
+				JsonObject object = new JsonObject();
+				object.addProperty("result", isUpdated);
+				out.println(object);
+				out.flush();
+			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		}
-
-		
 	}
-
-
 }

@@ -1,16 +1,19 @@
 <!DOCTYPE html>
+<%@page import="in.siva.util.DateTimeUtil"%>
 <%@page import="in.siva.model.OrderItem"%>
 <%@page import="in.siva.model.OrderDetail"%>
 <%@page import="java.util.List"%>
 <html lang="en">
 <head>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <title>Vegetable Shopping App</title>
 <style>
 .overview th {
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: left;
-	background-color: #F2AE4D;
+	background-color: #053A73;
 	color: white;
 }
 
@@ -60,8 +63,8 @@
 	<h4>Sorry! Your orders is empty.</h4>
 	<%
 	} else {
-		int j=1;
-		for (OrderDetail order : orderDetails) {
+	int j = 1;
+	for (OrderDetail order : orderDetails) {
 	%>
 	<figure>
 		<figcaption>Your Orders</figcaption>
@@ -72,6 +75,7 @@
 					<th scope="col">Username</th>
 					<th scope="col">Total Bill (Rs)</th>
 					<th scope="col">Status</th>
+					<th scope="col">Cancellation</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -80,6 +84,23 @@
 					<td><%=order.getUsername()%></td>
 					<td><%=order.getTotalBill()%></td>
 					<td><%=order.getStatus()%></td>
+					<%
+					if (order.getStatus().equals("PENDING")) {
+					%>
+					<td><button class="btn btn-danger"
+							onclick="cancelOrder(<%=order.getOrderId()%>)">Cancel</button> <%
+ } else if (order.getStatus().equals("CANCELED") && DateTimeUtil.isDeliveryIsAfterTodayDate(order.getDeliveryDate())) {
+	%>
+	<td><button class="btn btn-success" onclick="reOrder(<%=order.getOrderId() %>)">Re-Order</button>
+	<%
+ }
+
+ else {
+ %>
+					<td>---</td>
+					<%
+					}
+					%>
 				</tr>
 				<br />
 				<br />
@@ -119,4 +140,55 @@
 		</table>
 	</figure>
 </body>
+<script type="text/javascript">
+/**
+ * This method is called when user clicks cancel order and it will set order status as canceled
+ */
+function cancelOrder(orderId){
+	event.preventDefault();
+	let value = confirm("Do You want to cancel this order ?");
+	if(value){
+		let status = "CANCELED";
+		let url = "ChangeStatusServlet?orderId=" + orderId + "&status=" + status;
+		axios.get(url).then(res=> {
+	
+			let result = res.data;
+			if(result){
+				alert("Successful");
+				window.location.reload();
+			}
+			else{
+				alert("Sorry Unable to confirm");
+			}
+		});
+	} else{
+		window.location.reload();
+	}
+}
+
+/**
+ * This method is called when user wants to buy canceled orders. Status of order is set as pending
+ */
+function reOrder(orderId){
+	event.preventDefault();
+	let value = confirm("Do You want to re-order this order ?");
+	if(value){
+		let status = "PENDING"
+		let url = "ChangeStatusServlet?orderId=" + orderId + "&status=" + status;
+		axios.get(url).then(res=> {
+	
+			let result = res.data;
+			if(result){
+				alert("Successful");
+				window.location.reload();
+			}
+			else{
+				alert("Sorry Unable to confirm");
+			}
+		});
+	} else{
+		window.location.reload();
+	}
+}
+</script>
 </html>
