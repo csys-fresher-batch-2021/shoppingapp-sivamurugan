@@ -8,7 +8,7 @@
 	<main class="container-fluid">
 		<form action="UpdateNameServlet" method="post">
 			<label for="newName">New Name:</label>
-			 <input type="text"	name="newName" pattern="[a-zA-Z\s]+" placeholder="Enter New Name"
+			 <input type="text"	name="newName" pattern="(?=.*[a-z]).{4,}" placeholder="Enter New Name"
 				required>
 			<button type="submit" class="btn btn-success">Update</button>
 			<br />
