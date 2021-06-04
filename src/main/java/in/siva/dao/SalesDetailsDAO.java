@@ -253,7 +253,7 @@ public class SalesDetailsDAO {
 	 * @return
 	 * @throws DBException
 	 */
-	public static List<OrderDetail> findOrdersForDelivery(Date date, String status) throws DBException {
+	public static List<OrderDetail> findOrdersForDelivery(Date date) throws DBException {
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -264,12 +264,11 @@ public class SalesDetailsDAO {
 			con = ConnectionUtil.getConnection();
 
 			// SQl commands
-			String sql = "SELECT * FROM order_details WHERE delivery_date = ? AND status =?";
+			String sql = "SELECT * FROM order_details WHERE delivery_date = ? AND status ='PENDING' or status = 'HOLD'";
 
 			// Execute query
 			pst = con.prepareStatement(sql);
 			pst.setDate(1, date);
-			pst.setString(2, status);
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
@@ -358,7 +357,7 @@ public class SalesDetailsDAO {
 			// To Get the connection
 			connection = ConnectionUtil.getConnection();
 			
-			String sql = "UPDATE order_details SET status='EXPIRED' WHERE delivery_date < ? and status = 'PENDING'";
+			String sql = "UPDATE order_details SET status='EXPIRED', active=false WHERE delivery_date < ? and status = 'PENDING' or status = 'HOLD'";
 			
 			pst = connection.prepareStatement(sql);
 			pst.setTimestamp(1, previousDate);

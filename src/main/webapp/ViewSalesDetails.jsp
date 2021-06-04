@@ -21,7 +21,7 @@
 	position: absolute;
 	display : none;
 	left : 900px;
-	top: 380px;
+	top: 500px;
 	width: 30%;
 	background: #F9B95E;
 	padding: 20px;
@@ -54,30 +54,36 @@
 	background-color: #04AA6D;
 	color: white;
 }
+input[type=text], [type=number], [type=date] {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<section id="left">
-			<label for="username">Enter Username :</label> <input type="text"
+			<label for="username"><strong>Enter Username :</strong></label> <input type="text"
 				id="username" placeholder="Enter Username" required>
 			<button onclick="searchOrders(<%=1%>)" class="btn btn-info">Search</button>
-			<br /> <label for="orderDate">Order Date :</label> <input
+			<br /> <label for="orderDate"><strong>Order Date :</strong></label> <input
 				type="date" id="date" required>
 			<button class="btn btn-info" onclick="searchOrders(<%=2%>)">Search</button>
-			<br /> <label for="deliveryDate">Delivery Date :</label> <input
+			<br /> <label for="deliveryDate"><strong>Delivery Date :</strong></label> <input
 				type="date" id="deliveryDate" required>
 			<button class="btn btn-info" onclick="searchOrders(<%=3%>)">Search</button>
-			<br /> <label for="sort">Sort By :</label><br /> <input
+			<br /> <label for="sort"><strong>Sort By :</strong></label><br /> <input
 				type="radio" id="sort" onchange="onclick=sortByStatus()" name="sort"
-				value="delivered"> <label for="delivered">Delivered</label><br />
+				value="delivered"> <label for="delivered">Delivered</label>
 			<input type="radio" onchange="onclick=sortByStatus()" id="sort"
-				name="sort" value="pending"> <label for="pending">Pending</label><br />
+				name="sort" value="pending"> <label for="pending">Pending</label>
 			<input type="radio" id="sort" onchange="onclick=sortByStatus()"
-				name="sort" value="canceled"> <label for="canceled">Canceled</label><br />
+				name="sort" value="canceled"> <label for="canceled">Canceled</label>
 			<input type="radio" id="sort" onchange="onclick=sortByStatus()"
-				name="sort" value="expired"> <label for="expired">Expired</label><br />
+				name="sort" value="expired"> <label for="expired">Expired</label>
 			<br />
 			<button class="btn btn-danger" onclick="searchOrders(<%=4%>)">View
 				All</button>

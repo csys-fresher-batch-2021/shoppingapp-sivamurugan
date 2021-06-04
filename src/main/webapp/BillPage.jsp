@@ -33,6 +33,21 @@
 .bill tr:hover {
 	background-color: #ddd;
 }
+
+form{
+	border: 5px solid #047A76;
+	padding: 10px;
+	margin: auto;
+	margin-top: 0%;
+	width: 600px;
+}
+
+input[type=date] {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+}
 </style>
 </head>
 <body>
@@ -80,15 +95,14 @@
 		</figure>
 		<br />
 		<form action="OrderConfirmServlet" method="post">
-			<label for="deliveryDate">Select Delivery Date :</label> <input
+			<label for="deliveryDate"><strong>Select Delivery Date :</strong></label> <input
 				type="date" id="deliveryDate" name="date" required> <label
 				for="info">(You can't order vegetables in future for more
-				than 5 days)</label><br /> <br /> <label for="address">Address
-				(Enter Pincode) :</label><br />
+				than 5 days)</label><br /> <br /> <label for="address"><strong>Address :</strong></label><br />
 			<textarea id="address" name="address" rows="4" cols="50"
 				minlength="20" maxlength="200" required></textarea>
-			<br /> <br /> <label for="paymentMethod">Select Your
-				Payment method:</label> <select name="paymentMethod" required>
+			<br /> <br /> <label for="paymentMethod"><strong>Select Your
+				Payment method:</strong></label> <select name="paymentMethod" required>
 				<option disabled>---SELECT---</option>
 				<option value="Net Banking">NET BANKING</option>
 				<option value="UPI ID">UPI ID</option>
