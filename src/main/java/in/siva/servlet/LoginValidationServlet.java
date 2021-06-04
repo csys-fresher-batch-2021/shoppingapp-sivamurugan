@@ -42,7 +42,11 @@ public class LoginValidationServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("LOGGED_IN_USER", username);
 			session.setAttribute("ROLE", role);
-			response.sendRedirect("index.jsp?infoMessage=" + infoMessage);
+			if(role.equals("C")) {
+				response.sendRedirect("DeliveryManIndex.jsp?infoMessage=" + infoMessage);
+			} else {
+				response.sendRedirect("index.jsp?infoMessage=" + infoMessage);
+			}
 			
 			
 		} catch(InvalidLoginException | DBException e) {

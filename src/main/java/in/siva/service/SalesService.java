@@ -149,8 +149,7 @@ public class SalesService {
 	public static List<OrderDetail> getCurrentDeliveryOrders() throws DBException {
 		String dateTime = DateTimeUtil.getDateTime();
 		Date date = Date.valueOf(dateTime.substring(0, 10));
-		String status = "PENDING";
-		List<OrderDetail> orderDetails = SalesDetailsDAO.findOrdersForDelivery(date, status);
+		List<OrderDetail> orderDetails = SalesDetailsDAO.findOrdersForDelivery(date);
 		List<OrderDetail> orderDetailsForOutput = new ArrayList<>();
 
 		for (OrderDetail order : orderDetails) {

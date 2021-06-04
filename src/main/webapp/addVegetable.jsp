@@ -10,7 +10,13 @@
 	background-color: #047A76;
 	color: white;
 }
-
+form{
+	border: 5px solid #047A76;
+	padding: 10px;
+	margin: auto;
+	margin-top: 2%;
+	width: 600px;
+}
 .addVeg {
 	font-family: Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
@@ -50,7 +56,7 @@
 					Product Name 
 				</td>
 				<td>
-					<input type = "text" name = "vegName" placeholder = "Produt Name"  required autofocus>
+					<input type = "text" name = "vegName" pattern="(?=.*[a-z]).{3,}" placeholder = "Produt Name"  required autofocus>
 				</td>
 			</tr>
 			<tr>

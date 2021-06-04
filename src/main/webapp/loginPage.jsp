@@ -3,35 +3,36 @@
 <head>
 <title>Login Page</title>
 <style type="text/css">
-.login {
+
+.login-section {
+	border: 5px solid #458809;
+	padding: 10px;
+	margin: auto;
+	margin-top: 4%;
+	width: 600px;
+	height : 300px;
+	background-color: #DEFDC2;
+}
+
+input[type=text], [type=password] {
 	width: 100%;
-	background-color: #E8E8E8;
 	padding: 12px 20px;
 	margin: 8px 0;
 	box-sizing: border-box;
-	border: 2px solid white;
-	border-radius: 4px;
 }
 
-::placeholder {
-	font-family: Parkavenue, sans-serif;
-	opacity: 1;
+input {
+	padding: 5px 12px;
+	margin: 5px 0;
+	color: #458809;
+	box-sizing: border-box;
+	border: 2px solid #458809;
+	border-bottom: 2px solid #458809;
 }
 
-h2 {
+.head{
 	text-align: center;
-	font-family: Parkavenue, cursive;
-}
-
-.login-section {
-	width: 800px;
-	border-radius : 5px;
-	margin: 0 auto;
-	background-color: white;
-}
-
-.login-body{
-	background-color: #C6C3C3;
+	color:#167712;
 }
 </style>
 </head>
@@ -40,7 +41,7 @@ h2 {
 	<main class="container-fluid">
 
 		<section class="login-section">
-			<h2>Login Page</h2>
+			<h2 class="head">Login Page</h2>
 			<form action="LoginValidationServlet" method="post">
 				<input type="text" class="login" name="username"
 					placeholder="Enter Username" autofocus required><br /> <input

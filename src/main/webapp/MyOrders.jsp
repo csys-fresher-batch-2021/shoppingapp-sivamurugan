@@ -7,8 +7,16 @@
 <head>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<title>Vegetable Shopping App</title>
+<title>My Orders</title>
 <style>
+.body{
+	background-color: #F4FCFD;
+}
+.title{
+	text-align: center;
+	color: #053A73;
+	font-size: 30px; 
+}
 .overview th {
 	padding-top: 12px;
 	padding-bottom: 12px;
@@ -35,44 +43,41 @@
 .overview tr:hover {
 	background-color: #ddd;
 }
-
-.vegDetails table, th, td {
-	border: 1px solid black;
-	margin-left: auto;
-	margin-right: auto;
-	width: 200px;
-	text-align: center;
+.table-design{
+	margin-left:50px;
+	margin-right:50px;
+}
+.table-bordered, thead, th, td{
+	border: 1px solid black !important;
 }
 
-.vegDetails th, td {
-	padding: 5px;
-}
-
-.vegDetails th {
-	text-align: left;
-}
 </style>
 </head>
-<body>
+<body class="body">
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid"></main>
 	<%
 	List<OrderDetail> orderDetails = (List<OrderDetail>) request.getAttribute("myOrders");
-	if (orderDetails == null) {
+	if (orderDetails == null || orderDetails.isEmpty()) {
 	%>
 	<h4>Sorry! Your orders is empty.</h4>
 	<%
 	} else {
 	int j = 1;
+	%>
+
+	<h4 class="title">Your Orders</h4>
+
+	<%
 	for (OrderDetail order : orderDetails) {
 	%>
-	<figure>
-		<figcaption>Your Orders</figcaption>
+	<div class="table-design">
 		<table class="overview">
+			<caption></caption>
 			<thead>
 				<tr>
 					<th scope="col">S.No</th>
-					<th scope="col">Username</th>
+					<th scope="col">Name</th>
 					<th scope="col">Total Bill (Rs)</th>
 					<th scope="col">Status</th>
 					<th scope="col">Cancellation</th>
@@ -88,24 +93,24 @@
 					if (order.getStatus().equals("PENDING")) {
 					%>
 					<td><button class="btn btn-danger"
-							onclick="cancelOrder(<%=order.getOrderId()%>)">Cancel</button> <%
- } else if (order.getStatus().equals("CANCELED") && DateTimeUtil.isDeliveryIsAfterTodayDate(order.getDeliveryDate())) {
-	%>
-	<td><button class="btn btn-success" onclick="reOrder(<%=order.getOrderId() %>)">Re-Order</button>
-	<%
- }
+							onclick="cancelOrder(<%=order.getOrderId()%>)">Cancel</button> 
+					<%
+ 					} else if (order.getStatus().equals("CANCELED") &&
 
- else {
- %>
+ 						DateTimeUtil.isDeliveryIsAfterTodayDate(order.getDeliveryDate())) {
+ 					%>
+					<td><button class="btn btn-success"
+							onclick="reOrder(<%=order.getOrderId()%>)">Re-Order</button> 
+					<%
+ 					} else {
+ 					%>
 					<td>---</td>
 					<%
 					}
 					%>
 				</tr>
-				<br />
-				<br />
-				<table class="vegDetails">
-					<thead>
+				<table class="table table-bordered">
+					<thead id="vegHead">
 						<tr>
 							<th scope="col">S.No</th>
 							<th scope="col">vegetable Name</th>
@@ -138,7 +143,7 @@
 				</table>
 			</tbody>
 		</table>
-	</figure>
+	</div>
 </body>
 <script type="text/javascript">
 /**
