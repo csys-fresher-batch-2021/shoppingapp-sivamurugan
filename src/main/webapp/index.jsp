@@ -5,65 +5,58 @@
 <html lang="en">
 <head>
 <title>Vegetable Shopping App</title>
-<style>
-.vegDetails th {
-	padding-top: 12px;
-	padding-bottom: 12px;
-	text-align: left;
-	background-color: #047A76;
-	color: white;
+<style type="text/css">
+.info {
+	border: 2px solid #31760B;
+	color: black;
+	background-color: #EEFEE5;
+	margin: 4px;
+	font-size: 15px;
 }
 
-.vegDetails {
-	font-family: Arial, Helvetica, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-.vegDetails td, #vegDetails th {
-	border: 1px solid #ddd;
-	padding: 8px;
-}
-
-.vegDetails tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
-
-.vegDetails tr:hover {
-	background-color: #ddd;
+.note {
+	border: 2px solid #CC152E;
+	color: black;
+	background-color: #FDEEF0;
+	margin: 4px;
+	font-size: 15px;
 }
 </style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<main class="container-fluid">
-		<h3>Welcome to VegShop</h3>
-		<figure>
-			<figcaption>List Of Vegetables</figcaption>
-			<table class="vegDetails">
-				<tr>
-					<th scope="col">S.No</th>
-					<th scope="col">Name</th>
-					<th scope="col">Price (Rs)</th>
-					<th scope="col">Available Quantity (Kg)</th>
-				</tr>
-				<%
-				int i = 0;
-				List<VegDetail> vegetables = VegDetailDAO.findAll();
-				for (VegDetail veg : vegetables) {
-					i++;
-				%>
-				<tr>
-					<td><%=i%></td>
-					<td><%=veg.getName()%></td>
-					<td><%=veg.getPrice()%> /-</td>
-					<td><%=veg.getQuantity()%></td>
-				</tr>
-				<%
-				}
-				%>
-			</table>
-		</figure>
-	</main>
+	<main class="container-fluid"></main>
+	<h3>Welcome to VegShop</h3>
+	<section class="info">
+		<ul>
+			<strong>Announcement :</strong>
+			<li>Discounts available for purchase more than Rs. 1000</li>
+			<li>You will get a discount coupon according to your bill amount</li>
+			<li>You can use this discount coupon on your next order</li>
+			<li>Rs.50 worth discount coupon, if your bill amount s between
+				Rs.1000 to 2000</li>
+			<li>Rs.150 worth discount coupon, if your bill amount is between
+				Rs.2000 to 3000</li>
+			<li>Rs.300 worth discount coupon, if your bill amount is between
+				Rs.3000 to 4000</li>
+			<li>Rs.450 worth discount coupon, if your bill amount is between
+				Rs.4000 to 5000</li>
+			<li>Rs.600 worth discount coupon, if your bill amount is more
+				than Rs.5000</li>
+		</ul>
+	</section>
+	<section class="note">
+		<ul>
+			<strong>Note:</strong>
+			<li>This discount coupon will expire after 2 months after order
+				confirmed date</li>
+			<li>You cannot retrieve your discount coupon if you canceled
+				discount applied order</li>
+			<li>Bill amount of minimum Rs.100 required after applying
+				discount coupon to use that discount coupon</li>
+			<li>This discount is only available for short period of time.
+				Hurry Up!!</li>
+		</ul>
+	</section>
 </body>
 </html>

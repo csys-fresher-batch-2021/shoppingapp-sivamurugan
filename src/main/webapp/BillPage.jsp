@@ -36,25 +36,34 @@
 	background-color: #ddd;
 }
 
-form{
+form {
 	border: 5px solid #047A76;
 	padding: 10px;
 	margin: auto;
 	margin-top: 0%;
 	width: 600px;
 }
+.discount{
+	border: 5px solid #31760B;
+	background-color: #EBFCE2;
+	padding: 10px;
+	margin: auto;
+	margin-top: 0%;
+	width: 600px;
+}
 
-input[type=date] {
+input[type=date], select {
 	width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
 	box-sizing: border-box;
 }
-#couponOptions{
+
+#couponOptions {
 	display: none;
 }
 
-#notAvailable{
+#notAvailable {
 	display: none;
 }
 </style>
@@ -103,23 +112,28 @@ input[type=date] {
 			</table>
 		</figure>
 		<br />
-		<label>You can use your discount coupons by clicking here</label>
-		<button onclick="applyCoupon(<%= totalBill%>)"class="btn btn-info">Click Here</button>
-		<h6 id="notAvailable"></h6>
-		<select name="couponOptions" id="couponOptions" onchange="findTotalAfterDiscount(<%=totalBill%>)"></select>
-		<section  id="isDiscountAvailable"></section>
-		<h4 id="showFinalBill"></h4> 
+		<section class="discount">
+			<label>You can use your discount coupons by clicking here --></label>
+			<button onclick="applyCoupon(<%=totalBill%>)" class="btn btn-info">Click
+				Here</button>
+			<h6 id="notAvailable"></h6>
+			<select name="couponOptions" id="couponOptions"
+				onchange="findTotalAfterDiscount(<%=totalBill%>)"></select>
+			<section id="isDiscountAvailable"></section>
+			<h4 id="showFinalBill"></h4>
+		</section><br/>
 		<form action="OrderConfirmServlet" method="post">
-			<input type="hidden" id="totalBill" name="finalBill" value="<%=totalBill%>"/>
-			<input type="hidden" id="index" name = "index"/>
-			<label for="deliveryDate"><strong>Select Delivery Date :</strong></label> <input
-				type="date" id="deliveryDate" name="date" required> <label
-				for="info">(You can't order vegetables in future for more
-				than 5 days)</label><br /> <br /> <label for="address"><strong>Address :</strong></label><br />
+			<input type="hidden" id="totalBill" name="finalBill"
+				value="<%=totalBill%>" /> <input type="hidden" id="index"
+				name="index" /> <label for="deliveryDate"><strong>Select
+					Delivery Date :</strong></label> <input type="date" id="deliveryDate" name="date"
+				required> <label for="info">(You can't order
+				vegetables in future for more than 5 days)</label><br /> <br /> <label
+				for="address"><strong>Address :</strong></label><br />
 			<textarea id="address" name="address" rows="4" cols="50"
 				minlength="20" maxlength="200" required></textarea>
-			<br /> <br /> <label for="paymentMethod"><strong>Select Your
-				Payment method:</strong></label> <select name="paymentMethod" required>
+			<br /> <br /> <label for="paymentMethod"><strong>Select
+					Your Payment method:</strong></label> <select name="paymentMethod" required>
 				<option disabled>---SELECT---</option>
 				<option value="Net Banking">NET BANKING</option>
 				<option value="UPI ID">UPI ID</option>
@@ -133,7 +147,11 @@ input[type=date] {
 	</main>
 </body>
 <script>
-	setDate();
+setDate();
+
+	/**
+	 * This method is used to set current date in html page in default
+	 */
 	function setDate() {
 		let date = new Date();
 		let currentDate = date.toJSON().substring(0, 10);
@@ -149,7 +167,9 @@ input[type=date] {
 		document.querySelector("#deliveryDate").setAttribute('max', maxDateStr);
 	}
 	
-
+/**
+ * This method is used to apply discount coupon if user wants to apply discount
+ */
 	function applyCoupon(totalBill){
 		let url = "GetCouponServlet";
 		fetch(url).then(res=> res.json()).then(res=>{
@@ -165,7 +185,7 @@ input[type=date] {
 				showSelectOption();
 				let i=0;
 				content += "";
-				content += "<option value='-1' selected data-default>Select from your available discounts</option>";
+				content += "<option value='-1' selected data-default>I don't want discount</option>";
 				for(let discount of couponDetails){
 					content += "<option value = " + i + ">Code :" +  discount.coupon + ",  Rs - " + discount.amount + "</option>";
 					i++;
@@ -175,27 +195,35 @@ input[type=date] {
 			}
 		});
 	}
+/**
+ * This method is used to show available discounts if button clicked
+ */
 	function showSelectOption(){
 		document.getElementById("couponOptions").style.display = "block";
 	}
-	
+/**
+ * This method is used to show no discount available if no discounts available
+ */
 	function showNotAvailable(){
 		document.getElementById("notAvailable").style.display = "block";
 	}
-
+/**
+ * This method is used to set total bill amount after discount applied\
+ * This method also sets value of total bill, index of coupon to servlet
+ */
 	function findTotalAfterDiscount(totalBill){
 		let url = "GetCouponServlet";
 		let finalBill = totalBill;
 		let value = document.querySelector("#couponOptions").value;
 		let billValue = "Your bill amount after considering discount (Rs)  : ";
-		if(value == "-1"){
-			finalBill = totalBill;
-		} 
-		else{
-			fetch(url).then(res=> res.json()).then(res=>{
-				let couponDetails = res;
+		let content = "";
+		fetch(url).then(res=> res.json()).then(res=>{
+			let couponDetails = res;
+			if(value==-1){
+				billValue += finalBill;
+				content += "<p>Discount not selected</p>";
+			}else{
 				let discount = couponDetails[value].amount;
-				let content = "";
 				if((discount + 100) > (totalBill)){
 					content += "<p style='color:white; background-color:red;'>Sorry! You cannot use this discount for this order. Please select other discount</p>";
 					billValue += finalBill;
@@ -203,14 +231,13 @@ input[type=date] {
 					content += "<p style='color:white; background-color:#32C617;'>Congratulations! You can use this discount</p>";
 					finalBill = totalBill - discount;
 					billValue += finalBill;
-					document.querySelector("#index").value = value;
 				}
-				document.querySelector("#totalBill").value = finalBill;
-				document.querySelector("#isDiscountAvailable").innerHTML = content;
-				document.querySelector("#showFinalBill").innerHTML = billValue;
-				
-			});
-		}
+			}
+			document.querySelector("#index").value = value;
+			document.querySelector("#totalBill").value = finalBill;
+			document.querySelector("#isDiscountAvailable").innerHTML = content;
+			document.querySelector("#showFinalBill").innerHTML = billValue;
+		});
 	}
 </script>
 </html>

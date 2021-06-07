@@ -13,6 +13,7 @@ import in.siva.exception.DBException;
 import in.siva.exception.NoDiscountFoundException;
 import in.siva.model.BillDetail;
 import in.siva.model.DiscountDetail;
+import in.siva.service.DiscountService;
 import in.siva.service.SalesService;
 
 /**
@@ -42,8 +43,8 @@ public class OrderConfirmServlet extends HttpServlet {
 			String deliveryDate = request.getParameter("date");
 			String address = request.getParameter("address");
 			String paymentMethod = request.getParameter("paymentMethod");
-			String parameter = request.getParameter("finalBill");
-			float totalBillDouble = Float.parseFloat(parameter);
+			String totalBillStr = request.getParameter("finalBill");
+			float totalBillDouble = Float.parseFloat(totalBillStr);
 			int totalBill = Math.round(totalBillDouble);
 
 			// To store purchase details
@@ -51,11 +52,11 @@ public class OrderConfirmServlet extends HttpServlet {
 			SalesService.storeOrderDetails(username, billDetails, totalBill, paymentMethod, deliveryDate, address);
 			
 			// To set status as used in discount details after discount is used by customer
-			List<DiscountDetail> coupons =SalesService.getCoupons(username);
+			List<DiscountDetail> coupons =DiscountService.getCoupons(username);
 			int index = Integer.parseInt(request.getParameter("index"));
 			DiscountDetail discountDetail = coupons.get(index);
 			long discountId = discountDetail.getDiscountId();
-			SalesService.changeStatus(discountId, "USED");
+			DiscountService.changeStatus(discountId, "USED");
 			
 			response.sendRedirect("OrderConfirmedPage.jsp");
 		} catch (DBException e) {
@@ -64,7 +65,7 @@ public class OrderConfirmServlet extends HttpServlet {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		} catch (IOException | NoDiscountFoundException | NumberFormatException e) {
+		} catch (IOException | NoDiscountFoundException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
 			try {
 				response.sendRedirect("OrderConfirmedPage.jsp");
 			} catch (IOException e1) {

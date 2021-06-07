@@ -4,6 +4,10 @@ public class DiscountCouponUtil {
 		// To avoid object creation
 	}
 
+	/**
+	 * This method is used to generate a 10 digit random coupon code
+	 * @return
+	 */
 	public static String generateCoupon() {
  		// choose a Character random from this String
 		String availableCharacters = "ABCDEFGHIJKLMNPQRSTUVWXYZ" + "123456789";
@@ -25,6 +29,11 @@ public class DiscountCouponUtil {
 		
 	}
 	
+	/**
+	 * This method is used to find discount amount for a particular order
+	 * @param amount
+	 * @return
+	 */
 	public static int findDiscountAmount(int amount) {
 		int discount = 0;
 		if(amount < 2000 && amount >= 1000) {

@@ -4,7 +4,7 @@
 
 
 <%
-String loggedInUsername = (String)session.getAttribute("LOGGED_IN_USER");
+String loggedInUsername = (String) session.getAttribute("LOGGED_IN_USER");
 String role = (String) session.getAttribute("ROLE");
 %>
 <header>
@@ -20,35 +20,45 @@ String role = (String) session.getAttribute("ROLE");
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active"><a class="nav-link"
 					href="index.jsp">Home <span class="sr-only">(current)</span></a></li>
-				<% if (loggedInUsername != null && role != null && role.equalsIgnoreCase("C")){ %>
+				<li class="nav-item"><a class="nav-link"
+					href="ViewVegetables.jsp">View Vegetables</a></li>
+				<%
+				if (loggedInUsername != null && role != null && role.equalsIgnoreCase("C")) {
+				%>
 				<li class="nav-item"><a class="nav-link"
 					href="DeliveryManIndex.jsp">Sell Vegetables</a></li>
-					<%} %>
-				<% if (loggedInUsername != null && role != null && role.equalsIgnoreCase("A")){ %>
+				<%
+				}
+				%>
+				<%
+				if (loggedInUsername != null && role != null && role.equalsIgnoreCase("A")) {
+				%>
 				<li class="nav-item"><a class="nav-link"
 					href="ViewSalesDetails.jsp">Order Details</a></li>
 
 				<li class="nav-item"><a class="nav-link"
 					href="addVegetable.jsp">Add Vegetables</a></li>
-				<li class="nav-item"><a class="nav-link" href="index.jsp">View
-						Vegetables</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="removeVegetable.jsp">Remove Vegetable</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="removeAccount.jsp">Remove User</a></li>
 				<li class="nav-item"><a class="nav-link" href="viewUsers.jsp">View
 						Users</a></li>
-				<%} %>
-				<% if (loggedInUsername != null && role != null && role.equalsIgnoreCase("U")){ %>
-				<li class="nav-item"><a class="nav-link" href="index.jsp">View
-						Vegetables</a></li>
+				<%
+				}
+				%>
+				<%
+				if (loggedInUsername != null && role != null && role.equalsIgnoreCase("U")) {
+				%>
 				<li class="nav-item"><a class="nav-link" href="editProfile.jsp">Edit
 						Profile</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="SelectVegetables.jsp">Buy Vegetables</a></li>
-					<li class="nav-item"><a class="nav-link"
-					href="MyOrdersServlet">My Orders</a></li>
-				<%} %>
+				<li class="nav-item"><a class="nav-link" href="MyOrdersServlet">My
+						Orders</a></li>
+				<%
+				}
+				%>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="dropdownId"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -58,17 +68,23 @@ String role = (String) session.getAttribute("ROLE");
 					</div></li>
 			</ul>
 			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-				<% if (loggedInUsername == null){ %>
+				<%
+				if (loggedInUsername == null) {
+				%>
 				<li class="nav-item active"><a class="nav-link"
 					href="loginPage.jsp">Login</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="newUserRegistration.jsp">Register</a></li>
-				<%} else { %>
-				<li class="nav-item"><a class="nav-link" href="#">Welcome <%=loggedInUsername %></a>
+				<%
+				} else {
+				%>
+				<li class="nav-item"><a class="nav-link" href="#">Welcome <%=loggedInUsername%></a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="LogoutServlet">Logout</a>
 				</li>
-				<%} %>
+				<%
+				}
+				%>
 			</ul>
 		</div>
 	</nav>
@@ -80,14 +96,14 @@ String role = (String) session.getAttribute("ROLE");
 <!-- Java Codes common to all pages -->
 
 <%
-	// Scriplets (Java Code)
-	String infoMessage = request.getParameter("infoMessage");
-	if(infoMessage != null){
-		out.println("<h6 style='color:white; background-color:#32C617;'>" + infoMessage + "</h6>");
-	}
-	
-	String errorMessage = request.getParameter("errorMessage");
-	if(errorMessage != null){
-		out.println("<h6 style='color:white; background-color:red;'>" + errorMessage + "</h6>");
-	}
+// Scriplets (Java Code)
+String infoMessage = request.getParameter("infoMessage");
+if (infoMessage != null) {
+	out.println("<h6 style='color:white; background-color:#32C617;'>" + infoMessage + "</h6>");
+}
+
+String errorMessage = request.getParameter("errorMessage");
+if (errorMessage != null) {
+	out.println("<h6 style='color:white; background-color:red;'>" + errorMessage + "</h6>");
+}
 %>

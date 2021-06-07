@@ -42,6 +42,12 @@ public class DateTimeUtil {
 
 	}
 
+	/**
+	 * This method is used to validate whether the delivery date is in future
+	 * @param deliveryDateInput
+	 * @return
+	 * @throws ParseException
+	 */
 	public static boolean isDeliveryIsAfterTodayDate(java.sql.Date deliveryDateInput) throws ParseException {
 		boolean valid = false;
 		String currentDateStr = getDateTime().substring(0, 10);
@@ -55,6 +61,10 @@ public class DateTimeUtil {
 		return valid;
 	}
 
+	/**
+	 * This method is used to get expiry date of a discount ( After 2 Months ) 
+	 * @return
+	 */
 	public static String getExpiryDate() {
 		SimpleDateFormat sd = new SimpleDateFormat(Constants.DATE_TIME_FORMAT);
 		Date date = new Date();
