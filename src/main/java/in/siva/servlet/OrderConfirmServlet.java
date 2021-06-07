@@ -46,18 +46,15 @@ public class OrderConfirmServlet extends HttpServlet {
 			String totalBillStr = request.getParameter("finalBill");
 			float totalBillDouble = Float.parseFloat(totalBillStr);
 			int totalBill = Math.round(totalBillDouble);
-
 			// To store purchase details
 			List<BillDetail> billDetails = (List<BillDetail>) session.getAttribute("billDetails");
-			SalesService.storeOrderDetails(username, billDetails, totalBill, paymentMethod, deliveryDate, address);
-			
+			SalesService.storeOrderDetails(username, billDetails, totalBill, paymentMethod, deliveryDate, address);			
 			// To set status as used in discount details after discount is used by customer
 			List<DiscountDetail> coupons =DiscountService.getCoupons(username);
 			int index = Integer.parseInt(request.getParameter("index"));
 			DiscountDetail discountDetail = coupons.get(index);
 			long discountId = discountDetail.getDiscountId();
 			DiscountService.changeStatus(discountId, "USED");
-			
 			response.sendRedirect("OrderConfirmedPage.jsp");
 		} catch (DBException e) {
 			try {

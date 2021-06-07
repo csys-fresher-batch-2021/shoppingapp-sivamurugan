@@ -14,11 +14,8 @@ public class AddVegetableTest {
 	 */
 	@Test
 	public void validVegTest1() {
-
 		// Creating object for product 1
-
 		VegDetail veg1 = new VegDetail("Tomato", 40, 500);
-
 		try {
 			VegetableService.addVeg(veg1);
 
@@ -27,7 +24,6 @@ public class AddVegetableTest {
 		} catch (DBException e) {
 			fail();
 		}
-
 	}
 
 	/**
@@ -36,20 +32,16 @@ public class AddVegetableTest {
 	 */
 	@Test
 	public void validVegTest2() {
-
 		// Creating object for product 2
 		VegDetail veg2 = new VegDetail("Potato", 60, 500);
-
 		try {
 			VegetableService.addVeg(veg2);
-
 		} catch (VegInvalidException e) {
 			fail();
 		} catch (DBException e) {
 			fail();
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -58,10 +50,8 @@ public class AddVegetableTest {
 	 */
 	@Test
 	public void invalidVegTest1() {
-
 		// Creating object for product 3
 		VegDetail veg = new VegDetail(" ", 24, 500);
-
 		try {
 			VegetableService.addVeg(veg);
 			fail();
@@ -70,7 +60,6 @@ public class AddVegetableTest {
 		} catch (DBException e) {
 			fail();
 		}
-
 	}
 
 	/**
@@ -79,10 +68,8 @@ public class AddVegetableTest {
 	 */
 	@Test
 	public void invalidVegTest2() {
-
 		// Creating object for product 4
 		VegDetail veg = new VegDetail("potato", -4, 430);
-
 		try {
 			VegetableService.addVeg(veg);
 			fail();
@@ -92,7 +79,6 @@ public class AddVegetableTest {
 			fail();
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -101,10 +87,8 @@ public class AddVegetableTest {
 	 */
 	@Test
 	public void addingRepeatedVeg() {
-
 		// Creating object for product 4
 		VegDetail veg = new VegDetail("potato", 76, 430);
-
 		try {
 			VegetableService.addVeg(veg);
 			fail();
@@ -114,7 +98,5 @@ public class AddVegetableTest {
 			fail();
 			e.printStackTrace();
 		}
-
 	}
-
 }

@@ -1,7 +1,6 @@
 package in.siva.model;
 
 import java.sql.Timestamp;
-
 public class DiscountDetail {
 	private long discountId;
 	private String username;
@@ -9,7 +8,6 @@ public class DiscountDetail {
 	private int amount;
 	private String status;
 	private Timestamp expiryDate;
-	
 	public String getUsername() {
 		return username;
 	}
@@ -45,8 +43,7 @@ public class DiscountDetail {
 	}
 	public void setDiscountId(long discountId) {
 		this.discountId = discountId;
-	}
-	
+	}	
 	@Override
 	public String toString() {
 		return "DiscountDetail [discountId=" + discountId + ", username=" + username + ", coupon=" + coupon

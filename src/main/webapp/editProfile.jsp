@@ -52,8 +52,6 @@ input {
 		<form action="SelfRemoveAccountServlet" method="post">
 			<button type="submit" class="btn btn-danger">Remove Account</button>
 		</form>
-
-
 	</main>
 </body>
 </html>

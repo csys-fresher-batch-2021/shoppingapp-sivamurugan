@@ -25,16 +25,13 @@ public class UserRegistrationServlet extends HttpServlet {
 		super();
 
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-
 		try {
-
 			// To get Values from user input
 			String name = request.getParameter("name");
 			int age = Integer.parseInt(request.getParameter("age"));
@@ -44,7 +41,6 @@ public class UserRegistrationServlet extends HttpServlet {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String role = request.getParameter("role");
-
 			// To add user details in ArrayList
 			UserDetail user = new UserDetail();
 			user.setAge(age);
@@ -56,13 +52,11 @@ public class UserRegistrationServlet extends HttpServlet {
 			user.setRole(role);
 			user.setUsername(username);
 			UserService.addUser(user);
-			// System.out.println(user); (Used to check whether user details stored are not)
 
 			// Redirect to login page after registration
 			String infoMessage = "Account Created Successfully";
 			response.sendRedirect("loginPage.jsp?infoMessage=" + infoMessage);
 		} catch (UserInvalidException | UserRepeatedException | DBException | NumberFormatException e) {
-
 			// Invalid product message if details entered were wrong
 			String errorMessage = e.getMessage();
 			try {

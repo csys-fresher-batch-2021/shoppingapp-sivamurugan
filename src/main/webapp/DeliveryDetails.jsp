@@ -191,7 +191,9 @@
 			window.location.reload();
 		}
 	}
-	
+	/**
+	* This method is used to generate coupon for a order
+	*/
 	function generateCoupon(username, orderId){
 		let url2 = "GenerateCouponServlet?orderId=" + orderId + "&username=" + username ;
 		axios.get(url2).then(res=>{

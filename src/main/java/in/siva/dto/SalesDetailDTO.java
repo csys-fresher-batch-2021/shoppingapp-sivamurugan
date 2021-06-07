@@ -37,7 +37,6 @@ public class SalesDetailDTO {
 			double vegPrice = (double) vegDetail.getPrice();
 			int vegQuantity = vegDetail.getQuantity();
 			double eachVegBill = vegDetail.getEachVegBill();
-
 			// To create object for order items
 			OrderItem vegetable = new OrderItem();
 			vegetable.setVegName(vegName);
@@ -46,7 +45,6 @@ public class SalesDetailDTO {
 			vegetable.setEachVegPrice(eachVegBill);
 			orderItemList.add(vegetable);
 		}
-
 		return orderItemList;
 	}
 
@@ -63,7 +61,6 @@ public class SalesDetailDTO {
 			Date deliveryDate, String paymentMethod, String deliveryAddress) {
 		// To create object for order details of user
 		OrderDetail orderDetail = new OrderDetail();
-
 		// To add values in object
 		orderDetail.setCreatedDate(createdDateTime);
 		orderDetail.setUsername(username);
@@ -71,7 +68,6 @@ public class SalesDetailDTO {
 		orderDetail.setPaymentMethod(paymentMethod);
 		orderDetail.setDeliveryDate(deliveryDate);
 		orderDetail.setAddress(deliveryAddress);
-
 		return orderDetail;
 	}
 

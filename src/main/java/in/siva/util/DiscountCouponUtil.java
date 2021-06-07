@@ -11,12 +11,9 @@ public class DiscountCouponUtil {
 	public static String generateCoupon() {
  		// choose a Character random from this String
 		String availableCharacters = "ABCDEFGHIJKLMNPQRSTUVWXYZ" + "123456789";
-
 		// create StringBuffer 
 		StringBuilder sb = new StringBuilder(5);
-
 		for (int i = 0; i < 15; i++) {
-
 			// generate a random number
 			double indexDouble = availableCharacters.length() * Math.random();
 			int index = (int)Math.round(indexDouble);
@@ -24,9 +21,7 @@ public class DiscountCouponUtil {
 				sb.append(availableCharacters.charAt(index));
 			}
 		}
-
-		return sb.toString().substring(0,10);
-		
+		return sb.toString().substring(0,10);		
 	}
 	
 	/**

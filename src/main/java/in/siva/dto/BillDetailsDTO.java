@@ -25,8 +25,7 @@ public class BillDetailsDTO {
 	public static List<BillDetail> getBillForVeg(String[] selectedVeg, String[] quantities,
 			List<Double> eachVegBill) throws DBException {
 		// List to add billDetails
-		final List<BillDetail> billDetails = new ArrayList<>();
-		
+		final List<BillDetail> billDetails = new ArrayList<>();		
 		// Business Logic
 		for (int i = 0; i < selectedVeg.length; i++) {
 			String vegName = selectedVeg[i];

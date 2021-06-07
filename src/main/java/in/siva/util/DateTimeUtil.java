@@ -37,9 +37,7 @@ public class DateTimeUtil {
 		Date date = new Date();
 		Date previousDate = new Date(date.getTime() - MILLIS_IN_A_DAY);
 		sd.setTimeZone(TimeZone.getTimeZone("IST"));
-
 		return sd.format(previousDate);
-
 	}
 
 	/**
@@ -70,7 +68,6 @@ public class DateTimeUtil {
 		Date date = new Date();
 		Date expiryDate = new Date(date.getTime() + MILLIS_IN_A_DAY * 60);
 		sd.setTimeZone(TimeZone.getTimeZone("IST"));
-
 		return sd.format(expiryDate);
 	}
 }

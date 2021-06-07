@@ -43,7 +43,8 @@ form {
 	margin-top: 0%;
 	width: 600px;
 }
-.discount{
+
+.discount {
 	border: 5px solid #31760B;
 	background-color: #EBFCE2;
 	padding: 10px;
@@ -121,7 +122,8 @@ input[type=date], select {
 				onchange="findTotalAfterDiscount(<%=totalBill%>)"></select>
 			<section id="isDiscountAvailable"></section>
 			<h4 id="showFinalBill"></h4>
-		</section><br/>
+		</section>
+		<br />
 		<form action="OrderConfirmServlet" method="post">
 			<input type="hidden" id="totalBill" name="finalBill"
 				value="<%=totalBill%>" /> <input type="hidden" id="index"
@@ -187,7 +189,8 @@ setDate();
 				content += "";
 				content += "<option value='-1' selected data-default>I don't want discount</option>";
 				for(let discount of couponDetails){
-					content += "<option value = " + i + ">Code :" +  discount.coupon + ",  Rs - " + discount.amount + "</option>";
+					content += "<option value = " + i + ">Code :" + 
+					discount.coupon + ",  Rs - " + discount.amount + "</option>";
 					i++;
 				}
 				

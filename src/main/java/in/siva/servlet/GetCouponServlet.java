@@ -44,8 +44,7 @@ public class GetCouponServlet extends HttpServlet {
 		} catch (DBException | NoDiscountFoundException e) {
 			coupons = null;
 			Gson json = new Gson();
-			String couponStr = json.toJson(coupons);
-			
+			String couponStr = json.toJson(coupons);			
 			try {
 				PrintWriter out = response.getWriter();
 				
@@ -53,8 +52,7 @@ public class GetCouponServlet extends HttpServlet {
 				out.flush();
 			} catch (IOException e1) {
 				e1.printStackTrace();
-			}
-			
+			}			
 		}
 	}
 }

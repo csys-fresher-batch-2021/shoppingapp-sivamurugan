@@ -23,19 +23,15 @@ public class RemoveAccountServlet extends HttpServlet {
         super();
         
     }
-
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			
+		try {		
 			// To get input from user and to remove account
 			String username = request.getParameter("username");
-			UserService.removeAccount(username);
-			
+			UserService.removeAccount(username);		
 			// Information for user
 			String infoMessage = "User Removed Successfully";
 			response.sendRedirect("removeAccount.jsp?infoMessage=" + infoMessage);

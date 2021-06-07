@@ -13,7 +13,6 @@ import in.siva.util.DiscountCouponUtil;
 import in.siva.validator.UtilValidator;
 
 public class DiscountService {
-
 	private DiscountService() {
 		// To avoid object creation in other class
 	}

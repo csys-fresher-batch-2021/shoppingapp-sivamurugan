@@ -3,7 +3,6 @@ package in.siva.validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class UtilValidator {
 
 	private UtilValidator() {
@@ -82,7 +81,6 @@ public class UtilValidator {
 
 		// Pattern
 		String regx = "^[a-zA-Z0-9]+$";
-
 		// Business Logic
 		Pattern usernamePattern = Pattern.compile(regx);
 		Matcher usernameMatcher = usernamePattern.matcher(username);
@@ -106,6 +104,11 @@ public class UtilValidator {
 		return valid;
 	}
 
+	/**
+	 * This method is used to check whether the order is valid for discount or not
+	 * @param amount
+	 * @return
+	 */
 	public static boolean isCouponValid(int amount) {
 		boolean valid = true;
 		if (amount < 1000) {

@@ -24,9 +24,7 @@ public class DiscountDetailDTO {
 		discountDetail.setCoupon(coupon);
 		discountDetail.setAmount(amount);
 		discountDetail.setStatus("Available");
-		discountDetail.setExpiryDate(expiryDate);
-		
+		discountDetail.setExpiryDate(expiryDate);		
 		return discountDetail;
-	
 	}
 }

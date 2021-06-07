@@ -35,17 +35,14 @@ public class SelectVegetablesServlet extends HttpServlet {
 		try {
 			// To get billDetails and total bill from service
 			List<BillDetail> billDetails = SalesService.getBill(selectedVegetables, quantityValues);
-			Double totalBill = SalesService.getTotalBill(billDetails);
-			
+			Double totalBill = SalesService.getTotalBill(billDetails);			
 			HttpSession session = request.getSession();
 			// To store billDetails & total bill
 			session.setAttribute("billDetails", billDetails);
 			request.setAttribute("billDetails", billDetails);
-			request.setAttribute("totalBill", totalBill);
-			
+			request.setAttribute("totalBill", totalBill);		
 	        RequestDispatcher dis = request.getRequestDispatcher("BillPage.jsp");
- 	        dis.forward(request, response);
-			
+ 	        dis.forward(request, response);			
 		} catch (DBException | InvalidSelectionException | ServletException | IOException e) {
 			e.printStackTrace();
 		} catch(Exception e) {

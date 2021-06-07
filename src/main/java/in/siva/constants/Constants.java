@@ -1,7 +1,6 @@
 package in.siva.constants;
 
 public class Constants {
-
 	private Constants(){
 		// Default constructor
 	}
@@ -9,7 +8,6 @@ public class Constants {
 	public static final String FEMALE = "F";
 	public static final String ADMIN = "A";
 	public static final String USER = "U";
-	
 	public static final String ORDER_ID = "order_id";
 	public static final String USERNAME = "username";
 	public static final String TOTAL_BILL = "total_bill";

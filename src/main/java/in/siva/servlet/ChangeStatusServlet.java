@@ -34,13 +34,11 @@ public class ChangeStatusServlet extends HttpServlet {
 			String status = request.getParameter("status");
 			isUpdated = SalesService.setStatus(orderId, status);
 			PrintWriter out = response.getWriter();
-
 			JsonObject object = new JsonObject();
 			object.addProperty("result", isUpdated);
 			out.println(object);
 			out.flush();
 			// success
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {

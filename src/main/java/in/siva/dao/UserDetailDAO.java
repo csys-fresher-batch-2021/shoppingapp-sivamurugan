@@ -11,7 +11,6 @@ import in.siva.model.UserDetail;
 import in.siva.sql.ConnectionUtil;
 
 public class UserDetailDAO {
-
 	private UserDetailDAO() {
 		// private Constructor to avoid object creation in other class
 	}
@@ -33,7 +32,6 @@ public class UserDetailDAO {
 			String sql = "INSERT INTO userdetails(name, age, gender, mobile_no, email, username, password, role) VALUES(?,?,?,?,?,?,?,?)";
 			// To Execute
 			pst = connection.prepareStatement(sql);
-
 			pst.setString(1, user.getName());
 			pst.setInt(2, user.getAge());
 			pst.setString(3, user.getGender());
@@ -42,13 +40,10 @@ public class UserDetailDAO {
 			pst.setString(6, user.getUsername());
 			pst.setString(7, user.getPassword());
 			pst.setString(8, user.getRole());
-
 			pst.executeUpdate();
-
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new DBException("Sorry! Something went wrong, Unable to create account");
 		}
-
 		finally {
 			// Release the connection
 			ConnectionUtil.close(pst, connection);
@@ -72,14 +67,11 @@ public class UserDetailDAO {
 			userDetails = new ArrayList<>();
 			// To establish connection
 			con = ConnectionUtil.getConnection();
-
 			// SQl commands
 			String sql = "SELECT * FROM userdetails";
-
 			// Execute query
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
-
 			while (rs.next()) {
 				String name = rs.getString("name");
 				int age = rs.getInt("age");
@@ -89,7 +81,6 @@ public class UserDetailDAO {
 				String username = rs.getString("username");
 				String password = rs.getString("password");
 				String role = rs.getString("role");
-
 				UserDetail user = new UserDetail();
 				user.setAge(age);
 				user.setEmail(email);
@@ -98,14 +89,12 @@ public class UserDetailDAO {
 				user.setName(name);
 				user.setPassword(password);
 				user.setRole(role);
-				user.setUsername(username);
-				
+				user.setUsername(username);				
 				userDetails.add(user);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new DBException("Sorry! Unable to get User details");
 		}
-
 		finally {
 			// Close connection between java and db
 			ConnectionUtil.close(rs, pst, con);
@@ -125,21 +114,15 @@ public class UserDetailDAO {
 		try {
 			// To establish connection
 			con = ConnectionUtil.getConnection();
-
 			// SQl commands
 			String sql = "DELETE FROM userDetails WHERE username = ?";
 			// To Execute
 			pst = con.prepareStatement(sql);
-
 			pst.setString(1, username);
-
 			pst.executeUpdate();
-
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new DBException("Sorry! Unable to remove user.. Try Again!");
-
 		}
-
 		finally {
 			// Release the connection
 			ConnectionUtil.close(pst, con);
@@ -154,28 +137,22 @@ public class UserDetailDAO {
 	 * @param username
 	 * @throws DBException
 	 */
-	public static void updateName(String newName, String username) throws DBException {
-		
+	public static void updateName(String newName, String username) throws DBException {		
 		Connection con = null;
 		PreparedStatement pst = null;
 		try {
 			// To establish connection
 			con = ConnectionUtil.getConnection();
-
 			// SQl commands
 			String sql = "UPDATE userdetails SET name = ? WHERE username = ?";
 			// To Execute
 			pst = con.prepareStatement(sql);
-
 			pst.setString(1, newName);
 			pst.setString(2, username);
-
 			pst.executeUpdate();
-
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new DBException("Sorry! Unable to update name");
 		}
-
 		finally {
 			// Release the connection
 			ConnectionUtil.close(pst, con);
@@ -195,21 +172,16 @@ public class UserDetailDAO {
 		try {
 			// To establish connection
 			con = ConnectionUtil.getConnection();
-
 			// SQl commands
 			String sql = "UPDATE userdetails SET mobile_no = ? WHERE username = ?";
 			// To Execute
 			pst = con.prepareStatement(sql);
-
 			pst.setLong(1, newNumber);
 			pst.setString(2, username);
-
 			pst.executeUpdate();
-
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new DBException("Sorry! Unable to update mobile Number");
 		}
-
 		finally {
 			// Release the connection
 			ConnectionUtil.close(pst, con);
@@ -228,21 +200,16 @@ public class UserDetailDAO {
 		try {
 			// To establish connection
 			con = ConnectionUtil.getConnection();
-
 			// SQl commands
 			String sql = "UPDATE userdetails SET email = ? WHERE username = ?";
 			// To Execute
 			pst = con.prepareStatement(sql);
-
 			pst.setString(1, newEmail);
 			pst.setString(2, username);
-
 			pst.executeUpdate();
-
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new DBException("Sorry! Unable to update Email address");
 		}
-
 		finally {
 			// Release the connection
 			ConnectionUtil.close(pst, con);
@@ -264,14 +231,12 @@ public class UserDetailDAO {
 		try {
 			// To establish connection
 			con = ConnectionUtil.getConnection();
-
 			// SQl commands
 			String sql = "SELECT role FROM userdetails WHERE username = ? and password = ?";
 			// To Execute
 			pst = con.prepareStatement(sql);
 			pst.setString(1, username);
-			pst.setString(2, password);
-			
+			pst.setString(2, password);			
 			rs = pst.executeQuery();
 			if(rs.next()) {
 				 role = rs.getString("role");
@@ -279,7 +244,6 @@ public class UserDetailDAO {
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new DBException("Sorry! Something went wrong");
 		}
-
 		finally {
 			// Close connection between java and db
 			ConnectionUtil.close(rs, pst, con);

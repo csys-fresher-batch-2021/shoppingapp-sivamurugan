@@ -6,12 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 public class ConnectionUtil {
 	private ConnectionUtil() {
 		// Default constructor
-	}
-	
+	}	
 	private static final String DRIVER_CLASS = System.getenv("spring.datasource.driver-class-name");
 	private static final String URL = System.getenv("spring.datasource.url");
 	private static final String USERNAME = System.getenv("spring.datasource.username");

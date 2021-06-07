@@ -19,9 +19,7 @@ public class AddUserTest {
 	 */
 	@Test
 	public void validUserTest() {
-
 		UserDetail user1 = new UserDetail();
-
 		user1.setName("Siva Murugan");
 		user1.setAge(21);
 		user1.setGender(Constants.MALE);
