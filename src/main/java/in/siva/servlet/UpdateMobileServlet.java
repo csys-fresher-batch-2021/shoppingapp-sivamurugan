@@ -29,16 +29,13 @@ public class UpdateMobileServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			// To get mobile number from user
-			long mobileNumber = Long.parseLong(request.getParameter("newMobileNumber"));
-			
+			long mobileNumber = Long.parseLong(request.getParameter("newMobileNumber"));		
 			// To get logged in username
 			HttpSession session = request.getSession();
-			String username = (String)session.getAttribute("LOGGED_IN_USER");
-			
+			String username = (String)session.getAttribute("LOGGED_IN_USER");			
 			UserService.updateMobileNumber(mobileNumber, username);
 			String infoMessage = "Mobile Number Updated Successfully";
-			response.sendRedirect("editProfile.jsp?infoMessage=" + infoMessage);
-			
+			response.sendRedirect("editProfile.jsp?infoMessage=" + infoMessage);			
 		} catch(DBException | UserRepeatedException | UserInvalidException e){
 			try {
 				response.sendRedirect("editProfile.jsp?errorMessage=" + e.getMessage());

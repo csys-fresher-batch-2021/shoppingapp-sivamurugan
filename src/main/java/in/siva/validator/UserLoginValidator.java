@@ -19,23 +19,20 @@ public class UserLoginValidator {
 	 * @param username
 	 * @param password
 	 * @return
-	 * @throws DBException 
+	 * @throws DBException
 	 */
 	public static boolean userValidator(String username, String password) throws DBException {
-
 		// Declaration
 		boolean valid = false;
-
 		// To get user details
 		List<UserDetail> userDetils = UserDetailDAO.getUserDetails();
-
 		// Business Logic
-			for (UserDetail user : userDetils) {
-				if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-					valid = true;
-					break;
-				}
+		for (UserDetail user : userDetils) {
+			if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+				valid = true;
+				break;
 			}
+		}
 		return valid;
 	}
 }

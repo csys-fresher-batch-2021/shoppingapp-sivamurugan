@@ -22,7 +22,6 @@ public class RemoveVegetableServlet extends HttpServlet {
     public RemoveVegetableServlet() {
         super();
     }
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -32,13 +31,11 @@ public class RemoveVegetableServlet extends HttpServlet {
 			// To get product name from input box
 			String productName = request.getParameter("vegName");
 			productName= productName.toLowerCase();
-			VegetableService.removeVeg(productName);
-			
+			VegetableService.removeVeg(productName);			
 			// Information for user
 			String infoMessage = "Vegetable Removed Successfully";
 			response.sendRedirect("removeVegetable.jsp?infoMessage=" + infoMessage);
 		} catch(VegInvalidException | DBException e) {
-			
 			// Error message for user
 			String errorMessage = e.getMessage();
 			try {

@@ -11,11 +11,9 @@ import in.siva.model.VegDetail;
 import in.siva.sql.ConnectionUtil;
 
 public class VegDetailDAO {
-
 	private VegDetailDAO() {
 		// private constructor to avoid object creation in other class
 	}
-
 	/**
 	 * This method is used to add vegetables in database
 	 * 
@@ -33,17 +31,13 @@ public class VegDetailDAO {
 			String sql = "INSERT INTO veg_details(name, price, quantity) VALUES(?,?,?)";
 			// To Execute
 			pst = connection.prepareStatement(sql);
-
 			pst.setString(1, vegetable.getName());
 			pst.setInt(2, vegetable.getPrice());
 			pst.setInt(3, vegetable.getQuantity());
-
 			pst.executeUpdate();
-
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new DBException("Something went wrong! Unable to add Vegetable");
 		}
-
 		finally {
 			// Step 4: Release the connection
 			ConnectionUtil.close(pst, connection);
@@ -58,35 +52,26 @@ public class VegDetailDAO {
 	 * @throws DBException
 	 */
 	public static List<VegDetail> findAll() throws DBException {
-
 		List<VegDetail> vegDetails;
-
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-
 		try {
 			vegDetails = new ArrayList<>();
 			// To establish connection
 			con = ConnectionUtil.getConnection();
-
 			// SQl commands
 			String sql = "SELECT * FROM veg_details ORDER BY name";
-
 			// Execute query
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
-
 			while (rs.next()) {
 				String name = rs.getString("name");
 				int price = rs.getInt("price");
 				int quantity = rs.getInt("quantity");
-
 				VegDetail vegetable = new VegDetail(name, price, quantity);
-
 				vegDetails.add(vegetable);
 			}
-
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new DBException("Something went Wrong! Unable to get Vegetable Details");
 		} finally {
@@ -109,16 +94,12 @@ public class VegDetailDAO {
 		try {
 			// To establish connection
 			con = ConnectionUtil.getConnection();
-
 			// SQl commands
 			String sql = "DELETE FROM veg_details WHERE name = ?";
 			// To Execute
 			pst = con.prepareStatement(sql);
-
 			pst.setString(1, name);
-
 			pst.executeUpdate();
-
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new DBException("Something went wrong! Unable to remove vegetable");
 		} finally {
@@ -140,13 +121,11 @@ public class VegDetailDAO {
 		Integer price = null;
 		try {
 			// To establish connection
-			con = ConnectionUtil.getConnection();
-			
+			con = ConnectionUtil.getConnection();			
 			// SQL query
 			String sql = "SELECT price FROM veg_details WHERE name= ?";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, name);
-			
 			// execute query
 			rs = pst.executeQuery();
 			if(rs.next()) {
@@ -174,13 +153,11 @@ public class VegDetailDAO {
 		Integer quantity = null;
 		try {
 			// To establish connection
-			con = ConnectionUtil.getConnection();
-			
+			con = ConnectionUtil.getConnection();			
 			// SQL query
 			String sql = "SELECT quantity FROM veg_details WHERE name= ?";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, name);
-			
 			// To execute query
 			rs = pst.executeQuery();
 			if(rs.next()) {
@@ -207,25 +184,19 @@ public class VegDetailDAO {
 		try {
 			// To establish connection
 			con = ConnectionUtil.getConnection();
-
 			// SQl commands
 			String sql = "UPDATE veg_details SET quantity = ? WHERE name = ?";
 			// To Execute
 			pst = con.prepareStatement(sql);
-
 			pst.setInt(1, newStock);
 			pst.setString(2, name);
-
 			pst.executeUpdate();
-
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new DBException("Sorry! Something went wrong.. Unable to update stock");
 		}
-
 		finally {
 			// Release the connection
 			ConnectionUtil.close(pst, con);
-		}
-		
+		}	
 	}
 }

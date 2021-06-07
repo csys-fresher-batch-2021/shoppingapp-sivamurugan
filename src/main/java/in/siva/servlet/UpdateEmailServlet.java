@@ -21,7 +21,6 @@ public class UpdateEmailServlet extends HttpServlet {
 	public UpdateEmailServlet() {
 		super();
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -31,17 +30,13 @@ public class UpdateEmailServlet extends HttpServlet {
 		// To get mobile number from user
 		String newEmail = request.getParameter("newEmail");
 		newEmail = newEmail.toLowerCase();
-
 		// To get logged in username
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("LOGGED_IN_USER");
-
 		try {
-
 			UserService.updateEmail(newEmail, username);
 			String infoMessage = "Email Address Updated Successfully";
 			response.sendRedirect("editProfile.jsp?infoMessage=" + infoMessage);
-
 		} catch (DBException | UserRepeatedException | UserInvalidException e) {
 			try {
 				response.sendRedirect("editProfile.jsp?errorMessage=" + e.getMessage());

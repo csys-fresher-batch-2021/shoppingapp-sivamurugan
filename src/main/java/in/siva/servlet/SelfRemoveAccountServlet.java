@@ -23,7 +23,6 @@ public class SelfRemoveAccountServlet extends HttpServlet {
     public SelfRemoveAccountServlet() {
         super();
     }
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -31,8 +30,7 @@ public class SelfRemoveAccountServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
     	// To get logged in username
     	HttpSession session = request.getSession();
-		String username = (String)session.getAttribute("LOGGED_IN_USER");
-		
+		String username = (String)session.getAttribute("LOGGED_IN_USER");		
 		try {
 			UserService.removeAccount(username);
 			session.invalidate();

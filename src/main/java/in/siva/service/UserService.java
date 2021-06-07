@@ -18,7 +18,6 @@ public class UserService {
 		// Default constructor
 	}
 	
-	
 	/**
 	 * This method is used to add user to the ArrayList
 	 * @param user
@@ -56,8 +55,7 @@ public class UserService {
 			role = UserDetailDAO.getRole(username, password);
 		} else {
 			throw new InvalidLoginException("Invalid Login Credentials! Try Again");
-		}
-		
+		}		
 		return role;
 	}
 	
@@ -67,8 +65,7 @@ public class UserService {
 	 * @param username
 	 * @throws DBException 
 	 */
-	public static void removeAccount(String username) throws DBException{
-		
+	public static void removeAccount(String username) throws DBException{		
 		if(UserValidator.isUsernamePresent(username)) {
 			UserDetailDAO.removeUser(username);
 		} else {
@@ -81,8 +78,7 @@ public class UserService {
 	 * @param user
 	 * @return
 	 */
-	public static UserDetail changeEmailToLowerCase(UserDetail user) {
-		
+	public static UserDetail changeEmailToLowerCase(UserDetail user) {		
 		String email = user.getEmail();
 		email = email.toLowerCase();
 		user.setEmail(email);

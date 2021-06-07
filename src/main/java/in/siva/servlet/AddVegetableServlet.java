@@ -31,21 +31,16 @@ public class AddVegetableServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-
 		// To add products to DB
 		try {
 			// To get values from input box
 			String vegName = request.getParameter("vegName");
 			Integer vegPrice = Integer.parseInt(request.getParameter("vegPrice"));
 			Integer vegQuantity = Integer.parseInt(request.getParameter("vegQuantity"));
-
 			VegDetail product1 = new VegDetail(vegName, vegPrice, vegQuantity);
-
 			VegetableService.addVeg(product1);
-
 			String infoMessage = "Vegetable Added Successfully";
 			response.sendRedirect("addVegetable.jsp?infoMessage=" + infoMessage);
-
 		}
 
 		// Exception message if product details didn't met requirements
@@ -56,7 +51,6 @@ public class AddVegetableServlet extends HttpServlet {
 			} catch (IOException e1) {
 				e.printStackTrace();
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -30,7 +30,6 @@ public class SalesDetailsServlet extends HttpServlet {
 		List<OrderDetail> orderDetails;
 		try {
 			orderDetails = SalesService.getAllOrderDetails();
-			SalesService.updateExpiredOrder();
 			Gson jsonObj = new Gson();
 			String orderDetailsStr = jsonObj.toJson(orderDetails);
 			PrintWriter out = response.getWriter();

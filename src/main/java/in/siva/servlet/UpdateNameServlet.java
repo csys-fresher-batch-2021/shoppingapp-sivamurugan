@@ -15,13 +15,9 @@ import in.siva.service.UserService;
 @WebServlet("/UpdateNameServlet")
 public class UpdateNameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    
     public UpdateNameServlet() {
         super();
     }
-
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

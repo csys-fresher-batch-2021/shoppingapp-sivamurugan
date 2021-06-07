@@ -25,15 +25,13 @@ public class BillCalculator {
 	 */
 	public static List<Double> billForEachVegetable(String[] selectedVegs, String[] quantities) throws DBException {
 		List<Double> eachVegBill = new ArrayList<>();
-
 		// Business logic
 		for (int i = 0; i < selectedVegs.length; i++) {
 			Double bill;
 			String vegName = selectedVegs[i];
 			int vegQuantity = Integer.parseInt(quantities[i]);
 			if (vegQuantity < 0) {
-				throw new InvalidQuantityException("You entered Invalid Quantity");
-				
+				throw new InvalidQuantityException("You entered Invalid Quantity");			
 			} else {
 				if (VegetableValidator.isVegMatches(vegName)) {
 					int price = VegDetailDAO.findPriceByName(vegName);
@@ -41,7 +39,6 @@ public class BillCalculator {
 					eachVegBill.add(bill);
 				}
 			}
-
 		}
 		return eachVegBill;
 	}

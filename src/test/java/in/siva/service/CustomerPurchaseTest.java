@@ -21,8 +21,7 @@ public class CustomerPurchaseTest {
 	@Test
 	public void totalBillTest1() throws DBException {
 		String[] selectedVegs = {"onion","tomato"}; // Not available in shop
-		String[] quantities = {"2", "5"};
-		
+		String[] quantities = {"2", "5"};		
 		List<BillDetail> billDetails;
 		try {
 			billDetails = SalesService.getBill(selectedVegs, quantities);
@@ -30,8 +29,7 @@ public class CustomerPurchaseTest {
 			assertEquals(320.0, totalBill,0.0);
 		} catch (DBException | EmptyBillException e) {
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 	
 	/**
@@ -51,8 +49,7 @@ public class CustomerPurchaseTest {
 			assertEquals(400.0, totalBill,0.0);
 		} catch (DBException | EmptyBillException e) {
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 	
 	/**
@@ -71,8 +68,7 @@ public class CustomerPurchaseTest {
 			fail();
 		} catch (DBException | InvalidQuantityException | EmptyBillException | NullPointerException e) {
 			assertEquals("You didn't entered any Quantities. Please enter quantity", e.getMessage());
-		}
-		
+		}		
 	}
 	
 	/**
@@ -82,8 +78,7 @@ public class CustomerPurchaseTest {
 	@Test
 	public void withNegativeQuality() throws DBException {
 		String[] selectedVegs = {"beans","tomato"}; // Not available in shop
-		String[] quantities = {"10", "-8"};
-		
+		String[] quantities = {"10", "-8"};		
 		List<BillDetail> billDetails;
 		try {
 			billDetails = SalesService.getBill(selectedVegs, quantities);
@@ -91,8 +86,7 @@ public class CustomerPurchaseTest {
 			fail();
 		} catch (DBException | EmptyBillException | InvalidQuantityException | NullPointerException e) {
 			assertEquals("You entered Invalid Quantity", e.getMessage());
-		}
-		
+		}		
 	}
 	
 	/**
@@ -103,8 +97,7 @@ public class CustomerPurchaseTest {
 	@Test
 	public void sizeDiffBwQuantityAndVeg() throws DBException {
 		String[] selectedVegs = {"beans"}; // Not available in shop
-		String[] quantities = {"10", "8"};
-		
+		String[] quantities = {"10", "8"};		
 		List<BillDetail> billDetails;
 		try {
 			billDetails = SalesService.getBill(selectedVegs, quantities);
@@ -112,8 +105,7 @@ public class CustomerPurchaseTest {
 			assertEquals(400.0, totalBill, 0.0);
 		} catch (DBException | EmptyBillException | InvalidQuantityException | NullPointerException e) {
 			fail();
-		}
-		
+		}		
 	}
 
 	/**
@@ -123,8 +115,7 @@ public class CustomerPurchaseTest {
 	@Test
 	public void withoutDetailsTest() throws DBException {
 		String[] selectedVegs = {}; // Not available in shop
-		String[] quantities = {};
-		
+		String[] quantities = {};		
 		List<BillDetail> billDetails;
 		try {
 			billDetails = SalesService.getBill(selectedVegs, quantities);
@@ -132,8 +123,7 @@ public class CustomerPurchaseTest {
 			fail();
 		} catch (DBException | EmptyBillException | InvalidQuantityException | NullPointerException e) {
 			assertEquals("You didn't entered any Quantities. Please enter quantity", e.getMessage());
-		}
-		
+		}		
 	}
 	
 	/**
@@ -143,8 +133,7 @@ public class CustomerPurchaseTest {
 	@Test
 	public void withQuantityWithoutVegTest() throws DBException {
 		String[] selectedVegs = {}; // Not available in shop
-		String[] quantities = {"2","4"};
-		
+		String[] quantities = {"2","4"};		
 		List<BillDetail> billDetails;
 		try {
 			billDetails = SalesService.getBill(selectedVegs, quantities);
@@ -152,8 +141,6 @@ public class CustomerPurchaseTest {
 			fail();
 		} catch (DBException | EmptyBillException | InvalidQuantityException | NullPointerException e) {
 			assertEquals("You didn't entered any Quantities. Please enter quantity", e.getMessage());
-		}
-		
-	}
-	
+		}		
+	}	
 }

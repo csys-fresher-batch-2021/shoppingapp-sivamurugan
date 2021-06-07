@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import in.siva.exception.InvalidLoginException;
+import in.siva.service.SalesService;
 import in.siva.service.UserService;
 
 /**
@@ -15,13 +17,20 @@ import in.siva.service.UserService;
  */
 @WebServlet("/LoginValidationServlet")
 public class LoginValidationServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+	private static final long serialVersionUID = 1L;       
     /**
      * @see HttpServlet#HttpServlet()
      */
     public LoginValidationServlet() {
         super();
+    } 
+    @Override
+	public void init() {
+    	try {
+			SalesService.updateExpiredOrder();
+		} catch (DBException e) {
+			e.printStackTrace();
+		}
     }
 
 	/**
@@ -29,15 +38,12 @@ public class LoginValidationServlet extends HttpServlet {
 	 */
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-		
-		try {
-			
+		try {			
 			// To get information from user
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String role = UserService.loginValidation(username, password);
-			String infoMessage = "Login Successful";
-			
+			String infoMessage = "Login Successful";			
 			// To store user details in session
 			HttpSession session = request.getSession();
 			session.setAttribute("LOGGED_IN_USER", username);
@@ -46,11 +52,8 @@ public class LoginValidationServlet extends HttpServlet {
 				response.sendRedirect("DeliveryManIndex.jsp?infoMessage=" + infoMessage);
 			} else {
 				response.sendRedirect("index.jsp?infoMessage=" + infoMessage);
-			}
-			
-			
-		} catch(InvalidLoginException | DBException e) {
-			
+			}				
+		} catch(InvalidLoginException | DBException e) {		
 			// To give error message to user
 			String errorMessage = e.getMessage();
 			try {
@@ -62,5 +65,4 @@ public class LoginValidationServlet extends HttpServlet {
 			e.printStackTrace();
 		} 
 	}
-
 }

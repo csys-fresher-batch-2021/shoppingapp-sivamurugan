@@ -34,11 +34,9 @@ public class GetVegDetailsServlet extends HttpServlet {
 		// To convert provided list into JSON Object
 		Gson gsonObj = new Gson();
 		JsonObject object = new JsonObject();
-		try {
-			
+		try {			
 			List<VegDetail> vegDetails = VegetableService.getVegDetails();
-			String jsonVegDetails = gsonObj.toJson(vegDetails);
-			
+			String jsonVegDetails = gsonObj.toJson(vegDetails);			
 			PrintWriter out = response.getWriter();
 			out.println(jsonVegDetails);
 			out.flush();

@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import in.siva.exception.DBException;
+import in.siva.exception.NoDiscountFoundException;
 import in.siva.model.BillDetail;
+import in.siva.model.DiscountDetail;
+import in.siva.service.DiscountService;
 import in.siva.service.SalesService;
 
 /**
@@ -35,14 +38,23 @@ public class OrderConfirmServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		// To get logged in username & billDetails
-		String username = (String) session.getAttribute("LOGGED_IN_USER");
-		String deliveryDate = request.getParameter("date");
-		String address = request.getParameter("address");
-		String paymentMethod = request.getParameter("paymentMethod");
-		List<BillDetail> billDetails = (List<BillDetail>) session.getAttribute("billDetails");
 		try {
+			String username = (String) session.getAttribute("LOGGED_IN_USER");
+			String deliveryDate = request.getParameter("date");
+			String address = request.getParameter("address");
+			String paymentMethod = request.getParameter("paymentMethod");
+			String totalBillStr = request.getParameter("finalBill");
+			float totalBillDouble = Float.parseFloat(totalBillStr);
+			int totalBill = Math.round(totalBillDouble);
 			// To store purchase details
-			SalesService.storeOrderDetails(username, billDetails, paymentMethod, deliveryDate, address);
+			List<BillDetail> billDetails = (List<BillDetail>) session.getAttribute("billDetails");
+			SalesService.storeOrderDetails(username, billDetails, totalBill, paymentMethod, deliveryDate, address);			
+			// To set status as used in discount details after discount is used by customer
+			List<DiscountDetail> coupons =DiscountService.getCoupons(username);
+			int index = Integer.parseInt(request.getParameter("index"));
+			DiscountDetail discountDetail = coupons.get(index);
+			long discountId = discountDetail.getDiscountId();
+			DiscountService.changeStatus(discountId, "USED");
 			response.sendRedirect("OrderConfirmedPage.jsp");
 		} catch (DBException e) {
 			try {
@@ -50,10 +62,13 @@ public class OrderConfirmServlet extends HttpServlet {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException | NoDiscountFoundException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
+			try {
+				response.sendRedirect("OrderConfirmedPage.jsp");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
-
 	}
 
 }

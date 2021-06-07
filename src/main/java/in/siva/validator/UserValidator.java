@@ -70,7 +70,6 @@ public class UserValidator {
 			}
 		}
 		return valid;
-
 	}
 
 	/**
@@ -110,7 +109,6 @@ public class UserValidator {
 				break;
 			}
 		}
-
 		return isNotRepeated;
 	}
 
@@ -131,7 +129,6 @@ public class UserValidator {
 				break;
 			}
 		}
-
 		return isNotRepeated;
 	}
 
@@ -149,7 +146,6 @@ public class UserValidator {
 		if (UtilValidator.isStringValid(newName) && isUsernamePresent(username)) {
 			valid = true;
 		}
-
 		return valid;
 	}
 
@@ -180,7 +176,6 @@ public class UserValidator {
 		} else {
 			throw new UserInvalidException("Please enter valid mobile number");
 		}
-
 		return valid;
 	}
 
@@ -210,7 +205,6 @@ public class UserValidator {
 		} else {
 			throw new UserInvalidException("Please enter valid email ID");
 		}
-
 		return valid;
 	}
 }

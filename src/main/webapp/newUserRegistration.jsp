@@ -5,7 +5,7 @@
 </head>
 <style>
 form {
-	border: 5px solid #212529;
+	border: 5px solid #458809;
 	padding: 10px;
 	margin: auto;
 	margin-top: 4%;
@@ -45,7 +45,7 @@ select {
 		<form action="UserRegistrationServlet" method="post">
 			<h3 class="head">New User Registration</h3>
 			<label for="name"><strong>Name: </strong></label> <input type="text" name="name"
-				pattern="(?=.*[a-z]).{4,}" placeholder="Enter Name" autofocus
+				pattern="[A-Za-z]{3,}" placeholder="Enter Name" autofocus
 				required><br /> <label for="age"><strong>Age :</strong> </label> <input
 				type="number" name="age" min=15 max=90 placeholder="Enter Age"
 				required><br /> <label for="gender"> <strong>Gender :</strong></label> <select
@@ -58,7 +58,7 @@ select {
 				placeholder="Enter Mobile Number" required><br /> <label
 				for="email"><strong>Email :</strong></label> <input type="email" name="email"
 				placeholder="Enter Email" required><br /> <label
-				for="username"> <strong>Username :</strong></label> <input type="text"
+				for="username"> <strong>Username :</strong></label> <input type="text" pattern="(?=.*[a-z]).{6,}"
 				name="username" placeholder="Enter Unique User-Name" required><br />
 
 			<label for="password"><strong>Password :</strong></label> <input type="password"

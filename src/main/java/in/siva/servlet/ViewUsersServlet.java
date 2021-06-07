@@ -34,12 +34,9 @@ public class ViewUsersServlet extends HttpServlet {
 		try {
 			PrintWriter out = response.getWriter();
 			List<UserDetail> userList = UserService.getAllUsers();
-			String jsonUsers = users.toJson(userList);
-			
+			String jsonUsers = users.toJson(userList);			
 			out.println(jsonUsers);
 			out.flush();
-			
-		
 		} catch (DBException | IOException e) {
 			object.addProperty("errorMessage", e.getMessage());
 		}

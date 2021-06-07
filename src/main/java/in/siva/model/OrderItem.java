@@ -40,8 +40,5 @@ public class OrderItem {
 	}
 	public void setEachVegPrice(double eachVegPrice) {
 		this.eachVegPrice = eachVegPrice;
-	}
-
-	
-	
+	}	
 }

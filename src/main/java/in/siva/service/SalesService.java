@@ -40,23 +40,17 @@ public class SalesService {
 	 */
 	public static List<BillDetail> getBill(String[] selectedVegs, String[] quantities)
 			throws DBException, EmptyBillException {
-
 		// To get bill for each vegetable
 		List<Double> billForEachVeg = BillCalculator.billForEachVegetable(selectedVegs, quantities);
-
 		// To get bill details
 		List<BillDetail> billDetails = BillDetailsDTO.getBillForVeg(selectedVegs, quantities, billForEachVeg);
-
 		// Bill validation
 		BillValidator.isBillValid(billDetails);
-
 		return billDetails;
-
 	}
 
 	/**
 	 * This method is used to get total bill amount of a purchase
-	 * 
 	 * @param billDetails
 	 * @return
 	 */
@@ -98,15 +92,11 @@ public class SalesService {
 		Timestamp createdDateTime = Timestamp.valueOf(getDateTime());
 		Date deliveryDate = Date.valueOf(deliveryDateStr);
 		double totalBill = getTotalBill(billDetails);
-
 		OrderDetail orderDetails = SalesDetailDTO.setOrderDetailsForDb(username, totalBill, createdDateTime,
 				deliveryDate, paymentMethod, deliveryAddress);
-
 		SalesDetailsDAO.saveOrderDetails(orderDetails);
 		Long orderId = SalesDetailsDAO.findOrderId(orderDetails);
-
 		storeOrderItems(billDetails, orderId);
-
 	}
 
 	/**
@@ -213,5 +203,27 @@ public class SalesService {
 			throw new UserInvalidException("Please Login to see Your order details");
 		}
 		return orderDetailsForOutput;
+	}
+	
+	/**
+	 * This method is used to store order details
+	 * @param username
+	 * @param billDetails
+	 * @param totalBillInt
+	 * @param paymentMethod
+	 * @param deliveryDateStr
+	 * @param deliveryAddress
+	 * @throws DBException
+	 */
+	public static void storeOrderDetails(String username, List<BillDetail> billDetails, int totalBillInt,
+			String paymentMethod, String deliveryDateStr, String deliveryAddress) throws DBException {		
+		Timestamp createdDateTime = Timestamp.valueOf(getDateTime());
+		Date deliveryDate = Date.valueOf(deliveryDateStr);
+		double totalBill = totalBillInt;
+		OrderDetail orderDetails = SalesDetailDTO.setOrderDetailsForDb(username, totalBill, createdDateTime,
+				deliveryDate, paymentMethod, deliveryAddress);
+		SalesDetailsDAO.saveOrderDetails(orderDetails);
+		Long orderId = SalesDetailsDAO.findOrderId(orderDetails);
+		storeOrderItems(billDetails, orderId);
 	}
 }

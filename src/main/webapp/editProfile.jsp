@@ -34,7 +34,7 @@ input {
 	<main class="container-fluid">
 		<form action="UpdateNameServlet" method="post">
 			<label for="newName"><strong>New Name:</strong></label>
-			 <input type="text"	name="newName" pattern="(?=.*[a-z]).{4,}" placeholder="Enter New Name"
+			 <input type="text"	name="newName" pattern="[A-Za-z]{3,}" placeholder="Enter New Name"
 				required>
 			<button type="submit" class="btn btn-success">Update</button>
 			<br />
@@ -52,8 +52,6 @@ input {
 		<form action="SelfRemoveAccountServlet" method="post">
 			<button type="submit" class="btn btn-danger">Remove Account</button>
 		</form>
-
-
 	</main>
 </body>
 </html>
