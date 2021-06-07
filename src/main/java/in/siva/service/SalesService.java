@@ -6,27 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.siva.dao.VegDetailDAO;
-import in.siva.dao.DiscountDetailDAO;
 import in.siva.dao.SalesDetailsDAO;
 import in.siva.dto.BillDetailsDTO;
-import in.siva.dto.DiscountDetailDTO;
 import in.siva.dto.SalesDetailDTO;
 import in.siva.exception.DBException;
 import in.siva.exception.EmptyBillException;
 import in.siva.exception.EmptyOrderException;
-import in.siva.exception.NoDiscountFoundException;
 import in.siva.exception.UserInvalidException;
 import in.siva.exception.VegInvalidException;
 import in.siva.logics.BillCalculator;
 import in.siva.model.BillDetail;
-import in.siva.model.DiscountDetail;
 import in.siva.model.OrderDetail;
 import in.siva.model.OrderItem;
 import in.siva.util.DateTimeUtil;
-import in.siva.util.DiscountCouponUtil;
 import in.siva.validator.BillValidator;
 import in.siva.validator.UserValidator;
-import in.siva.validator.UtilValidator;
 import in.siva.validator.VegetableValidator;
 
 public class SalesService {
