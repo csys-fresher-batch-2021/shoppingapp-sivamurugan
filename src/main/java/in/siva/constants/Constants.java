@@ -22,4 +22,5 @@ public class Constants {
 	public static final String CANCEL_REASON = "cancel_reason";
 	public static final String COMMON_ERROR_DB ="Something went wrong!";
 	public static final String FIND_ORDER_ERROR = "Sorry! Unable to get order details";
+	public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 }

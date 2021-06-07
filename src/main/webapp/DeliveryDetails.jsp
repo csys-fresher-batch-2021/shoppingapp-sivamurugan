@@ -92,7 +92,7 @@
 						<td><%=order.getAddress()%></td>
 						<td><%=order.getStatus() %>
 						<td><button class="btn btn-success"
-								onclick="delivered(<%=order.getOrderId()%>)">Deliver</button>
+								onclick="delivered(<%=order.getOrderId()%>, '<%=order.getUsername()%>')">Deliver</button>
 								<%
 								if(!order.getStatus().equals("HOLD")){
 								%>
@@ -145,7 +145,7 @@
 /**
  * This method is called when salesman clicks deliver button and status of that order is set as delivered
  */
-	function delivered(orderId){
+	function delivered(orderId, username){
 		event.preventDefault();
 		let value = confirm("Did you delivered vegetables to this destination?");
 		if(value){
@@ -156,6 +156,7 @@
 				let result = res.data;
 				if(result){
 					alert("Successful");
+					generateCoupon(username, orderId)
 					window.location.reload();
 				}
 				else{
@@ -190,5 +191,17 @@
 			window.location.reload();
 		}
 	}
+	
+	function generateCoupon(username, orderId){
+		let url2 = "GenerateCouponServlet?orderId=" + orderId + "&username=" + username ;
+		axios.get(url2).then(res=>{
+			let result = res.data;
+			console.log(result);
+			if(result==true){
+				alert("Discount coupon generated for this order");
+			}
+		})
+	}
+
 </script>
 </html>

@@ -55,9 +55,7 @@ public class UserRegistrationServlet extends HttpServlet {
 			user.setPassword(password);
 			user.setRole(role);
 			user.setUsername(username);
-			
 			UserService.addUser(user);
-
 			// System.out.println(user); (Used to check whether user details stored are not)
 
 			// Redirect to login page after registration

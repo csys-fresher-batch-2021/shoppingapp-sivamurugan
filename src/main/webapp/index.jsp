@@ -38,7 +38,6 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<h3>Welcome to VegShop</h3>
-
 		<figure>
 			<figcaption>List Of Vegetables</figcaption>
 			<table class="vegDetails">
@@ -50,9 +49,9 @@
 				</tr>
 				<%
 				int i = 0;
-						List<VegDetail> vegetables = VegDetailDAO.findAll();
-						for (VegDetail veg : vegetables) {
-							i++;
+				List<VegDetail> vegetables = VegDetailDAO.findAll();
+				for (VegDetail veg : vegetables) {
+					i++;
 				%>
 				<tr>
 					<td><%=i%></td>

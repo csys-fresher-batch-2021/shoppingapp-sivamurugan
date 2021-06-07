@@ -42,3 +42,12 @@ create table order_details(
 	address varchar(200) not null,
 	cancel_reason varchar(200)
 );
+
+create table discount_coupons(
+	id serial primary key,
+	username varchar(30) not null,
+	coupon varchar(15) not null,
+	amount int not null,
+	status varchar(15) default 'AVAILABLE',
+	expiry_date timestamp not null
+)

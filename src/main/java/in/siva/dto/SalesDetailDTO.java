@@ -25,6 +25,11 @@ public class SalesDetailDTO {
 		return orderDetail;
 	}
 
+	/**
+	 * This method is used to set vegetable details of order into orderDetails 
+	 * @param vegDetails
+	 * @return
+	 */
 	public static List<OrderItem> setOrderItems(List<BillDetail> vegDetails) {
 		List<OrderItem> orderItemList = new ArrayList<>();
 		for (BillDetail vegDetail : vegDetails) {

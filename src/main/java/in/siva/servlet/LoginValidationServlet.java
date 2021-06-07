@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import in.siva.exception.InvalidLoginException;
+import in.siva.service.SalesService;
 import in.siva.service.UserService;
 
 /**
@@ -22,6 +24,15 @@ public class LoginValidationServlet extends HttpServlet {
      */
     public LoginValidationServlet() {
         super();
+    }
+    
+    @Override
+	public void init() {
+    	try {
+			SalesService.updateExpiredOrder();
+		} catch (DBException e) {
+			e.printStackTrace();
+		}
     }
 
 	/**

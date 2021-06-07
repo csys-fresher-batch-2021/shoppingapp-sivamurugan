@@ -5,6 +5,8 @@
 <%@page import="java.util.ArrayList"%>
 <html lang="en">
 <head>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <title>Confirm Order</title>
 <style type="text/css">
 .bill th {
@@ -47,6 +49,13 @@ input[type=date] {
 	padding: 12px 20px;
 	margin: 8px 0;
 	box-sizing: border-box;
+}
+#couponOptions{
+	display: none;
+}
+
+#notAvailable{
+	display: none;
 }
 </style>
 </head>
@@ -94,7 +103,15 @@ input[type=date] {
 			</table>
 		</figure>
 		<br />
+		<label>You can use your discount coupons by clicking here</label>
+		<button onclick="applyCoupon(<%= totalBill%>)"class="btn btn-info">Click Here</button>
+		<h6 id="notAvailable"></h6>
+		<select name="couponOptions" id="couponOptions" onchange="findTotalAfterDiscount(<%=totalBill%>)"></select>
+		<section  id="isDiscountAvailable"></section>
+		<h4 id="showFinalBill"></h4> 
 		<form action="OrderConfirmServlet" method="post">
+			<input type="hidden" id="totalBill" name="finalBill" value="<%=totalBill%>"/>
+			<input type="hidden" id="index" name = "index"/>
 			<label for="deliveryDate"><strong>Select Delivery Date :</strong></label> <input
 				type="date" id="deliveryDate" name="date" required> <label
 				for="info">(You can't order vegetables in future for more
@@ -130,6 +147,70 @@ input[type=date] {
 		document.querySelector("#deliveryDate")
 				.setAttribute('min', currentDate);
 		document.querySelector("#deliveryDate").setAttribute('max', maxDateStr);
+	}
+	
+
+	function applyCoupon(totalBill){
+		let url = "GetCouponServlet";
+		fetch(url).then(res=> res.json()).then(res=>{
+			let couponDetails = res;
+			let content ="";
+			let value = "";
+			document.querySelector("#totalBill").value = totalBill;
+			if(couponDetails == null){
+				showNotAvailable();
+				value += "Sorry! No Discount coupons Available for your account";
+				document.querySelector("#notAvailable").innerHTML = value;
+			} else{
+				showSelectOption();
+				let i=0;
+				content += "";
+				content += "<option value='-1' selected data-default>Select from your available discounts</option>";
+				for(let discount of couponDetails){
+					content += "<option value = " + i + ">Code :" +  discount.coupon + ",  Rs - " + discount.amount + "</option>";
+					i++;
+				}
+				
+				document.querySelector("#couponOptions").innerHTML = content;
+			}
+		});
+	}
+	function showSelectOption(){
+		document.getElementById("couponOptions").style.display = "block";
+	}
+	
+	function showNotAvailable(){
+		document.getElementById("notAvailable").style.display = "block";
+	}
+
+	function findTotalAfterDiscount(totalBill){
+		let url = "GetCouponServlet";
+		let finalBill = totalBill;
+		let value = document.querySelector("#couponOptions").value;
+		let billValue = "Your bill amount after considering discount (Rs)  : ";
+		if(value == "-1"){
+			finalBill = totalBill;
+		} 
+		else{
+			fetch(url).then(res=> res.json()).then(res=>{
+				let couponDetails = res;
+				let discount = couponDetails[value].amount;
+				let content = "";
+				if((discount + 100) > (totalBill)){
+					content += "<p style='color:white; background-color:red;'>Sorry! You cannot use this discount for this order. Please select other discount</p>";
+					billValue += finalBill;
+				} else{
+					content += "<p style='color:white; background-color:#32C617;'>Congratulations! You can use this discount</p>";
+					finalBill = totalBill - discount;
+					billValue += finalBill;
+					document.querySelector("#index").value = value;
+				}
+				document.querySelector("#totalBill").value = finalBill;
+				document.querySelector("#isDiscountAvailable").innerHTML = content;
+				document.querySelector("#showFinalBill").innerHTML = billValue;
+				
+			});
+		}
 	}
 </script>
 </html>
