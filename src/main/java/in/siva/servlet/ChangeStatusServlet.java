@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 
+import in.siva.constants.Constants;
 import in.siva.service.SalesService;
 
 /**
@@ -27,24 +29,27 @@ public class ChangeStatusServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Call Service
 		boolean isUpdated = false;
 		try {
-			Long orderId = Long.parseLong(request.getParameter("orderId"));
-			String status = request.getParameter("status");
-			isUpdated = SalesService.setStatus(orderId, status);
 			PrintWriter out = response.getWriter();
 			JsonObject object = new JsonObject();
-			object.addProperty("result", isUpdated);
+			HttpSession session = request.getSession();
+			String loggedInUsername = (String) session.getAttribute("LOGGED_IN_USER");
+			if (loggedInUsername != null) {
+				Long orderId = Long.parseLong(request.getParameter("orderId"));
+				String status = request.getParameter("status");
+				isUpdated = SalesService.setStatus(orderId, status);
+				object.addProperty(Constants.RESULT, isUpdated);
+			}
 			out.println(object);
 			out.flush();
-			// success
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 			try {
 				PrintWriter out = response.getWriter();
 				JsonObject object = new JsonObject();
-				object.addProperty("result", isUpdated);
+				object.addProperty(Constants.RESULT, isUpdated);
 				out.println(object);
 				out.flush();
 			} catch (IOException e1) {

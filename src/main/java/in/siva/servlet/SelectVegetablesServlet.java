@@ -23,29 +23,34 @@ import in.siva.service.SalesService;
 public class SelectVegetablesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-    @Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response){
-    	// To get values from jsp page
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		// To get values from jsp page
 		String[] quantityValues = request.getParameterValues("quantity");
 		String[] selectedVegetables = request.getParameterValues("select");
 		try {
-			// To get billDetails and total bill from service
-			List<BillDetail> billDetails = SalesService.getBill(selectedVegetables, quantityValues);
-			Double totalBill = SalesService.getTotalBill(billDetails);			
 			HttpSession session = request.getSession();
-			// To store billDetails & total bill
-			session.setAttribute("billDetails", billDetails);
-			request.setAttribute("billDetails", billDetails);
-			request.setAttribute("totalBill", totalBill);		
-	        RequestDispatcher dis = request.getRequestDispatcher("BillPage.jsp");
- 	        dis.forward(request, response);			
+			String loggedInUsername = (String) session.getAttribute("LOGGED_IN_USER");
+			if (loggedInUsername == null) {
+				response.sendRedirect("loginPage.jsp?errorMessage=" + "please Login to purchase");
+			} else {
+				// To get billDetails and total bill from service
+				List<BillDetail> billDetails = SalesService.getBill(selectedVegetables, quantityValues);
+				Double totalBill = SalesService.getTotalBill(billDetails);
+				// To store billDetails & total bill
+				session.setAttribute("billDetails", billDetails);
+				request.setAttribute("billDetails", billDetails);
+				request.setAttribute("totalBill", totalBill);
+				RequestDispatcher dis = request.getRequestDispatcher("BillPage.jsp");
+				dis.forward(request, response);
+			}
 		} catch (DBException | InvalidSelectionException | ServletException | IOException e) {
 			e.printStackTrace();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			String errorMessage = "Sorry You haven't selected any vegetables..! Select atleast one vegetable to continue";
 			try {
 				response.sendRedirect("SelectVegetables.jsp?errorMessage=" + errorMessage);

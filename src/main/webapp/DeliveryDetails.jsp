@@ -155,12 +155,8 @@
 			
 				let result = res.data;
 				if(result){
-					alert("Successful");
 					generateCoupon(username, orderId)
 					window.location.reload();
-				}
-				else{
-					alert("Sorry Unable to confirm");
 				}
 			});
 		} else{

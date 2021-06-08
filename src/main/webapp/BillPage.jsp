@@ -121,7 +121,7 @@ input[type=date], select {
 			<select name="couponOptions" id="couponOptions"
 				onchange="findTotalAfterDiscount(<%=totalBill%>)"></select>
 			<section id="isDiscountAvailable"></section>
-			<h4 id="showFinalBill"></h4>
+			<h5 id="showFinalBill"></h5>
 		</section>
 		<br />
 		<form action="OrderConfirmServlet" method="post">
@@ -142,7 +142,7 @@ input[type=date], select {
 				<option value="Credit Card">CREDIT CARD</option>
 				<option value="Debit Card">DEBIT CARD</option>
 				<option value="Cash On Delivery">CASH ON DELIVERY</option>
-			</select><br />
+			</select><br /><br/>
 			<button type="submit" class="btn btn-success">Order Now</button>
 			<a href="SelectVegetables.jsp" class="btn btn-danger">Back</a>
 		</form>
