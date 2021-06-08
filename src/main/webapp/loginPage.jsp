@@ -50,8 +50,7 @@ input {
 
 				<button type="submit" class="btn btn-success">Submit</button>
 				<button type="reset" class="btn btn-danger">Clear</button>
-				<a href="newUserRegistration.jsp" class="btn btn-secondary">New
-					User? Register here</a>
+				<a href="newUserRegistration.jsp" class="btn btn-secondary">Sign Up!</a>
 			</form>
 		</section>
 	</main>

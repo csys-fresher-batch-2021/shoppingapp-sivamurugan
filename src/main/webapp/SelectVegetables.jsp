@@ -7,8 +7,8 @@
 <title>Select Vegetables</title>
 <style type="text/css">
 input.checkbox {
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
 	display: block;
 	position: relative;
 	padding-left: 45px;
@@ -111,6 +111,7 @@ function isVegChecked(i){
 	let quantity = document.querySelector("#quantity_"+i);
 	if(selected.checked){
 		quantity.removeAttribute("disabled");
+		quantity.focus();
 	} else{
 		quantity.setAttribute("disabled", true);
 	}
