@@ -45,7 +45,7 @@ select {
 		<form action="UserRegistrationServlet" method="post">
 			<h3 class="head">New User Registration</h3>
 			<label for="name"><strong>Name: </strong></label> <input type="text" name="name"
-				pattern="[A-Za-z]{3,}" placeholder="Enter Name" autofocus
+				pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$" placeholder="Enter Name" autofocus
 				required><br /> <label for="age"><strong>Age :</strong> </label> <input
 				type="number" name="age" min=15 max=90 placeholder="Enter Age"
 				required><br /> <label for="gender"> <strong>Gender :</strong></label> <select
@@ -59,7 +59,7 @@ select {
 				for="email"><strong>Email :</strong></label> <input type="email" name="email"
 				placeholder="Enter Email" required><br /> <label
 				for="username"> <strong>Username :</strong></label> <input type="text" pattern="(?=.*[a-z]).{6,}"
-				name="username" placeholder="Enter Unique User-Name" required><br />
+				name="username" placeholder="Enter Unique Username" required>(Minimum 6 characters required)<br />
 
 			<label for="password"><strong>Password :</strong></label> <input type="password"
 				name="password"

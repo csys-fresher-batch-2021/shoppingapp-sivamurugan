@@ -81,6 +81,7 @@
 						<th scope="col">Total Bill (Rs)</th>
 						<th scope="col">Address</th>
 						<th scope="col">Status</th>
+						<th scope="col">Payment Method</th>
 						<th scope="col">Options</th>
 					</tr>
 				</thead>
@@ -90,7 +91,8 @@
 						<td><%=order.getUsername()%></td>
 						<td><%=order.getTotalBill()%></td>
 						<td><%=order.getAddress()%></td>
-						<td><%=order.getStatus() %>
+						<td><%=order.getStatus() %></td>
+						<td><%=order.getPaymentMethod() %></td>
 						<td><button class="btn btn-success"
 								onclick="delivered(<%=order.getOrderId()%>, '<%=order.getUsername()%>')">Deliver</button>
 								<%
@@ -100,7 +102,7 @@
 								onclick="setHold(<%=order.getOrderId()%>)">Hold</button>
 								<%
 								}
-								%>
+								%></td>
 					</tr>
 					<br />
 					<br />
@@ -176,7 +178,6 @@
 			axios.get(url).then(res=> {
 				let result = res.data;
 				if(result){
-					alert("Successful");
 					window.location.reload();
 				}
 				else{

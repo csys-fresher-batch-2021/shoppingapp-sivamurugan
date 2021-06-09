@@ -59,7 +59,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>app</finalName>
+		<finalName>VegShoppingApp</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
