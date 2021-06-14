@@ -3,6 +3,7 @@
 <%@page import="in.siva.model.BillDetail"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <html lang="en">
 <head>
 <script
@@ -87,46 +88,42 @@ input[type=date], select {
 				<%
 				List<BillDetail> billDetails = (List<BillDetail>) request.getAttribute("billDetails");
 				Double totalBill = (Double) request.getAttribute("totalBill");
-				int i = 0;
-				for (BillDetail vegDetail : billDetails) {
-					i++;
 				%>
+				<c:forEach items="${billDetails}" var="vegDetail" varStatus="loop">
 				<tbody>
 					<tr>
-						<td><%=i%>
-						<td><%=vegDetail.getVegName()%></td>
-						<td><%=vegDetail.getPrice()%></td>
-						<td><%=vegDetail.getQuantity()%></td>
-						<td><%=vegDetail.getEachVegBill()%></td>
+						<td>${loop.index}</td>
+						<td>${vegDetail.vegName}</td>
+						<td>${vegDetail.price}</td>
+						<td>${vegDetail.quantity}</td>
+						<td>${vegDetail.eachVegBill}</td>
 					</tr>
 				</tbody>
-				<%
-				}
-				%>
+				</c:forEach>
 				<tr>
 					<td></td>
 					<td></td>
 					<td></td>
 					<td><strong>Total Bill Amount (Rs) :</strong></td>
-					<td><strong><%=totalBill%></strong></td>
+					<td><strong>${totalBill}</strong></td>
 				</tr>
 			</table>
 		</figure>
 		<br />
 		<section class="discount">
 			<label>You can use your discount coupons by clicking here --></label>
-			<button onclick="applyCoupon(<%=totalBill%>)" class="btn btn-info">Click
+			<button onclick="applyCoupon(${totalBill})" class="btn btn-info">Click
 				Here</button>
 			<h6 id="notAvailable"></h6>
 			<select name="couponOptions" id="couponOptions"
-				onchange="findTotalAfterDiscount(<%=totalBill%>)"></select>
+				onchange="findTotalAfterDiscount(${totalBill })"></select>
 			<section id="isDiscountAvailable"></section>
 			<h5 id="showFinalBill"></h5>
 		</section>
 		<br />
 		<form action="OrderConfirmServlet" method="post">
 			<input type="hidden" id="totalBill" name="finalBill"
-				value="<%=totalBill%>" /> <input type="hidden" id="index"
+				value="${totalBill }" /> <input type="hidden" id="index"
 				name="index" /> <label for="deliveryDate"><strong>Select
 					Delivery Date :</strong></label> <input type="date" id="deliveryDate" name="date"
 				required> <label for="info">(You can't order

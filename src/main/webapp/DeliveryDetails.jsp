@@ -23,22 +23,18 @@
 	background-color: #053A73;
 	color: white;
 }
-
 .overview {
 	font-family: Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
 	width: 100%;
 }
-
 .overview td, #overview th {
 	border: 3px solid #ddd;
 	padding: 8px;
 }
-
 .overview tr:nth-child(even) {
 	background-color: #E8E8E8;
 }
-
 .overview tr:hover {
 	background-color: #ddd;
 }
@@ -49,7 +45,6 @@
 .table-bordered, thead, th, td{
 	border: 1px solid black !important;
 }
-
 </style>
 </head>
 <body class="body">
